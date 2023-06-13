@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.backend.mapper.UserMapper">
+    <select id="getUser" parameterType="java.lang.Integer" resultType="com.backend.pojo.User">
+        select * from user where account=#{account}
+    </select>
+    <insert id="insertOne" parameterType="com.backend.pojo.User"  useGeneratedKeys="true" keyProperty="account">
+        insert into user(unit_no, password,username, tellphone) values(
+            #{unit_no},
+            #{password},
+            #{username},
+            #{tellphone}
+        )
+    </insert>
+
+    <select id="getUserByUsername" parameterType="java.lang.String" resultType="com.backend.pojo.User">
+        select * from user where username=#{username}
+    </select>
+</mapper>
