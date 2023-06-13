@@ -1,4 +1,4 @@
-import {createRouter, createWebHistory} from 'vue-router'
+import {createRouter, createWebHistory} from "vue-router"
 
 
 const routes = [
@@ -8,7 +8,15 @@ const routes = [
     },
     {
         path: '/index',
-        component: () => import(/* webpackChunkName: "index" */ '../views/hello.vue')
+        component: () => import(/* webpackChunkName: "index" */ '../views/index.vue')
+    },
+    {
+        path: '/login',
+        component: () => import(/* webpackChunkName: "login" */ '../views/login.vue')
+    },
+    {
+        path: '/register',
+        component: () => import(/* webpackChunkName: "register" */ '../views/register.vue')
     },
 
 ];

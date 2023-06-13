@@ -7,13 +7,13 @@
         @finish="onFinish"
         @finishFailed="onFinishFailed"
       >
-
         <a-form-item
             label="用户账号"
             name="username"
+            class="sign-input"
             :rules="[{ required: true, message: '不能输入空用户账号' }]"
       >
-        <a-input size="large"  v-model:value="formState.username">
+        <a-input size="large" v-model:value="formState.username">
           <template #prefix>
             <UserOutlined class="site-form-item-icon" />
           </template>
@@ -24,6 +24,7 @@
         label="用户密码"
         name="password"
         :rules="[{ required: true, message: '不能输入空密码' }]"
+        class="sign-input"
       >
         <a-input-password size="large" v-model:value="formState.password">
           <template #prefix>
@@ -31,13 +32,6 @@
           </template>
         </a-input-password>
       </a-form-item>
-        
-    
-        <a-form-item>
-          <a-form-item name="remember" no-style>
-            <a-checkbox v-model:checked="formState.remember">记住我</a-checkbox>
-          </a-form-item>
-        </a-form-item>
         
         <div class="login-btn-box">
             <a-form-item >
@@ -51,13 +45,10 @@
                     <RouterLink to="register">
                         注册
                     </RouterLink>
-                    
                   </a-button>
             </a-form-item>
         </div>
-       
       </a-form>
-
     </div>
     
   </template>
@@ -99,28 +90,17 @@
   });
   </script>
   <style scoped>
-    .login-box {
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-image: linear-gradient(to top, #accbee 0%, #e7f0fd 100%);
-    }
     .login-form {
-        width: 350px;
-        display: flex;
-        flex-direction: column;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 10px;
+      width: 22rem;
+      display: flex;
+      flex-direction: column;
+      background-color: rgba(255, 255, 255, 0.5);
+      padding: 20px;
+      border-radius: 10px;
     }
-    .login-form-button {
-        width: 120px;
-        margin: 20px;
+    .sign-input {
+      margin-top: 1rem;
     }
-
-    .login-btn-box {
-        display: flex;
-    }
+  
   </style>
   

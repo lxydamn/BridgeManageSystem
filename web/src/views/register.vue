@@ -12,6 +12,7 @@
         <a-form-item
             label="用户账号"
             name="username"
+            class="sign-input"
             :rules="[{ required: true, message: '不能输入空用户账号' }]"
       >
         <a-input size="large"  v-model:value="formState.username">
@@ -24,6 +25,7 @@
       <a-form-item
         label="用户密码"
         name="password"
+        class="sign-input"
         :rules="[{ required: true, message: '不能输入空密码' }]"
       >
         <a-input-password size="large" v-model:value="formState.password">
@@ -36,6 +38,7 @@
       <a-form-item
         label="确认密码"
         name="confirmedPassword"
+        class="sign-input"
         :rules="[{ required: true, message: '不能输入空密码' }]"
       >
         <a-input-password size="large" v-model:value="formState.confirmedPassword">
@@ -104,28 +107,17 @@
   });
   </script>
   <style scoped>
-    .login-box {
-        height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-image: linear-gradient(to top, #accbee 0%, #e7f0fd 100%);
-    }
-    .login-form {
-        width: 350px;
-        display: flex;
-        flex-direction: column;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 10px;
-    }
-    .login-form-button {
-        width: 120px;
-        margin: 20px;
-    }
+  .login-form {
+    width: 23rem;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+  }
+  .sign-input {
+    margin-top: 1rem;
+  }
 
-    .login-btn-box {
-        display: flex;
-    }
   </style>
   

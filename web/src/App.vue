@@ -1,11 +1,10 @@
 
 <template>
-  <navbar />
   <RouterView></RouterView>
 </template>
 <script lang="ts" setup>
-import navbar from './components/navbar.vue';
+import './assets/style/style.css'
 </script>
 
-<style scoped>
+<style>
 </style>
