@@ -5,18 +5,20 @@ export const useUserStore = defineStore('user', {
     persist: true,
     state: () => {
         return {
-            id:"",
-            username:"",
+            account:"",
+            username:'',
+            unit_no:"",
+            unit_name:'',
             is_login:false,
-            is_supplier:false,
         }
     },
     actions: {
         logout() {
-            this.id=""
-            this.username=""
+            this.account=""
             this.is_login=false
-            this.is_supplier=false,
+            this.username=""
+            this.unit_no = ""
+            this.unit_name = ''
             sessionStorage.removeItem("is_login")
             router.push('login')
         }

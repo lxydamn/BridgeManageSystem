@@ -1,8 +1,8 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-}
+  :root {
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+  }
 
   .login-box {
     height: 100vh;
@@ -11,14 +11,18 @@
     justify-content: center;
     background-image: linear-gradient(-225deg, #5D9FFF 0%, #B8DCFF 48%, #6BBBFF 100%);
   }
+  .login-box img {
+    height: 60vh;
+    border-radius: 10px 0 10px 0;
+  }
   .ant-form {
     padding: 20px;
     border-radius: 10px;
   }
-
+  
   .login-form-button {
-    width: 8rem;
-    margin-top: 2rem;
+    width: 10rem;
+    margin-top: 1rem;
   }
 
   .login-btn-box {

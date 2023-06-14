@@ -46,6 +46,9 @@
     }
     .content-box {
         width: 85%;
+        height: 90vh;
+        padding: 1em;
+        overflow: hidden auto;
     }
   </style>
   

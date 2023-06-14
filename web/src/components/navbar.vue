@@ -4,7 +4,7 @@
       <a-menu
        v-model:selectedKeys="current" 
        mode="horizontal"
-       style="width:100%; display:flex; flex-direction:row-reverse; align-items:center;" 
+       style=" width:10%; display:flex; flex-direction:row-reverse; align-items:center; justify-content:center;" 
        @click="handleClick"
       >
       <a-sub-menu key="user">
@@ -59,14 +59,15 @@ export default defineComponent({
 <style scoped>
   .header-box {
     display: flex;
-    box-shadow: 1px 2px 2px #bebdbd;
-    margin-bottom: 0.2rem;
+    box-shadow: 0 .25em 0.25em #bebdbd;
+    margin-bottom: 0.3em;
+    width: 100%;
   }
   .logo {
       display: flex;
       align-items: center;
-      height: 3rem;
-      width: 20rem;
+      height: 4rem;
+      width: 90%;
       text-align: center;
       justify-content: center;
       font-size: 30px;
