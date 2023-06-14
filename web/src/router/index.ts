@@ -4,11 +4,11 @@ import {createRouter, createWebHistory} from "vue-router"
 const routes = [
     {
         path:'/',
-        redirect:'/hello'
+        redirect:'/dashboard'
     },
     {
         path:'/index',
-        redirect:'/hello'
+        redirect:'/dashboard'
     },
     {
         path: '/index',
@@ -16,7 +16,6 @@ const routes = [
             author:true,
         },
         component: () => import(/* webpackChunkName: "index" */ '../views/index.vue'),
-
         children: [
             {
                 path:'/dashboard',

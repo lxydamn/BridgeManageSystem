@@ -16,25 +16,43 @@
           </template>  
           首页
         </a-menu-item>
+        <a-menu-item key="bridge">
+          <template #icon>
+            <DatabaseOutlined />
+          </template>  
+          桥梁管理
+        </a-menu-item>
         <a-sub-menu key="bridge">
           <template #icon>
             <FileDoneOutlined />
           </template>
-          <template #title>桥梁管理</template>
+          <template #title>信息录入</template>
           <a-menu-item key="1">桥梁基本卡片</a-menu-item>
           <a-menu-item key="2">初始检查记录</a-menu-item>
           <a-menu-item key="3">定期检查记录</a-menu-item>
         </a-sub-menu>
+        <a-menu-item key="part">
+          <template #icon>
+            <ApartmentOutlined />
+          </template>  
+          部件配置
+        </a-menu-item>
       </a-menu>
+      
     </div>
   </template>
   <script lang="ts">
   import { defineComponent, reactive, toRefs } from 'vue';
-  import { MailOutlined,FileDoneOutlined, AppstoreOutlined, SettingOutlined } from '@ant-design/icons-vue';
-import router from '../router';
+  import {
+     MailOutlined, DatabaseOutlined, FileDoneOutlined, 
+     ApartmentOutlined,  AppstoreOutlined, SettingOutlined 
+    } from '@ant-design/icons-vue';
+  import router from '../router';
   export default defineComponent({
     components: {
       MailOutlined,
+      ApartmentOutlined,
+      DatabaseOutlined,
       AppstoreOutlined,
       SettingOutlined,
       FileDoneOutlined,

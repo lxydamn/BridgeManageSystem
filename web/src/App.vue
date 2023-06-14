@@ -1,4 +1,3 @@
-
 <template>
   <RouterView></RouterView>
 </template>
@@ -7,4 +6,5 @@ import './assets/style/style.css'
 </script>
 
 <style>
+
 </style>

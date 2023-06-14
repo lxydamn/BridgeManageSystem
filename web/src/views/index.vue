@@ -10,7 +10,7 @@
             </RouterView>
         </div>
     </div>
-    
+   
         
   </template>
   <script lang="ts">
@@ -49,6 +49,7 @@
         height: 90vh;
         padding: 1em;
         overflow: hidden auto;
+        background-color: rgb(239, 238, 238);
     }
   </style>
   
