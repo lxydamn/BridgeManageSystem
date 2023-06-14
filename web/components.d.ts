@@ -17,6 +17,8 @@ declare module '@vue/runtime-core' {
     ACardMeta: typeof import('ant-design-vue/es')['CardMeta']
     ACheckbox: typeof import('ant-design-vue/es')['Checkbox']
     ACol: typeof import('ant-design-vue/es')['Col']
+    AdminNavbar: typeof import('./src/components/adminNavbar.vue')['default']
+    AdminSider: typeof import('./src/components/adminSider.vue')['default']
     AForm: typeof import('ant-design-vue/es')['Form']
     AFormItem: typeof import('ant-design-vue/es')['FormItem']
     AInput: typeof import('ant-design-vue/es')['Input']

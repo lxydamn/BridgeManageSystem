@@ -28,6 +28,16 @@
     height: 60vh;
     border-radius: 10px 0 10px 0;
   }
+  .response-message {
+    text-align: center;
+    font-weight: 900;
+    font-size: 5rem;
+    @supports (-webkit-background-clip: text) or (background-clip: text) {
+      background-image: linear-gradient(to right, #eea2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+  }
+  }
   .ant-form {
     padding: 20px;
     border-radius: 10px;
@@ -38,7 +48,10 @@
     width: 10rem;
     margin-top: 1rem;
   }
-
+  .error-page {
+    height: 100vh;
+    background-image: linear-gradient(-225deg, #5D9FFF 0%, #B8DCFF 48%, #6BBBFF 100%);
+  }
   .login-btn-box {
     display: flex;
     justify-content: space-around;

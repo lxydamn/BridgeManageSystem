@@ -67,11 +67,11 @@ export default defineComponent({
 
           if (data.error_info === 'success') {
             userStore.$patch({
-              username:data.username,
-              unit_no:data.unit_no,
-              unit_name:data.unit_name,
-              is_login:true,
-              account:values.account,
+              username: data.username,
+              unit_no: data.unit_no,
+              unit_name: data.unit_name,
+              is_login: true,
+              account: values.account,
             })
             sessionStorage.setItem("is_login", "true");
             router.push('/index')

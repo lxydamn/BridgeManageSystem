@@ -3,15 +3,24 @@
         <div class="notfound-box">
             <img src="../assets/images/4.png" alt="back" />
             <img src="../assets/images/0.png" alt="back" />
-            <img src="../assets/images/4.png" alt="back" />
+            <img src="../assets/images/3.png" alt="back" />
         </div>
-        <h1 class="response-message">没有找到的页面</h1>
+        <h1 class="response-message">你的权限不足</h1>
     </div>
-
+    
 </template>
 
-<script lang="ts" setup>
+<script lang="ts">
+import { defineComponent } from 'vue';
 
+export default defineComponent({
+    components:{
+        
+    },
+    setup() {
+
+    }
+})
 </script>
 
 <style scoped>  
