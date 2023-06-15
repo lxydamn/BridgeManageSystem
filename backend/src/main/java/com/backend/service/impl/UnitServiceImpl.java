@@ -1,11 +1,13 @@
 package com.backend.service.impl;
 
 import com.backend.mapper.UnitMapper;
+import com.backend.pojo.Unit;
 import com.backend.service.UnitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -31,5 +33,10 @@ public class UnitServiceImpl implements UnitService {
 
         resp.put("error_info", "success");
         return resp;
+    }
+
+    @Override
+    public List<Unit> getAll() {
+        return unitMapper.getAll();
     }
 }

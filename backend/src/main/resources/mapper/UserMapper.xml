@@ -15,6 +15,16 @@
         )
     </insert>
 
+    <select id="getAll" resultType="java.util.Map">
+        select account,username,unit_name,tellphone from
+            user join unit on unit.unit_no = user.unit_no
+    </select>
+
+    <delete id="deleteOne" parameterType="java.lang.Integer">
+        delete from user
+        where account=#{account}
+    </delete>
+
     <select id="getUserByUsername" parameterType="java.lang.String" resultType="com.backend.pojo.User">
         select * from user where username=#{username}
     </select>

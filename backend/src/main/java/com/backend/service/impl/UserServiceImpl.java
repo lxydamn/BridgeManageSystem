@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -29,25 +30,36 @@ public class UserServiceImpl implements UserService {
         String username = map.get("username");
         String password = map.get("password");
         String tellphone = map.get("tellphone");
+        System.out.println(map);
 
+        User user  = userMapper.getUserByUsername(username);
+
+        if (user != null) {
+            resp.put("error_info", "用户名重复");
+            return resp;
+        }
         try {
             userMapper.insertOne(new User(
                     null,
-                    unit_no,
-                    password,
-                    username,
-                    tellphone
+                        unit_no,
+                        password,
+                        username,
+                        tellphone
                     ));
 
-            User user  = userMapper.getUserByUsername(username);
         } catch (Exception e) {
-            resp.put("error_info", "用户名重复");
+            resp.put("error_info", "错误");
             return resp;
         }
 
         resp.put("error_info", "success");
 
         return resp;
+    }
+
+    @Override
+    public List<Map<String, Object>> getUsers() {
+        return userMapper.getAll();
     }
 
     @Override
@@ -76,6 +88,20 @@ public class UserServiceImpl implements UserService {
         resp.put("unit_no", String.valueOf(unit.getUnit_no()));
         resp.put("unit_name", unit.getUnit_name());
 
+        return resp;
+    }
+
+    @Override
+    public Map<String, String> deleteOne(Map<String, String> map) {
+        Map<String, String> resp = new HashMap<>();
+        Integer account = Integer.parseInt(map.get("account"));
+        try {
+            userMapper.deleteOne(account);
+        } catch (Exception e) {
+            resp.put("error_info", "删除失败");
+            return resp;
+        }
+        resp.put("error_info", "success");
         return resp;
     }
 }
