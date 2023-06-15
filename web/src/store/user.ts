@@ -20,7 +20,7 @@ export const useUserStore = defineStore('user', {
             this.unit_no = ""
             this.unit_name = ''
             sessionStorage.removeItem("is_login")
-            router.push('login')
+            router.push({name:'login'})
         }
     }
 })

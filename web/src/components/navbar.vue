@@ -63,21 +63,7 @@ export default defineComponent({
     margin-bottom: 0.3em;
     width: 100%;
   }
-  .logo {
-      display: flex;
-      align-items: center;
-      height: 4rem;
-      width: 90%;
-      text-align: center;
-      justify-content: center;
-      font-size: 30px;
-      font-weight: 900;
-      @supports (-webkit-background-clip: text) or (background-clip: text) {
-          background-image: linear-gradient(to right, #eea2a2 0%, #bbc1bf 19%, #57c6e1 42%, #b49fda 79%, #7ac5d8 100%);
-          -webkit-background-clip:text;
-          -webkit-text-fill-color:transparent;
-      }
-  }
+  
 
 </style>
 

@@ -6,4 +6,10 @@
     <select id="getUnit" parameterType="java.lang.Integer" resultType="com.backend.pojo.Unit">
         select * from unit where unit_no=#{unit_no}
     </select>
+    <insert id="insertOne" parameterType="java.util.Map">
+        insert into unit(unit_no, unit_name) values(
+            #{unit_no},
+            #{unit_name}
+        )
+    </insert>
 </mapper>

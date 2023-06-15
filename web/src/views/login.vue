@@ -83,6 +83,12 @@ export default defineComponent({
           }
 
         })
+          .catch(() => {
+            notification.error({
+              message: '登录出现错误',
+              description: "未知错误",
+            })
+          })
     };
 
     const onFinishFailed = (errorInfo: any) => {

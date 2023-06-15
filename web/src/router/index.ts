@@ -53,7 +53,73 @@ const routes = [
 				},
 				component: () =>
 					import(
-						/* webpackChunkName: "dashboard" */ "../views/dashboard.vue"
+						/* webpackChunkName: "dashboard" */ "../views/admin/adminboard.vue"
+					),
+			},
+			{
+				path: "/admin/user",
+				name: "adminUser",
+				meta: {
+					author: 2,
+				},
+				component: () =>
+					import(
+						/* webpackChunkName: "dashboard" */ "../views/admin/user.vue"
+					),
+			},
+			{
+				path: "/admin/unit",
+				name: "adminUnit",
+				meta: {
+					author: 2,
+				},
+				component: () =>
+					import(
+						/* webpackChunkName: "dashboard" */ "../views/admin/unit.vue"
+					),
+			},
+			{
+				path: "/admin/type",
+				name: "adminType",
+				meta: {
+					author: 2,
+				},
+				component: () =>
+					import(
+						/* webpackChunkName: "dashboard" */ "../views/admin/type.vue"
+					),
+			},
+			{
+				path: "/admin/part",
+				name: "adminPart",
+				meta: {
+					author: 2,
+				},
+				component: () =>
+					import(
+						/* webpackChunkName: "dashboard" */ "../views/admin/part.vue"
+					),
+			},
+			{
+				path: "/admin/typeComponent",
+				name: "adminTypeComponent",
+				meta: {
+					author: 2,
+				},
+				component: () =>
+					import(
+						/* webpackChunkName: "dashboard" */ "../views/admin/typeComponent.vue"
+					),
+			},
+			{
+				path: "/admin/component",
+				name: "adminComponent",
+				meta: {
+					author: 2,
+				},
+				component: () =>
+					import(
+						/* webpackChunkName: "dashboard" */ "../views/admin/component.vue"
 					),
 			},
 		],
@@ -100,12 +166,18 @@ router.beforeEach((to, _form, next) => {
 	const userStore = useUserStore();
 	if (to.meta.author != 0 && !sessionStorage.getItem("is_login")) {
 		next({ name: "login" });
-	} else if (
+	} else if ( // 管理员界面权限控制
 		sessionStorage.getItem("is_login") &&
 		userStore.account != "114514" &&
 		to.meta.author == 2
 	) {
 		next({ name: "prevent" });
+	} else if( // 用户权限控制
+		sessionStorage.getItem("is_login") &&
+		userStore.account == "114514" &&
+		to.meta.author == 1
+	){
+		next({ name: "admin" });
 	} else {
 		next();
 	}

@@ -1,19 +1,38 @@
 <template>
-    <div class="base-info-box">
-        <a-card hoverable class="left-info-box">
-            <div class="info-grid">
-                <img class="info-avator" src="../assets/images/avator.png" alt="avator" />
-                <div class="user-info">
-                    <h3>姓名：{{ userStore.username }}</h3>
-                    <h3>桥梁记录工程师</h3>
+    <div class="base-box">
+        <a-row>
+            <a-col :span="16">
+                <a-card hoverable class="left-info-box">
+                    <div class="info-grid">
+                        <img class="info-avator" src="../assets/images/avator.png" alt="avator" />
+                        <div class="user-info">
+                            <h3>姓名：{{ userStore.username }}</h3>
+                            <h3>桥梁记录工程师</h3>
+                        </div>
+                        <h3>单位：{{ userStore.unit_name }}</h3>
+                    </div>
+                </a-card>
+            </a-col>
+            <a-col :span="8">
+                <a-card hoverable class="right-info-box">
+                    <h2>广告位招租</h2>
+                </a-card>
+            </a-col>
+        </a-row>
+        
+        <a-row>
+            <a-col :span="24">
+                <div class="chat-box">
+                    <a-card hoverable class="chat-card">
+                        <h2>广告位招租</h2>
+                    </a-card>
                 </div>
-                <h3>单位：{{ userStore.unit_name }}</h3>
-            </div>
-        </a-card>
-        <a-card hoverable class="right-info-box">
-            <h2>广告位招租</h2>
-        </a-card>
+            </a-col>
+            
+        </a-row>
+        
     </div>
+    
 </template>
 
 <script lang="ts">
@@ -39,11 +58,21 @@ export default defineComponent({
 <style scoped>
 .left-info-box {
     display: flex;
-    margin-left: 2em;
-    margin-right: 3em;
     height: 15em;
+    margin: .5em;
+    padding: 0;
     align-items: center;
     justify-content: space-between;
+}
+
+.right-info-box {
+    height: 15em;
+    margin: 0.5em;
+}
+
+.chat-card {
+    margin: .5em;
+    height: 35em;
 }
 
 .info-grid {
@@ -70,12 +99,6 @@ export default defineComponent({
     transform: rotate(180deg);
 }
 
-.right-info-box {
-    width: 30%;
-}
 
-.base-info-box {
-    display: flex;
-    margin-left: 3rem;
-}
+
 </style>

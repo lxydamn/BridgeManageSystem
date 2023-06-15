@@ -7,29 +7,30 @@
                 <template #icon>
                     <AppstoreOutlined />
                 </template>
-                首页
+                信息统计
             </a-menu-item>
-            <a-menu-item key="bridge">
+            <a-menu-item key="user">
                 <template #icon>
                     <DatabaseOutlined />
                 </template>
-                桥梁管理
+                用户管理
+            </a-menu-item>
+            <a-menu-item key="unit">
+                <template #icon>
+                    <ApartmentOutlined />
+                </template>
+                单位管理
             </a-menu-item>
             <a-sub-menu key="bridge">
                 <template #icon>
                     <FileDoneOutlined />
                 </template>
-                <template #title>信息录入</template>
-                <a-menu-item key="1">桥梁基本卡片</a-menu-item>
-                <a-menu-item key="2">初始检查记录</a-menu-item>
-                <a-menu-item key="3">定期检查记录</a-menu-item>
+                <template #title>桥梁管理</template>
+                <a-menu-item key="type">桥梁类型管理</a-menu-item>
+                <a-menu-item key="part">桥梁部位管理</a-menu-item>
+                <a-menu-item key="component">桥梁部件管理</a-menu-item>
+                <a-menu-item key="typeComponent">桥梁桥梁类型部件配置</a-menu-item>
             </a-sub-menu>
-            <a-menu-item key="part">
-                <template #icon>
-                    <ApartmentOutlined />
-                </template>
-                部件配置
-            </a-menu-item>
         </a-menu>
 
     </div>
