@@ -4,6 +4,7 @@
     <a-table :columns="columns" :data-source="dataSource">
         <template #bodyCell="{column, record}">
             <template v-if="column.dataIndex === 'operation'">
+                <a style="margin-right: .5em;" @click="onUpdate(record)">修改</a>
                 <a-popconfirm
                     v-if="dataSource.length"
                     title="确认要删除吗？"
@@ -23,9 +24,10 @@
         ok-text="确认"
         cancel-text="取消"
         @ok="handleOk"
+        @cancel="cleanInput"
     >
         <a-input class="input-cpn" v-model:value="modalValue.username" placeholder="用户名" />
-        <a-input class="input-cpn" v-model:value="modalValue.password" placeholder="密码" />
+        <a-input type="password" class="input-cpn" v-model:value="modalValue.password" placeholder="密码" />
         <a-select
             class="input-cpn"
             ref="select"
@@ -40,8 +42,8 @@
 <script lang="ts">
 import axios from 'axios';
 import { Ref, defineComponent, reactive, ref } from 'vue';
-import '../../utils/errorMessage'
-import {error_message} from '../../utils/errorMessage';
+import { error_message } from '../../utils/errorMessage';
+
 const columns = [
     {
         title: '用户名',
@@ -71,6 +73,8 @@ const columns = [
 interface User {
     account: string
     username: string
+    unit_no:string
+    password:string
     unit_name: string
     tellphone: string
 }
@@ -82,6 +86,7 @@ export default defineComponent({
 
     setup() {
         let visible = ref(false)
+        let isUpdate = ref(false)
         const dataSource: Ref<User[]> = ref([])
 
         let units = ref([])
@@ -95,10 +100,14 @@ export default defineComponent({
         }
 
         const cleanInput = () => {
+            visible.value = false
+            isUpdate.value = false
             modalValue.username = ""
             modalValue.password = ""
             modalValue.unit_no = ""
             modalValue.account = ""
+            modalValue.tellphone = ""
+            getUsers()
         }
 
         const modalValue = reactive({
@@ -135,7 +144,16 @@ export default defineComponent({
                 error_message("请规范输入内容", "error");
                 return
             }
+            
+            if (isUpdate.value) {
+                handleUpdate()
+            } else {
+                handleAdd()
+            }
+            
+        }
 
+        const handleAdd = () => {
             axios({
                 url:'http://localhost:3000/api/user/register',
                 method:"POST",
@@ -148,9 +166,40 @@ export default defineComponent({
             }).then((resp) => {
                 if (resp.data.error_info === 'success') {
                     error_message("成功", "success")
-                    visible.value = false
                     cleanInput()
-                    getUsers()
+                } else {
+                    error_message(resp.data.error_info, "error")
+                }
+            })
+        }
+
+        const onUpdate = (record:any) => {
+            modalValue.account = record.account
+            modalValue.username = record.username
+            modalValue.password = record.password
+            modalValue.tellphone = record.tellphone
+            modalValue.unit_no = record.unit_no
+
+            visible.value = true
+            isUpdate.value = true
+            console.log(record)
+        }
+
+        const handleUpdate = () => {
+            axios({
+                url:'http://localhost:3000/api/user/update',
+                method:"POST",
+                params:{
+                    account:modalValue.account,
+                    username:modalValue.username,
+                    password:modalValue.password,
+                    unit_no:modalValue.unit_no,
+                    tellphone:modalValue.tellphone,
+                }
+            }).then((resp) => {
+                if (resp.data.error_info === 'success') {
+                    error_message("成功", "success")
+                    cleanInput()
                 } else {
                     error_message(resp.data.error_info, "error")
                 }
@@ -158,8 +207,6 @@ export default defineComponent({
         }
 
         const onDelete = (account : any) => {
-
-            console.log(account)
             axios({
                 url:'http://localhost:3000/api/user/delete',
                 method:"POST",
@@ -179,6 +226,8 @@ export default defineComponent({
             modalValue,
             handleOk,
             visible,
+            cleanInput,
+            onUpdate,
             units,
             onDelete,
         };

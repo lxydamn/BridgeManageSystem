@@ -14,7 +14,7 @@ public class UnitJobController {
     @Autowired
     private UnitJobService unitJobService;
 
-    @PostMapping("/api/unitJob/add")
+    @PostMapping("/api/unit/job/add")
     public Map<String, String> addUnitJob(@RequestParam Map<String, String> map) {
         return unitJobService.addUnitJob(map);
     }

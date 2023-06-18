@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.backend.mapper.BridgeTypeMapper">
+    <select id="getAll" resultType="com.backend.pojo.BridgeType">
+        select * from bridge_type;
+    </select>
+
+    <select id="selectById" parameterType="java.util.Map" resultType="com.backend.pojo.BridgeType">
+        select * from bridge_type where type_no = #{type_no}
+    </select>
+
+    <delete id="delete" parameterType="java.util.Map">
+        delete from bridge_type where type_no=#{type_no};
+    </delete>
+
+    <update id="update" parameterType="java.util.Map">
+        update bridge_type set type_no = #{new_type_no}, type_name = #{type_name}
+        where type_no =#{old_type_no}
+    </update>
+
+
+
+    <insert id="insert" parameterType="java.util.Map">
+        insert into bridge_type values(
+                                    #{type_no},
+                                    #{type_name},
+                                )
+    </insert>
+</mapper>

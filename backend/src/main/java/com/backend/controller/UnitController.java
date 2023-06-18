@@ -22,6 +22,15 @@ public class UnitController {
         return unitService.addUnit(map);
     }
 
+    @PostMapping("/api/unit/delete")
+    public Map<String, String> delete(@RequestParam Map<String, String> map) {
+        return unitService.delete(map);
+    }
+
+    @PostMapping("/api/unit/update")
+    public Map<String, String> update(@RequestParam Map<String, String> map) {
+        return unitService.update(map);
+    }
     @GetMapping("/api/unit/get/all")
     public List<Unit> getAll() {
         return unitService.getAll();

@@ -30,6 +30,10 @@ public class UserController {
     public Map<String, String> deleteOne(@RequestParam Map<String, String> map) {
         return userService.deleteOne(map);
     }
+    @PostMapping("/api/user/update")
+    public Map<String, String> update(@RequestParam Map<String, String> map) {
+        return userService.update(map);
+    }
     @PostMapping("/api/user/login")
     public Map<String, String> login(@RequestParam Map<String, String> map) {
         return userService.login(map);

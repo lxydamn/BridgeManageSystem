@@ -17,4 +17,14 @@
             #{unit_name}
         )
     </insert>
+
+    <delete id="delete" parameterType="java.util.Map">
+        delete from unit where unit_no=#{unit_no};
+    </delete>
+
+    <update id="update" parameterType="java.util.Map">
+        update unit set
+                        unit_no=#{new_unit_no},unit_name=#{unit_name}
+        where unit_no=#{old_unit_no}
+    </update>
 </mapper>

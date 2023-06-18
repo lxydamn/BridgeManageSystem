@@ -104,4 +104,17 @@ public class UserServiceImpl implements UserService {
         resp.put("error_info", "success");
         return resp;
     }
+
+    @Override
+    public Map<String, String> update(Map<String, String> map) {
+        Map<String, String> resp = new HashMap<>();
+        try {
+            userMapper.update(map);
+        } catch (Exception e) {
+            resp.put("error_info", "修改失败");
+            return resp;
+        }
+        resp.put("error_info", "success");
+        return resp;
+    }
 }

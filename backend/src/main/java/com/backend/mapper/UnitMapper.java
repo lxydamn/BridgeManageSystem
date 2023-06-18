@@ -15,4 +15,8 @@ public interface UnitMapper {
 
     List<Unit> getAll();
     void insertOne(Map<String, String> map);
+
+    void update(Map<String , String> map);
+
+    void delete(Map<String, String> map);
 }

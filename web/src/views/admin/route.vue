@@ -1,5 +1,5 @@
 <template>
-    <a-button class="operator-btn" @click="visible = true">添加单位</a-button>
+    <a-button class="operator-btn" @click="visible = true">添加路线</a-button>
 
     <a-table :columns="columns" :data-source="dataSource">
         <template #bodyCell="{column, record}">
@@ -26,9 +26,9 @@
         @ok="handleOk"
         @cancel="cleanInput"
     >
-        
-        <a-input class="input-cpn" pattern="[0-9]*" v-model:value="modalValue.unit_no" placeholder="单位编号" />
-        <a-input class="input-cpn" v-model:value="modalValue.unit_name" placeholder="单位名称" />
+        <a-input class="input-cpn" pattern="[0-9]*" v-model:value="modalValue.route_no" placeholder="路线编号" />
+        <a-input class="input-cpn" v-model:value="modalValue.route_name" placeholder="路线名称" />
+        <a-input class="input-cpn" v-model:value="modalValue.route_rank" placeholder="路线等级" />
     </a-modal>
 </template>
 <script lang="ts">
@@ -38,12 +38,17 @@ import { error_message } from '../../utils/errorMessage';
 
 const columns = [
     {
-        title: '单位编号',
-        dataIndex: 'unit_no',
+        title: "路线编号",
+        dataIndex: 'route_no',
     },
     {
-        title: '单位名称',
-        dataIndex: 'unit_name',
+        title: '路线名称',
+        dataIndex: 'route_name',
+        ellipsis: true,
+    },
+    {
+        title: '路线级别',
+        dataIndex: "route_rank",
         ellipsis: true,
     },
     {
@@ -53,9 +58,10 @@ const columns = [
     
 ];
 
-interface Unit {
-    unit_no:string
-    unit_name: string
+interface Route {
+    route_no:string
+    route_name: string
+    route_rank:string
 }
 
 export default defineComponent({
@@ -66,13 +72,15 @@ export default defineComponent({
     setup() {
         let visible = ref(false)
         let isUpdate = ref(false)
-        let old_unit_no = ref("")
-        const dataSource: Ref<Unit[]> = ref([])
+        let old_route_no = ref("")
+        const dataSource: Ref<Route[]> = ref([])
 
         let units = ref([])
 
         const checkInput = () => {
-            if (modalValue.unit_no.length == 0 || modalValue.unit_name.length == 0 )
+            if (modalValue.route_no.length == 0 || modalValue.route_name.length == 0 ||
+                modalValue.route_rank.length == 0
+            )
                 return false
 
             return true
@@ -82,27 +90,29 @@ export default defineComponent({
             visible.value = false
             isUpdate.value = false
 
-            modalValue.unit_no = ""
-            modalValue.unit_name =""
-            old_unit_no.value=""
+            modalValue.route_no = ""
+            modalValue.route_name =""
+            modalValue.route_rank =""
+            old_route_no.value=""
 
-            getUnits()
+            getRoutes()
         }
 
         const modalValue = reactive({
-            unit_no:'',
-            unit_name:'',
+            route_no:'',
+            route_name:'',
+            route_rank:'',
         })
 
-        const getUnits = () => {
+        const getRoutes = () => {
             axios({
-                url: 'http://localhost:3000/api/unit/get/all',
+                url: 'http://localhost:3000/api/route/get/all',
                 method:'GET',
             }).then((resp) => {
                 dataSource.value = resp.data
             })
         }
-        getUnits()
+        getRoutes()
 
         const handleOk = () => {
 
@@ -121,11 +131,12 @@ export default defineComponent({
 
         const handleAdd = () => {
             axios({
-                url:'http://localhost:3000/api/unit/add',
+                url:'http://localhost:3000/api/route/add',
                 method:"POST",
                 params:{
-                    unit_no:modalValue.unit_no,
-                    unit_name:modalValue.unit_name,
+                    route_no:modalValue.route_no,
+                    route_name:modalValue.route_name,
+                    route_rank:modalValue.route_rank,
                 }
             }).then((resp) => {
                 if (resp.data.error_info === 'success') {
@@ -138,9 +149,10 @@ export default defineComponent({
         }
 
         const onUpdate = (record:any) => {
-            modalValue.unit_no = record.unit_no
-            modalValue.unit_name = record.unit_name
-            old_unit_no.value = record.unit_no
+            modalValue.route_no = record.route_no
+            modalValue.route_name = record.route_name
+            modalValue.route_rank = record.route_rank
+            old_route_no.value = record.route_no
             visible.value = true
             isUpdate.value = true
             console.log(record)
@@ -148,12 +160,13 @@ export default defineComponent({
 
         const handleUpdate = () => {
             axios({
-                url:'http://localhost:3000/api/unit/update',
+                url:'http://localhost:3000/api/route/update',
                 method:"POST",
                 params:{
-                    old_unit_no:old_unit_no.value,
-                    new_unit_no:modalValue.unit_no,
-                    unit_name:modalValue.unit_name,
+                    old_route_no:old_route_no.value,
+                    new_route_no:modalValue.route_no,
+                    route_name:modalValue.route_name,
+                    route_rank:modalValue.route_rank,
                 }
             }).then((resp) => {
                 if (resp.data.error_info === 'success') {
@@ -165,17 +178,18 @@ export default defineComponent({
             })
         }
 
-        const onDelete = (unit_no : any) => {
+        const onDelete = (route_no : any) => {
+
             axios({
-                url:'http://localhost:3000/api/unit/delete',
+                url:'http://localhost:3000/api/route/delete',
                 method:"POST",
                 params: {
-                    unit_no: unit_no,
+                    route_no: route_no,
                 }
             }).then((resp) => {
                 console.log(resp.data)
                 error_message(resp.data.error_info, resp.data.error_info)
-                getUnits()
+                getRoutes()
             })
         }
 

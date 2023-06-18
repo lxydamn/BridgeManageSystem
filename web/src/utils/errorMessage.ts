@@ -1,7 +1,6 @@
 import { notification } from "ant-design-vue"
     
 export function error_message (message : string, type:string) {
-
         if (type === 'error') {
             notification.error({
                 message:'操作失败',

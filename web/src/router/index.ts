@@ -79,6 +79,17 @@ const routes = [
 					),
 			},
 			{
+				path: "/admin/route",
+				name: "adminRoute",
+				meta: {
+					author: 2,
+				},
+				component: () =>
+					import(
+						/* webpackChunkName: "dashboard" */ "../views/admin/route.vue"
+					),
+			},
+			{
 				path: "/admin/type",
 				name: "adminType",
 				meta: {

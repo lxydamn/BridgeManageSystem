@@ -13,6 +13,7 @@ public interface UserMapper {
      User getUser(Integer account);
      void insertOne(User user);
 
+     void update(Map<String, String> map);
      List<Map<String, Object>> getAll();
      User getUserByUsername(String username);
 

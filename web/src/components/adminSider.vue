@@ -21,6 +21,12 @@
                 </template>
                 单位管理
             </a-menu-item>
+            <a-menu-item key="route">
+                <template #icon>
+                    <RiseOutlined />
+                </template>
+                路线管理
+            </a-menu-item>
             <a-sub-menu key="bridge">
                 <template #icon>
                     <FileDoneOutlined />
@@ -39,7 +45,8 @@
 import { defineComponent, reactive, toRefs } from 'vue';
 import {
     MailOutlined, DatabaseOutlined, FileDoneOutlined,
-    ApartmentOutlined, AppstoreOutlined, SettingOutlined
+    ApartmentOutlined, AppstoreOutlined, SettingOutlined,
+    RiseOutlined,
 } from '@ant-design/icons-vue';
 import router from '../router';
 export default defineComponent({
@@ -50,6 +57,7 @@ export default defineComponent({
         AppstoreOutlined,
         SettingOutlined,
         FileDoneOutlined,
+        RiseOutlined,
     },
     setup() {
         const state = reactive({
