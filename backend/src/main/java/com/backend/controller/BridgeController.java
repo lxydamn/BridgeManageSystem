@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,12 +21,16 @@ public class BridgeController {
     @Autowired
     private BridgeService bridgeService;
 
+    @GetMapping("/api/bridge/get/all")
+    public List<Map<String, Object>> getAll() {
+        return bridgeService.getAll();
+    }
     @PostMapping("/api/bridge/add")
     public Map<String, String> addBridge(@RequestParam Map<String, String> map) {
         return bridgeService.addBridge(map);
     }
 
-    @GetMapping("/api/bridge/get")
+    @GetMapping("/api/bridge/get/id")
     public BridgeInfo getBridge(@RequestParam Map<String, String> map) {
         return bridgeService.getBridge(map);
     }

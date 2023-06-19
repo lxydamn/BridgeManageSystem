@@ -13,7 +13,7 @@
             <a-statistic title="已完成定期检查" suffix="座" :value="112893" />
         </a-card-grid>
       </a-card>
-    <a-button class="operator-btn" @click="visible = true">添加单位</a-button>
+    <a-button class="operator-btn" @click="visible = true">添加桥梁</a-button>
     <a-table :columns="columns" :data-source="dataSource">
         <template #bodyCell="{column, record}">
             <template v-if="column.dataIndex === 'operation'">
@@ -33,15 +33,33 @@
 
     <a-modal
         v-model:visible="visible"
-        title="单位"
+        title="桥梁"
         ok-text="确认"
         cancel-text="取消"
         @ok="handleOk"
         @cancel="cleanInput"
     >
-        
-        <a-input class="input-cpn" pattern="[0-9]*" v-model:value="modalValue.unit_no" placeholder="单位编号" />
-        <a-input class="input-cpn" v-model:value="modalValue.unit_name" placeholder="单位名称" />
+        <a-input addon-before="桥梁编号" class="input-cpn" pattern="[0-9]*" v-model:value="modalValue.bridge_no" placeholder="桥梁编号" />
+        <a-input addon-before="桥梁名称" class="input-cpn" v-model:value="modalValue.bridge_name" placeholder="桥梁名称" />
+        <div class="select-box input-cpn">
+            <span>路线编号</span>
+            <a-select
+                ref="select"
+                v-model:value="modalValue.route_no"
+                style="width: 10em"
+                :options="routes"
+                :field-names="{label:'route_name', value:'route_no'}"
+            ></a-select>
+            <span>桥梁类型</span>
+            <a-select
+                ref="select"
+                v-model:value="modalValue.type_no"
+                style="width: 10em"
+                :options="types"
+                :field-names="{label:'type_name', value:'type_no'}"
+            ></a-select>
+        </div>
+     
     </a-modal>
 </template>
 <script lang="ts">
@@ -51,12 +69,37 @@ import { error_message } from '../../utils/errorMessage';
 
 const columns = [
     {
-        title: '单位编号',
-        dataIndex: 'unit_no',
+        title: '桥梁编号',
+        dataIndex: 'bridge_no',
     },
     {
-        title: '单位名称',
-        dataIndex: 'unit_name',
+        title: '桥梁名称',
+        dataIndex: 'bridge_name',
+        ellipsis: true,
+    },
+    {
+        title: '路线编号',
+        dataIndex: 'route_no',
+        ellipsis: true,
+    },
+    {
+        title: '路线名称',
+        dataIndex: 'route_name',
+        ellipsis: true,
+    },
+    {
+        title: '路线等级',
+        dataIndex: 'route_rank',
+        ellipsis: true,
+    },
+    {
+        title: '桥梁类型编号',
+        dataIndex: 'type_no',
+        ellipsis: true,
+    },
+    {
+        title: '类型名称',
+        dataIndex: 'type_name',
         ellipsis: true,
     },
     {
@@ -66,9 +109,14 @@ const columns = [
     
 ];
 
-interface Unit {
-    unit_no:string
-    unit_name: string
+interface Bridge {
+    bridge_no:string
+    bridge_name: string
+    route_no:string
+    route_name:string
+    route_rank:string
+    type_no:string
+    type_name:string
 }
 
 export default defineComponent({
@@ -79,15 +127,17 @@ export default defineComponent({
     setup() {
         let visible = ref(false)
         let isUpdate = ref(false)
-        let old_unit_no = ref("")
-        const dataSource: Ref<Unit[]> = ref([])
+        let old_bridge_no = ref("")
+        const dataSource: Ref<Bridge[]> = ref([])
+        const routes = ref([])
+        const types = ref([])
 
-        let units = ref([])
 
         const checkInput = () => {
-            if (modalValue.unit_no.length == 0 || modalValue.unit_name.length == 0 )
+            if (modalValue.bridge_name.length == 0 || modalValue.bridge_no.length == 0 ||
+                    modalValue.route_no.length == 0 || modalValue.type_no.length == 0
+                )
                 return false
-
             return true
         }
 
@@ -95,27 +145,51 @@ export default defineComponent({
             visible.value = false
             isUpdate.value = false
 
-            modalValue.unit_no = ""
-            modalValue.unit_name =""
-            old_unit_no.value=""
+            modalValue.bridge_no = ""
+            modalValue.route_no = ""
+            modalValue.type_no = ""
+            modalValue.bridge_name =""
+            old_bridge_no.value=""
 
-            getUnits()
+            getBridge()
         }
 
         const modalValue = reactive({
-            unit_no:'',
-            unit_name:'',
+            bridge_no:'',
+            bridge_name:'',
+            type_no:'',
+            route_no:'',
         })
 
-        const getUnits = () => {
+        const getRoutes = () => {
             axios({
-                url: 'http://localhost:3000/api/unit/get/all',
+                url: 'http://localhost:3000/api/route/get/all',
+                method:'GET',
+            }).then((resp) => {
+                routes.value = resp.data
+            })
+        }
+        getRoutes()
+
+        const getBridge = () => {
+            axios({
+                url: 'http://localhost:3000/api/bridge/get/all',
                 method:'GET',
             }).then((resp) => {
                 dataSource.value = resp.data
             })
         }
-        getUnits()
+        getBridge()
+
+        const getTypes = () => {
+            axios({
+                url: 'http://localhost:3000/api/type/get/all',
+                method:'GET',
+            }).then((resp) => {
+                types.value = resp.data
+            })
+        }
+        getTypes()
 
         const handleOk = () => {
 
@@ -134,11 +208,13 @@ export default defineComponent({
 
         const handleAdd = () => {
             axios({
-                url:'http://localhost:3000/api/unit/add',
+                url:'http://localhost:3000/api/bridge/add',
                 method:"POST",
                 params:{
-                    unit_no:modalValue.unit_no,
-                    unit_name:modalValue.unit_name,
+                    bridge_no:modalValue.bridge_no,
+                    bridge_name:modalValue.bridge_name,
+                    type_no:modalValue.type_no,
+                    route_no:modalValue.route_no,
                 }
             }).then((resp) => {
                 if (resp.data.error_info === 'success') {
@@ -151,9 +227,12 @@ export default defineComponent({
         }
 
         const onUpdate = (record:any) => {
-            modalValue.unit_no = record.unit_no
-            modalValue.unit_name = record.unit_name
-            old_unit_no.value = record.unit_no
+            modalValue.bridge_no = record.bridge_no
+            modalValue.bridge_name = record.bridge_name
+            modalValue.route_no = record.route_no
+            modalValue.type_no = record.type_no
+            old_bridge_no.value = record.bridge_no
+
             visible.value = true
             isUpdate.value = true
             console.log(record)
@@ -164,9 +243,11 @@ export default defineComponent({
                 url:'http://localhost:3000/api/unit/update',
                 method:"POST",
                 params:{
-                    old_unit_no:old_unit_no.value,
-                    new_unit_no:modalValue.unit_no,
-                    unit_name:modalValue.unit_name,
+                    old_bridge_no:old_bridge_no.value,
+                    new_bridge_no:modalValue.bridge_no,
+                    bridge_name:modalValue.bridge_name,
+                    route_no:modalValue.route_no,
+                    type_no:modalValue.type_no,
                 }
             }).then((resp) => {
                 if (resp.data.error_info === 'success') {
@@ -178,17 +259,17 @@ export default defineComponent({
             })
         }
 
-        const onDelete = (unit_no : any) => {
+        const onDelete = (bridge_no : any) => {
             axios({
-                url:'http://localhost:3000/api/unit/delete',
+                url:'http://localhost:3000/api/bridge/delete',
                 method:"POST",
                 params: {
-                    unit_no: unit_no,
+                    bridge_no: bridge_no,
                 }
             }).then((resp) => {
                 console.log(resp.data)
                 error_message(resp.data.error_info, resp.data.error_info)
-                getUnits()
+                getBridge()
             })
         }
 
@@ -199,7 +280,8 @@ export default defineComponent({
             handleOk,
             visible,
             onUpdate,
-            units,
+            types,
+            routes,
             onDelete,
             cleanInput,
         };
@@ -211,6 +293,13 @@ export default defineComponent({
     .operator-btn {
         margin-bottom: .8em;
         height: 3em;
+    }
+    .select-box {
+        width: 100%;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
     .input-cpn {
         margin: .5em;
