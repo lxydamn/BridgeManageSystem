@@ -11,6 +11,11 @@
             #{bridge_no}, #{type_no},  #{route_no}, #{bridge_name}
         )
     </insert>
+    <update id="update">
+        update bridge_info set bridge_no=#{new_bridge_no},bridge_name=#{bridge_name},
+                               type_no=#{type_no},route_no=#{route_no}
+        where bridge_no=#{old_bridge_no}
+    </update>
 
     <select id="selectById" resultType="com.backend.pojo.BridgeInfo" parameterType="java.util.Map">
         select * from bridge_info where bridge_no=#{bridge_no}
@@ -20,6 +25,9 @@
         from bridge_info,bridge_type,route
         where bridge_type.type_no=bridge_info.type_no and
               bridge_info.route_no=route.route_no
+    </select>
+    <select id="getCountByUnit" parameterType="java.util.Map" resultType="java.util.Map">
+        select count(bridge_no) bridgeCount from unit_job where unit_no=#{unit_no}
     </select>
 
 

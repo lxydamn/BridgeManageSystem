@@ -1,7 +1,7 @@
 <template>
     <a-card style="margin-bottom:1em">
         <a-card-grid style="width: 25%; text-align: center">
-            <a-statistic title="管理桥梁" suffix="座" :value="112893" />
+            <a-statistic title="管理桥梁" suffix="座" :value="bridgeCount.bridgeCount" />
         </a-card-grid>
         <a-card-grid style="width: 25%; text-align: center">
             <a-statistic title="已完成基本卡片" suffix="座" :value="112893" />
@@ -23,7 +23,6 @@
                     title="确认要删除吗？"
                     ok-text="确认"
                     cancel-text="取消"
-                    @confirm="onDelete(record.route_no)"
                 >
                   <a>删除</a>
                 </a-popconfirm>
@@ -42,7 +41,7 @@
         <a-input addon-before="桥梁编号" class="input-cpn" pattern="[0-9]*" v-model:value="modalValue.bridge_no" placeholder="桥梁编号" />
         <a-input addon-before="桥梁名称" class="input-cpn" v-model:value="modalValue.bridge_name" placeholder="桥梁名称" />
         <div class="select-box input-cpn">
-            <span>路线编号</span>
+            <span style="margin-left: .6em;">路线编号</span>
             <a-select
                 ref="select"
                 v-model:value="modalValue.route_no"
@@ -66,6 +65,7 @@
 import axios from 'axios';
 import { Ref, defineComponent, reactive, ref } from 'vue';
 import { error_message } from '../../utils/errorMessage';
+import { useUserStore } from '../../store/user'
 
 const columns = [
     {
@@ -125,12 +125,23 @@ export default defineComponent({
     },
 
     setup() {
+        const userStore = useUserStore()
         let visible = ref(false)
         let isUpdate = ref(false)
         let old_bridge_no = ref("")
         const dataSource: Ref<Bridge[]> = ref([])
         const routes = ref([])
         const types = ref([])
+        const modalValue = reactive({
+            bridge_no:'',
+            bridge_name:'',
+            type_no:'',
+            route_no:'',
+        })
+
+        let bridgeCount = reactive({
+            bridgeCount:0,
+        })
 
 
         const checkInput = () => {
@@ -154,13 +165,19 @@ export default defineComponent({
             getBridge()
         }
 
-        const modalValue = reactive({
-            bridge_no:'',
-            bridge_name:'',
-            type_no:'',
-            route_no:'',
-        })
+        const getCount = () => {
+            axios({
+                url: 'http://localhost:3000/api/bridge/unit/count',
+                method:'GET',
+                params: {
+                    unit_no:userStore.unit_no,
+                }
+            }).then((resp) => {
+                bridgeCount.bridgeCount = resp.data.bridgeCount
 
+            })
+        }
+        getCount()
         const getRoutes = () => {
             axios({
                 url: 'http://localhost:3000/api/route/get/all',
@@ -183,7 +200,7 @@ export default defineComponent({
 
         const getTypes = () => {
             axios({
-                url: 'http://localhost:3000/api/type/get/all',
+                url: 'http://localhost:3000/api/bridgeType/get/all',
                 method:'GET',
             }).then((resp) => {
                 types.value = resp.data
@@ -240,7 +257,7 @@ export default defineComponent({
 
         const handleUpdate = () => {
             axios({
-                url:'http://localhost:3000/api/unit/update',
+                url:'http://localhost:3000/api/bridge/update',
                 method:"POST",
                 params:{
                     old_bridge_no:old_bridge_no.value,
@@ -280,6 +297,7 @@ export default defineComponent({
             handleOk,
             visible,
             onUpdate,
+            bridgeCount,
             types,
             routes,
             onDelete,

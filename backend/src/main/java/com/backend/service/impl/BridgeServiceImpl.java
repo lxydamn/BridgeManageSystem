@@ -41,4 +41,25 @@ public class BridgeServiceImpl implements BridgeService {
     public List<Map<String, Object>> getAll() {
         return bridgeMapper.getAll();
     }
+
+    @Override
+    public Map<String, Object> getCountByUnit(Map<String, Object> map) {
+        return bridgeMapper.getCountByUnit(map);
+    }
+
+    @Override
+    public Map<String, String> updateBridge(Map<String, Object> map) {
+
+        Map<String, String> resp = new HashMap<>();
+
+        try {
+            bridgeMapper.update(map);
+        } catch (Exception e) {
+            resp.put("error_info", "修改失败");
+            return resp;
+        }
+
+        resp.put("error_info", "success");
+        return resp;
+    }
 }

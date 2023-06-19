@@ -11,4 +11,8 @@ public interface BridgeService {
     BridgeInfo getBridge(Map<String, String> map);
 
     List<Map<String, Object>> getAll();
+
+    Map<String, Object> getCountByUnit(Map<String, Object> map);
+
+    Map<String, String> updateBridge(Map<String, Object> map);
 }
