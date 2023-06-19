@@ -30,7 +30,18 @@ const routes = [
 				},
 				component: () =>
 					import(
-						/* webpackChunkName: "dashboard" */ "../views/dashboard.vue"
+						/* webpackChunkName: "dashboard" */ "../views/user/dashboard.vue"
+					),
+			},
+			{
+				path: "/bridge",
+				name: "bridge",
+				meta: {
+					author: 1,
+				},
+				component: () =>
+					import(
+						/* webpackChunkName: "bridge" */ "../views/user/bridge.vue"
 					),
 			},
 		],
@@ -151,7 +162,7 @@ const routes = [
 			author: 0,
 		},
 		component: () =>
-			import(/* webpackChunkName: "login" */ "../views/prevent.vue"),
+			import(/* webpackChunkName: "login" */ "../views/error/prevent.vue"),
 	},
 	{
 		path: "/notfound",
@@ -160,7 +171,7 @@ const routes = [
 			author: 0,
 		},
 		component: () =>
-			import(/* webpackChunkName: "404" */ "../views/404.vue"),
+			import(/* webpackChunkName: "404" */ "../views/error/404.vue"),
 	},
 	{
 		path: "/:catchAll(.*)",

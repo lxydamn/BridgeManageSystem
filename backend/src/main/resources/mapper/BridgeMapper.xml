@@ -3,12 +3,16 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.backend.mapper.BridgeMapper">
-    <insert id="insertOne" parameterType="java.util.Map">
+    <insert id="insert" parameterType="java.util.Map">
         insert into bridge_info (
-            bridge_no, type_no, peri_rcd_no, card_no, init_rcd_no, route_no, bridge_name
+            bridge_no, type_no, route_no, bridge_name
         )
         values (
-            #{bridge_no}, #{type_no}, #{peri_rcd_no}, #{card_no}, #{init_rcd_no}, #{route_no}, #{bridge_name}
+            #{bridge_no}, #{type_no},  #{route_no}, #{bridge_name}
         )
     </insert>
+
+    <select id="selectById" resultType="com.backend.pojo.BridgeInfo" parameterType="java.util.Map">
+        select * from bridge_info where bridge_no=#{bridge_no}
+    </select>
 </mapper>

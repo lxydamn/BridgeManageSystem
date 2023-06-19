@@ -4,7 +4,7 @@
             <a-col :span="16">
                 <a-card hoverable class="left-info-box">
                     <div class="info-grid">
-                        <img class="info-avator" src="../assets/images/avator.png" alt="avator" />
+                        <img class="info-avator" src="../../assets/images/avator.png" alt="avator" />
                         <div class="user-info">
                             <h3>姓名：{{ userStore.username }}</h3>
                             <h3>桥梁记录工程师</h3>
@@ -38,7 +38,7 @@
 <script lang="ts">
 import { SettingOutlined, EditOutlined, EllipsisOutlined } from '@ant-design/icons-vue';
 import { defineComponent } from 'vue';
-import { useUserStore } from '../store/user';
+import { useUserStore } from '../../store/user';
 export default defineComponent({
     components: {
         SettingOutlined,

@@ -15,7 +15,7 @@
                 </template>
                 桥梁管理
             </a-menu-item>
-            <a-sub-menu key="bridge">
+            <a-sub-menu key="bridge1">
                 <template #icon>
                     <FileDoneOutlined />
                 </template>

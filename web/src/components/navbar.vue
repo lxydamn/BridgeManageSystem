@@ -1,6 +1,8 @@
 <template>
   <div class="header-box">
-      <div class="logo"> 桥梁初始信息管理</div>
+      <div class="logo">
+        <a href="/dashboard">桥梁初始信息管理</a>
+      </div>
       <a-menu
        v-model:selectedKeys="current" 
        mode="horizontal"
