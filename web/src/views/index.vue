@@ -48,7 +48,7 @@ export default defineComponent({
 	width: 85%;
 	height: 90vh;
 	padding: 1em;
-	overflow: hidden auto;
+	overflow: hidden hidden;
 	background-color: rgb(239, 238, 238);
 }
 </style>

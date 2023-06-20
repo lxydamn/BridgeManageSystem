@@ -1,9 +1,7 @@
 package com.backend.service.impl;
 
 import com.backend.mapper.BridgeTypeMapper;
-import com.backend.mapper.RouteMapper;
 import com.backend.pojo.BridgeType;
-import com.backend.pojo.Route;
 import com.backend.service.BridgeTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

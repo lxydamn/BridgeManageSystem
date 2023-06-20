@@ -11,7 +11,15 @@ import java.util.Map;
 @Repository
 public interface BridgeMapper {
 
-    Map<String, Object> getCountByUnit(Map<String, Object> map);
+    Integer getBasicCardCount(Map<String, Object> map);
+
+    Integer getInitRecordCount(Map<String, Object> map);
+
+    Integer getPeriRecordCount(Map<String, Object> map);
+
+    Map<String, Object> getAllCount(Map<String, Object> map);
+
+    Integer getCountByUnit(Map<String, Object> map);
     void insert(Map<String, String> map);
     BridgeInfo selectById(Map<String, String> map);
 

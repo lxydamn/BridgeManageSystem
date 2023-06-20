@@ -1,18 +1,5 @@
 <template>
-    <a-card style="margin-bottom:1em">
-        <a-card-grid style="width: 25%; text-align: center">
-            <a-statistic title="管理桥梁" suffix="座" :value="bridgeCount.bridgeCount" />
-        </a-card-grid>
-        <a-card-grid style="width: 25%; text-align: center">
-            <a-statistic title="已完成基本卡片" suffix="座" :value="112893" />
-        </a-card-grid>
-        <a-card-grid style="width: 25%; text-align: center">
-            <a-statistic title="已完成初始检查" suffix="座" :value="112893" />
-        </a-card-grid>
-        <a-card-grid style="width: 25%; text-align: center">
-            <a-statistic title="已完成定期检查" suffix="座" :value="112893" />
-        </a-card-grid>
-      </a-card>
+    
     <a-button class="operator-btn" @click="visible = true">添加桥梁</a-button>
     <a-table :columns="columns" :data-source="dataSource">
         <template #bodyCell="{column, record}">
@@ -65,7 +52,6 @@
 import axios from 'axios';
 import { Ref, defineComponent, reactive, ref } from 'vue';
 import { error_message } from '../../utils/errorMessage';
-import { useUserStore } from '../../store/user'
 
 const columns = [
     {
@@ -125,7 +111,6 @@ export default defineComponent({
     },
 
     setup() {
-        const userStore = useUserStore()
         let visible = ref(false)
         let isUpdate = ref(false)
         let old_bridge_no = ref("")
@@ -139,9 +124,7 @@ export default defineComponent({
             route_no:'',
         })
 
-        let bridgeCount = reactive({
-            bridgeCount:0,
-        })
+        
 
 
         const checkInput = () => {
@@ -165,19 +148,7 @@ export default defineComponent({
             getBridge()
         }
 
-        const getCount = () => {
-            axios({
-                url: 'http://localhost:3000/api/bridge/unit/count',
-                method:'GET',
-                params: {
-                    unit_no:userStore.unit_no,
-                }
-            }).then((resp) => {
-                bridgeCount.bridgeCount = resp.data.bridgeCount
-
-            })
-        }
-        getCount()
+        
         const getRoutes = () => {
             axios({
                 url: 'http://localhost:3000/api/route/get/all',
@@ -297,7 +268,6 @@ export default defineComponent({
             handleOk,
             visible,
             onUpdate,
-            bridgeCount,
             types,
             routes,
             onDelete,

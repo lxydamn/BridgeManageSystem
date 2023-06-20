@@ -44,7 +44,15 @@ public class BridgeServiceImpl implements BridgeService {
 
     @Override
     public Map<String, Object> getCountByUnit(Map<String, Object> map) {
-        return bridgeMapper.getCountByUnit(map);
+
+        Map<String, Object> resp = new HashMap<>();
+
+        resp.put("bridgeCount", bridgeMapper.getCountByUnit(map));
+        resp.put("basicCardCount", bridgeMapper.getBasicCardCount(map));
+        resp.put("initRecordCount", bridgeMapper.getInitRecordCount(map));
+        resp.put("periRecordCount", bridgeMapper.getPeriRecordCount(map));
+
+        return resp;
     }
 
     @Override
