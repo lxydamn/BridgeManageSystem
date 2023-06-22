@@ -2,7 +2,7 @@
     <div>
         <a-menu v-model:selectedKeys="selectedKeys" mode="inline" style="
           height: 90vh;
-        " @click="clickRouter" :open-keys="openKeys" @openChange="onOpenChange">
+        " @click="clickRouter" >
             <a-menu-item key="dashboard">
                 <template #icon>
                     <AppstoreOutlined />
@@ -15,12 +15,12 @@
                 </template>
                 桥梁管理
             </a-menu-item>
-            <a-sub-menu key="bridge1">
+            <a-sub-menu >
                 <template #icon>
                     <FileDoneOutlined />
                 </template>
                 <template #title>信息录入</template>
-                <a-menu-item key="1">桥梁基本卡片</a-menu-item>
+                <a-menu-item key="basicCard">桥梁基本卡片</a-menu-item>
                 <a-menu-item key="2">初始检查记录</a-menu-item>
                 <a-menu-item key="3">定期检查记录</a-menu-item>
             </a-sub-menu>
@@ -52,27 +52,17 @@ export default defineComponent({
     },
     setup() {
         const state = reactive({
-            rootSubmenuKeys: ['sub1', 'sub2', 'sub4'],
-            openKeys: ['sub1'],
             selectedKeys: [],
         });
 
         const clickRouter = (item: any) => {
-            router.push(item.key)
+            router.push({name:item.key})
+            
         }
 
-        const onOpenChange = (openKeys: string[]) => {
-            const latestOpenKey = openKeys.find(key => state.openKeys.indexOf(key) === -1);
-            if (state.rootSubmenuKeys.indexOf(latestOpenKey!) === -1) {
-                state.openKeys = openKeys;
-            } else {
-                state.openKeys = latestOpenKey ? [latestOpenKey] : [];
-            }
-        };
         return {
             ...toRefs(state),
             clickRouter,
-            onOpenChange,
         };
     },
 });

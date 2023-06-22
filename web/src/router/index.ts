@@ -44,6 +44,17 @@ const routes = [
 						/* webpackChunkName: "bridge" */ "../views/user/bridge.vue"
 					),
 			},
+			{
+				path: "/data/basic",
+				name: "basicCard",
+				meta: {
+					author: 1,
+				},
+				component: () =>
+					import(
+						/* webpackChunkName: "bridge" */ "../views/user/basicCard.vue"
+					),
+			},
 		],
 	}, //  admin 管理
 	{

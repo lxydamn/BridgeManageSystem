@@ -5,9 +5,15 @@
 			<sider></sider>
 		</div>
 		<div class="content-box">
+			
 			<RouterView v-slot="{ Component }">
-				<component :is="Component"></component>
-			</RouterView>
+				<Transition name="slide-fade">
+					<KeepAlive>	
+						<component :is="Component"></component>
+					</KeepAlive>
+				</Transition>
+			</RouterView>	
+			
 		</div>
 	</div>
 </template>
@@ -48,7 +54,7 @@ export default defineComponent({
 	width: 85%;
 	height: 90vh;
 	padding: 1em;
-	overflow: hidden hidden;
+	overflow: hidden auto;
 	background-color: rgb(239, 238, 238);
 }
 </style>
