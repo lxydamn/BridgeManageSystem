@@ -14,14 +14,12 @@
               <user-outlined />
           </template>
           <template #title>{{ userStore.username }}</template>
-          <a-menu-item-group>
             <a-menu-item key="userLogout">
               <template #icon>
                   <logout-outlined />
               </template>
               退出登录
             </a-menu-item>
-          </a-menu-item-group>
         </a-sub-menu>
       </a-menu>
   </div>

@@ -1,7 +1,7 @@
 <template>
     <a-button class="operator-btn" @click="visible = true">添加单位</a-button>
 
-    <a-table :columns="columns" :data-source="dataSource">
+    <a-table :columns="columns" :data-source="dataSource" :pagination="{ pageSize: 8}" style="height: 70vh">
         <template #bodyCell="{column, record}">
             <template v-if="column.dataIndex === 'operation'">
                 <a style="margin-right: .5em;" @click="onUpdate(record)">修改</a>
@@ -10,7 +10,7 @@
                     title="确认要删除吗？"
                     ok-text="确认"
                     cancel-text="取消"
-                    @confirm="onDelete(record.route_no)"
+                    @confirm="onDelete(record.unit_no)"
                 >
                   <a>删除</a>
                 </a-popconfirm>

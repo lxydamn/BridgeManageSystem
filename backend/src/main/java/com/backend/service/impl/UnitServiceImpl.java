@@ -43,6 +43,7 @@ public class UnitServiceImpl implements UnitService {
     @Override
     public Map<String, String> delete(Map<String, String> map) {
         Map<String, String> resp = new HashMap<>();
+        System.out.println(map);
         try {
             unitMapper.delete(map);
         } catch (Exception e) {

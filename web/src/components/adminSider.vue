@@ -34,8 +34,6 @@
                 <template #title>桥梁管理</template>
                 <a-menu-item key="type">桥梁类型管理</a-menu-item>
                 <a-menu-item key="part">桥梁部位管理</a-menu-item>
-                <a-menu-item key="component">桥梁部件管理</a-menu-item>
-                <a-menu-item key="typeComponent">桥梁桥梁类型部件配置</a-menu-item>
             </a-sub-menu>
         </a-menu>
 
