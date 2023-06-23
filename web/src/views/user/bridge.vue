@@ -1,7 +1,8 @@
 <template>
-    
+
     <a-button class="operator-btn" @click="visible = true">添加桥梁</a-button>
-    <a-table :columns="columns" :data-source="dataSource">
+
+    <a-table class="bridge-table" :columns="columns" :data-source="dataSource" :pagination="{ pageSize: 8}">
         <template #bodyCell="{column, record}">
             <template v-if="column.dataIndex === 'operation'">
                 <a style="margin-right: .5em;" @click="onUpdate(record)">修改</a>
@@ -45,9 +46,9 @@
                 :field-names="{label:'type_name', value:'type_no'}"
             ></a-select>
         </div>
-     
     </a-modal>
 </template>
+
 <script lang="ts">
 import axios from 'axios';
 import { Ref, defineComponent, reactive, ref } from 'vue';
@@ -274,21 +275,26 @@ export default defineComponent({
 </script>
 
 <style>
-    .operator-btn {
-        margin-bottom: .8em;
-        height: 3em;
-    }
-    .select-box {
-        width: 100%;
-        margin: 0;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-    .input-cpn {
-        margin: .5em;
-        height: 2.5em;
-    }
+.bridge-table{
+    height: 68vh;
+    margin-top: 1em;
+}
+
+.operator-btn {
+    margin-bottom: .8em;
+    height: 3em;
+}
+.select-box {
+    width: 100%;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.input-cpn {
+    margin: .5em;
+    height: 2.5em;
+}
 </style>
   
   

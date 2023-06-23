@@ -569,7 +569,7 @@ export default defineComponent({
 	position: absolute;
 	display: flex;
 	flex-direction: column;
-	top: 11vh;
+	top: 100px;
 	right: 2%;
 }
 .sub-struct-table {

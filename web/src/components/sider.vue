@@ -15,7 +15,7 @@
                 </template>
                 桥梁管理
             </a-menu-item>
-            <a-menu-item key="basicCardIndex">
+            <a-menu-item key="informationIndex">
                 <template #icon>
                     <FileDoneOutlined />
                 </template>
@@ -54,7 +54,6 @@ export default defineComponent({
 
         const clickRouter = (item: any) => {
             router.push({name:item.key})
-            
         }
 
         return {

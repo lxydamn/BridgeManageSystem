@@ -54,15 +54,38 @@ const routes = [
 					import(
 						/* webpackChunkName: "bridge" */ "../views/user/basicCard.vue"
 					),
-			},{
-				path: "index/basic/",
-				name: "basicCardIndex",
+			},
+			{
+				path: "/data/init",
+				name: "initCard",
 				meta: {
 					author: 1,
 				},
 				component: () =>
 					import(
-						/* webpackChunkName: "bridge" */ "../views/user/basicCardIndex.vue"
+						/* webpackChunkName: "bridge" */ "../views/user/initCard.vue"
+					),
+			},
+			{
+				path: "/data/peri",
+				name: "periCard",
+				meta: {
+					author: 1,
+				},
+				component: () =>
+					import(
+						/* webpackChunkName: "bridge" */ "../views/user/periCard.vue"
+					),
+			},
+			{
+				path: "information/",
+				name: "informationIndex",
+				meta: {
+					author: 1,
+				},
+				component: () =>
+					import(
+						/* webpackChunkName: "bridge" */ "../views/user/informationIndex.vue"
 						),
 			},
 		],

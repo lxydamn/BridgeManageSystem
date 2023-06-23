@@ -22,9 +22,9 @@
                     <div class="info-grid">
                         <img class="info-avator" src="../../assets/images/avator.png" alt="avator" />
                         <div class="user-info">
-                            <h3>姓名：{{ userStore.username }}</h3>
-                            <h3>桥梁记录工程师</h3>
-                            <h3>单位：{{ userStore.unit_name }}</h3>
+                            <p>姓名：{{ userStore.username }}</p>
+                            <p>桥梁记录工程师</p>
+                            <p>单位：{{ userStore.unit_name }}</p>
                         </div>
                     </div>
                 </a-card>
@@ -39,7 +39,6 @@
                     </a-card>
                 </div>
             </a-col>
-            
         </a-row>
         
     </div>
@@ -139,7 +138,5 @@ export default defineComponent({
 .info-avator:hover {
     transform: rotate(180deg);
 }
-
-
 
 </style>

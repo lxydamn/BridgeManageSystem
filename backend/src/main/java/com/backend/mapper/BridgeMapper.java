@@ -3,7 +3,6 @@ package com.backend.mapper;
 import com.backend.pojo.BridgeInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
-import sun.corba.Bridge;
 
 import java.util.List;
 import java.util.Map;
