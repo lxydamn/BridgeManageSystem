@@ -17,5 +17,7 @@ public interface UserMapper {
      List<Map<String, Object>> getAll();
      User getUserByUsername(String username);
 
+     Integer getCount();
+
      void deleteOne(Integer account);
 }

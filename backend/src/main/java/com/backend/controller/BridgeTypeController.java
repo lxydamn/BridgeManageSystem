@@ -31,6 +31,10 @@ public class BridgeTypeController {
         return bridgeTypeService.updateRoute(map);
     }
 
+    @GetMapping("/api/bridgeType/count")
+    public List<Map<String, Object>> getCount() {
+        return bridgeTypeService.getCount();
+    }
     @PostMapping("/api/bridgeType/add")
     public Map<String, String> insert(@RequestParam Map<String, Object> map) {
         return bridgeTypeService.addRoute(map);

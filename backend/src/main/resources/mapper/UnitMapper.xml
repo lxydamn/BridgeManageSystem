@@ -10,6 +10,9 @@
     <select id="getAll" resultType="com.backend.pojo.Unit">
         select * from unit
     </select>
+    <select id="getCount" resultType="java.lang.Integer">
+        select count(unit_no) from unit;
+    </select>
 
     <insert id="insertOne" parameterType="java.util.Map">
         insert into unit(unit_no, unit_name) values(

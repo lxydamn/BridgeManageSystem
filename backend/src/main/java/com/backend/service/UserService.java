@@ -12,4 +12,6 @@ public interface UserService {
     Map<String, String> deleteOne(Map<String, String> map);
 
     Map<String, String> update(Map<String, String> map);
+
+    Map<String, Object> getUUCount();
 }

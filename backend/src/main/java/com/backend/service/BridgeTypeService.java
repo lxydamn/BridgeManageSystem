@@ -20,4 +20,6 @@ public interface BridgeTypeService {
     List<BridgeType> getAll();
 
     BridgeType getById(Map<String, Object> map);
+
+    List<Map<String, Object>> getCount();
 }

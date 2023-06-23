@@ -2,6 +2,7 @@ package com.backend.mapper;
 
 import com.backend.pojo.BridgeType;
 import com.backend.pojo.Route;
+import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -19,7 +20,10 @@ public interface BridgeTypeMapper {
     void insert(Map<String, Object> map);
     void update(Map<String, Object> map);
 
+
+    List<Map<String, Object>> getTypeCount();
     List<BridgeType> getAll();
+
     BridgeType selectById(Map<String, Object> map);
 
     void  delete(Map<String, Object> map);

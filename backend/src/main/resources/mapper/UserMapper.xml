@@ -28,6 +28,9 @@
     <select id="getUserByUsername" parameterType="java.lang.String" resultType="com.backend.pojo.User">
         select * from user where username=#{username}
     </select>
+    <select id="getCount" resultType="java.lang.Integer">
+        select count(account) from user
+    </select>
 
     <update id="update" parameterType="java.util.Map" >
         update user set username=#{username},unit_no=#{unit_no},

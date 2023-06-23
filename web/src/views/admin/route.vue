@@ -20,7 +20,7 @@
 
     <a-modal
         v-model:visible="visible"
-        title="单位"
+        title="路线"
         ok-text="确认"
         cancel-text="取消"
         @ok="handleOk"
@@ -28,7 +28,6 @@
     >
         <a-input class="input-cpn" pattern="[0-9]*" v-model:value="modalValue.route_no" placeholder="路线编号" />
         <a-input class="input-cpn" v-model:value="modalValue.route_name" placeholder="路线名称" />
-        <a-input class="input-cpn" v-model:value="modalValue.route_rank" placeholder="路线等级" />
     </a-modal>
 </template>
 <script lang="ts">

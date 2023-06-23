@@ -79,4 +79,9 @@ public class BridgeTypeServiceImpl implements BridgeTypeService {
 
         return bridgeTypeMapper.selectById(map);
     }
+
+    @Override
+    public List<Map<String, Object>> getCount() {
+        return bridgeTypeMapper.getTypeCount();
+    }
 }

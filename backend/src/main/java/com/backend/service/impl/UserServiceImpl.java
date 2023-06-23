@@ -117,4 +117,15 @@ public class UserServiceImpl implements UserService {
         resp.put("error_info", "success");
         return resp;
     }
+
+    @Override
+    public Map<String, Object> getUUCount() {
+
+        Map<String, Object> resp = new HashMap<>();
+
+        resp.put("user_count", userMapper.getCount());
+        resp.put("unit_count", unitMapper.getCount());
+
+        return resp;
+    }
 }

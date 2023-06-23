@@ -19,4 +19,6 @@ public interface UnitMapper {
     void update(Map<String , String> map);
 
     void delete(Map<String, String> map);
+
+    Integer getCount();
 }

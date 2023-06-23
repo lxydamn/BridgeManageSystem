@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.backend.mapper.CardMapper">
+
+    <select id="getBasicCardCount" resultType="java.lang.Integer">
+        select count(bridge_no) from bridge_basic_cond;
+    </select>
+    <select id="getInitCardCount" resultType="java.lang.Integer">
+        select count(bridge_no) from bridge_init_record
+
+    </select>
+    <select id="getPeriCardCount" resultType="java.lang.Integer">
+        select count(bridge_no) from bridge_peri_record
+    </select>
+    <select id="getBridgeCount" resultType="java.lang.Integer">
+        select count(bridge_no) from bridge_info;
+    </select>
+</mapper>
