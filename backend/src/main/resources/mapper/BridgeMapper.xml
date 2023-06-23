@@ -51,5 +51,22 @@
     <select id="getAllCount" parameterType="java.util.Map" resultType="java.util.Map">
         select count(bridge_no) bridgeCount from unit_job where unit_no=#{unit_no};
     </select>
+    <select id="getBasicCardCountByBridgeNo" resultType="java.lang.Integer">
+        select count(bridge_no) from bridge_basic_cond where bridge_no=#{bridge_no};
+    </select>
+    <select id="getInitCardCountByBridgeNo" resultType="java.lang.Integer">
+        select count(bridge_no)
+        from bridge_init_record
+        where bridge_no=#{bridge_no};
+    </select>
+    <select id="getPeriCardCountByBridgeNo" resultType="java.lang.Integer">
+        select count(bridge_no) from bridge_peri_record where bridge_no=#{bridge_no};
+    </select>
+    <select id="getBridgeByUnit" resultType="com.backend.pojo.BridgeInfo">
+        select * from bridge_info where bridge_no in (
+            select bridge_no from unit_job where unit_no=#{unit_no}
+            )
+    </select>
+
 
 </mapper>

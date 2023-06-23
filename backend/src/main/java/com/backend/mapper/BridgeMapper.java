@@ -3,6 +3,7 @@ package com.backend.mapper;
 import com.backend.pojo.BridgeInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
+import sun.corba.Bridge;
 
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,14 @@ public interface BridgeMapper {
     Integer getInitRecordCount(Map<String, Object> map);
 
     Integer getPeriRecordCount(Map<String, Object> map);
+
+    Integer getBasicCardCountByBridgeNo(String bridge_no);
+
+    Integer getInitCardCountByBridgeNo(String bridge_no);
+
+    Integer getPeriCardCountByBridgeNo(String bridge_no);
+
+    List<BridgeInfo> getBridgeByUnit(Map<String, Object> map);
 
     Map<String, Object> getAllCount(Map<String, Object> map);
 

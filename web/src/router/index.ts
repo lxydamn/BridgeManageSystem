@@ -54,6 +54,16 @@ const routes = [
 					import(
 						/* webpackChunkName: "bridge" */ "../views/user/basicCard.vue"
 					),
+			},{
+				path: "index/basic/",
+				name: "basicCardIndex",
+				meta: {
+					author: 1,
+				},
+				component: () =>
+					import(
+						/* webpackChunkName: "bridge" */ "../views/user/basicCardIndex.vue"
+						),
 			},
 		],
 	}, //  admin 管理
@@ -211,6 +221,12 @@ router.beforeEach((to, _form, next) => {
 		to.meta.author == 1
 	){
 		next({ name: "admin" });
+	} else if (sessionStorage.getItem("is_login") && to.name === 'login') {
+		if (userStore.account === '114514') {
+			next({name:'admin'})
+		} else {
+			next({name:'dashboard'})
+		}
 	} else {
 		next();
 	}

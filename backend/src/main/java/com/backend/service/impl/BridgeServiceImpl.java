@@ -6,6 +6,7 @@ import com.backend.service.BridgeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,6 +69,30 @@ public class BridgeServiceImpl implements BridgeService {
         }
 
         resp.put("error_info", "success");
+        return resp;
+    }
+
+
+    @Override
+    public List<Map<String, Object>> getCardStatus(Map<String, Object> map) {
+        List<Map<String, Object>> resp = new ArrayList<>();
+
+        List<BridgeInfo> bridgeByUnit = bridgeMapper.getBridgeByUnit(map);
+
+        for (BridgeInfo bridgeInfo : bridgeByUnit) {
+            Integer basic = bridgeMapper.getBasicCardCountByBridgeNo(bridgeInfo.getBridge_no());
+            Integer peri = bridgeMapper.getPeriCardCountByBridgeNo(bridgeInfo.getBridge_no());
+            Integer init = bridgeMapper.getInitCardCountByBridgeNo(bridgeInfo.getBridge_no());
+            Map<String, Object> item = new HashMap<>();
+
+            item.put("basic", basic == 0 ? "unfinished" : "finish");
+            item.put("peri", peri == 0 ? "unfinished" : "finish");
+            item.put("init", init == 0 ? "unfinished" : "finish");
+            item.put("bridge_no", bridgeInfo.getBridge_no());
+            item.put("bridge_name", bridgeInfo.getBridge_name());
+            resp.add(item);
+        }
+
         return resp;
     }
 }

@@ -109,7 +109,6 @@ export default defineComponent({
     components: {
 
     },
-
     setup() {
         let visible = ref(false)
         let isUpdate = ref(false)
@@ -123,9 +122,6 @@ export default defineComponent({
             type_no:'',
             route_no:'',
         })
-
-        
-
 
         const checkInput = () => {
             if (modalValue.bridge_name.length == 0 || modalValue.bridge_no.length == 0 ||

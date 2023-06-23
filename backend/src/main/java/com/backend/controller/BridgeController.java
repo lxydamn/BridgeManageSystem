@@ -26,6 +26,11 @@ public class BridgeController {
         return bridgeService.getAll();
     }
 
+    @GetMapping("/api/bridge/card/status")
+    public List<Map<String, Object>> cardStatus(@RequestParam Map<String, Object> map) {
+        return bridgeService.getCardStatus(map);
+    }
+
     @GetMapping("/api/bridge/unit/count")
     public Map<String, Object> getCountByUnit(@RequestParam Map<String, Object> map) {
         return bridgeService.getCountByUnit(map);

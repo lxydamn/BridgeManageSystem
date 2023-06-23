@@ -20,7 +20,7 @@
                     <FileDoneOutlined />
                 </template>
                 <template #title>信息录入</template>
-                <a-menu-item key="basicCard">桥梁基本卡片</a-menu-item>
+                <a-menu-item key="basicCardIndex">桥梁基本卡片</a-menu-item>
                 <a-menu-item key="2">初始检查记录</a-menu-item>
                 <a-menu-item key="3">定期检查记录</a-menu-item>
             </a-sub-menu>
