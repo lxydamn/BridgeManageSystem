@@ -14,6 +14,5 @@ public interface CardMapper {
     Integer getBasicCardCount();
     Integer getInitCardCount();
     Integer getPeriCardCount();
-
     Integer getBridgeCount();
 }
