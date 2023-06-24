@@ -28,7 +28,7 @@ public interface BridgeMapper {
     Map<String, Object> getAllCount(Map<String, Object> map);
 
     Integer getCountByUnit(Map<String, Object> map);
-    void insert(Map<String, String> map);
+    void insert(Map<String, Object> map);
     BridgeInfo selectById(Map<String, String> map);
 
     List<Map<String, Object>> getAll();

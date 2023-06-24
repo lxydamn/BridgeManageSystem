@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface BridgeService {
-    Map<String, String> addBridge(Map<String, String> map);
+    Map<String, String> addBridge(Map<String, Object> map);
 
     BridgeInfo getBridge(Map<String, String> map);
 

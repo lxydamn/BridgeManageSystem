@@ -15,7 +15,7 @@ public class UnitJobServiceImpl implements UnitJobService {
     private UnitJobMapper unitJobMapper;
 
     @Override
-    public Map<String, String> addUnitJob(Map<String, String> map) {
+    public Map<String, String> addUnitJob(Map<String, Object> map) {
         Map<String, String> resp = new HashMap<>();
 
         try {

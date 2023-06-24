@@ -13,6 +13,7 @@ import java.util.Map;
 public interface RouteService {
     Map<String, String> addRoute(Map<String, Object> map);
 
+    Map<String, Object> getByBridgeNo (Map<String, Object> map);
     Map<String, String> deleteRoute(Map<String, Object> map);
 
     Map<String, String> updateRoute(Map<String, Object> map);

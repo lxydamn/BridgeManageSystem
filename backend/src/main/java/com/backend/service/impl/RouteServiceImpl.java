@@ -38,6 +38,11 @@ public class RouteServiceImpl implements RouteService {
     }
 
     @Override
+    public Map<String, Object> getByBridgeNo(Map<String, Object> map) {
+        return routeMapper.selectByBridgeNo(map);
+    }
+
+    @Override
     public Map<String, String> deleteRoute(Map<String, Object> map) {
         Map<String, String> resp = new HashMap<>();
 

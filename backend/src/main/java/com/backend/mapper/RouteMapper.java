@@ -21,5 +21,6 @@ public interface RouteMapper {
     List<Route> getAll();
     Route selectById(Map<String, Object> map);
 
+    Map<String, Object> selectByBridgeNo(Map<String, Object> map);
     void  delete(Map<String, Object> map);
 }

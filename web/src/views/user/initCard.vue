@@ -360,7 +360,7 @@
                     <CloudUploadOutlined />
                 </template>
             </a-button>
-            <a-button type="primary">
+            <a-button type="primary" @click="$router.back()">
                 <template #icon>
                     <ArrowLeftOutlined />
                 </template>

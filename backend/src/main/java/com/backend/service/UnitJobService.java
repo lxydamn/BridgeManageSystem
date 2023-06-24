@@ -4,5 +4,5 @@ import java.util.Map;
 
 public interface UnitJobService {
 
-    Map<String, String> addUnitJob(Map<String, String> map);
+    Map<String, String> addUnitJob(Map<String, Object> map);
 }

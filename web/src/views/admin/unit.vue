@@ -53,7 +53,7 @@ const columns = [
     
 ];
 
-interface Unit {
+export interface Unit {
     unit_no:string
     unit_name: string
 }

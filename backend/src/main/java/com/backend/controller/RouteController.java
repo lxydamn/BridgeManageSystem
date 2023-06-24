@@ -43,4 +43,9 @@ public class RouteController {
     public Route getById(@RequestParam Map<String, Object> map) {
         return routeService.getById(map);
     }
+
+    @GetMapping("/api/route/get/bno")
+    public Map<String, Object> getByBridgeNo(@RequestParam Map<String, Object> map) {
+        return routeService.getByBridgeNo(map);
+    }
 }

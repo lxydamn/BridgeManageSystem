@@ -12,7 +12,7 @@
 						<tr>
 							<td class="table-item-name" style="width: 15%" >桥梁所属行政区代码</td>
 							<td class="table-item-content">
-								<a-input placeholder="桥梁所属行政区代码" />
+								<a-input placeholder="桥梁所属行政区代码" v-model:value="cardInfo.arr.admin_code" />
 							</td>
 						</tr>
 					</table>
@@ -24,85 +24,95 @@
 						<tr>
 							<td class="table-item-name">路线编号</td>
 							<td class="table-item-content">
-								<a-input placeholder="路线编号" />
+								<a-input placeholder="路线编号" disabled v-model:value="cardInfo.route.route_no" />
 							</td>
 							<td class="table-item-name">路线名称</td>
 							<td class="table-item-content">
-								<a-input placeholder="路线编号" />
+								<a-input placeholder="路线编号" disabled v-model:value="cardInfo.route.route_name" />
 							</td>
 							<td class="table-item-name">路线等级</td>
 							<td class="table-item-content">
-								<a-input placeholder="路线编号" />
+								<a-input placeholder="路线编号" disabled v-model:value="cardInfo.route.route_rank" />
 							</td>
 						</tr>
 						<tr>
 							<td class="table-item-name">桥梁编号</td>
 							<td class="table-item-content">
-								<a-input placeholder="桥梁编号" />
+								<a-input placeholder="桥梁编号" disabled v-model:value="cardInfo.arr.bridge_no" />
 							</td>
 							<td class="table-item-name">桥梁名称</td>
 							<td class="table-item-content">
-								<a-input placeholder="桥梁名称" />
+								<a-input placeholder="桥梁名称" disabled v-model:value="cardInfo.route.bridge_name" />
 							</td>
 							<td class="table-item-name">桥位桩号</td>
 							<td class="table-item-content">
-								<a-input  placeholder="桥位桩号" />
+								<a-input placeholder="桥位桩号" disabled  />
 							</td>
 						</tr>
 						<tr>
 							<td class="table-item-name">功能类型</td>
 							<td class="table-item-content">
-								<a-input placeholder="功能类型" />
+								<a-input placeholder="功能类型" v-model:value="cardInfo.arr.fun_type"  />
 							</td>
 							<td class="table-item-name">被跨越道路名称</td>
 							<td class="table-item-content">
-								<a-input placeholder="被跨越道路名称" />
+								<a-input placeholder="被跨越道路名称" disabled />
 							</td>
 							<td class="table-item-name">被跨越道路桩号</td>
 							<td class="table-item-content">
-								<a-input placeholder="被跨越道路桩号" />
+								<a-input placeholder="被跨越道路桩号" disabled />
 							</td>
 						</tr>
 						<tr>
 							<td class="table-item-name">设计载荷</td>
 							<td class="table-item-content">
-								<a-input placeholder="设计载荷" />
+								<a-input placeholder="设计载荷" v-model:value="cardInfo.arr.des_load" />
 							</td>
 							<td class="table-item-name">桥梁坡度</td>
 							<td class="table-item-content">
-								<a-input placeholder="桥梁坡度" />
+								<a-input  suffix="/°" pattern="[0-9]*" placeholder="桥梁坡度" v-model:value="cardInfo.arr.bridge_slope" />
 							</td>
 							<td class="table-item-name">桥梁平曲线半径</td>
 							<td class="table-item-content">
-								<a-input placeholder="桥梁平曲线半径" />
+								<a-input suffix="/m" pattern="[0-9]*" placeholder="桥梁平曲线半径" v-model:value="cardInfo.arr.bridge_radius" />
 							</td>
 						</tr>
 						<tr>
 							<td class="table-item-name">建成时间</td>
 							<td class="table-item-content">
-								<a-input placeholder="建成时间" />
+								<a-date-picker class="input-item-default"  v-model:value="cardInfo.arr.build_time" />
 							</td>
 							<td class="table-item-name">设计单位</td>
 							<td class="table-item-content">
-								<a-input placeholder="设计单位" />
+								<a-input placeholder="设计单位" disabled />
 							</td>
 							<td class="table-item-name">施工单位</td>
 							<td class="table-item-content">
-								<a-input placeholder="施工单位" />
+								<a-input placeholder="施工单位" disabled />
 							</td>
 						</tr>
 						<tr>
 							<td class="table-item-name">监理单位</td>
 							<td class="table-item-content">
-								<a-input placeholder="监理单位" />
+								<a-select
+										class="input-item-default"
+										v-model:value="cardInfo.units.spr_unit"
+										:options="units"
+										:field-names="{label:'unit_name', value:'unit_no'}"
+								></a-select>
 							</td>
 							<td class="table-item-name">业主单位</td>
 							<td class="table-item-content">
-								<a-input placeholder="业主单位" />
+								<a-select
+										class="input-item-default"
+										v-model:value="cardInfo.units.own_unit"
+										:options="units"
+										:field-names="{label:'unit_name', value:'unit_no'}"
+								></a-select>
 							</td>
 							<td class="table-item-name">管养单位</td>
 							<td class="table-item-content">
-								<a-input placeholder="管养单位" />
+								<a-input placeholder="管养单位" disabled v-model:value="userStore.unit_name" />
 							</td>
 						</tr>
 					</table>
@@ -114,71 +124,71 @@
 						<tr>
 							<td class="table-item-name">桥梁全长</td>
 							<td class="table-item-content">
-								<a-input placeholder="桥梁全长" />
+								<a-input-number class="input-item-default" placeholder="桥梁全长" disabled />
 							</td>
 							<td class="table-item-name">桥面总宽</td>
 							<td class="table-item-content">
-								<a-input placeholder="桥面总宽" />
+								<a-input-number class="input-item-default" placeholder="桥面总宽" v-model:value="techIndex.arr.bridge_wdh" />
 							</td>
 							<td class="table-item-name">车道宽度</td>
 							<td class="table-item-content">
-								<a-input placeholder="车道宽度" />
+								<a-input-number class="input-item-default" placeholder="车道宽度" v-model:value="techIndex.arr.car_wdh" />
 							</td>
 						</tr>
 						<tr>
 							<td class="table-item-name">人行道宽度</td>
 							<td class="table-item-content">
-								<a-input placeholder="人行道宽度" />
+								<a-input-number class="input-item-default" placeholder="人行道宽度" v-model:value="techIndex.arr.psn_wdh" />
 							</td>
 							<td class="table-item-name">护栏或防撞墙高度</td>
 							<td class="table-item-content">
-								<a-input placeholder="护栏或防撞墙高度" />
+								<a-input-number class="input-item-default"  placeholder="护栏或防撞墙高度" v-model:value="techIndex.arr.pet_hgt" />
 							</td>
 							<td class="table-item-name">中央分隔带高度</td>
 							<td class="table-item-content">
-								<a-input placeholder="中央分隔带高度" />
+								<a-input-number class="input-item-default" placeholder="中央分隔带高度" v-model:value="techIndex.arr.ctr_dvr_wdh" />
 							</td>
 						</tr>
 						<tr>
 							<td class="table-item-name">桥面标准净空</td>
 							<td class="table-item-content">
-								<a-input placeholder="桥面标准净空" />
+								<a-input-number class="input-item-default" placeholder="桥面标准净空" v-model:value="techIndex.arr.std_hrm" />
 							</td>
 							<td class="table-item-name">桥面实际净空</td>
 							<td class="table-item-content">
-								<a-input placeholder="桥面实际净空" />
+								<a-input-number  class="input-item-default" placeholder="桥面实际净空" v-model:value="techIndex.arr.act_hrm" />
 							</td>
 							<td class="table-item-name">桥下通航等级及标准净空</td>
 							<td class="table-item-content">
-								<a-input placeholder="桥下通航等级及标准净空" />
+								<a-input-number  class="input-item-default" placeholder="桥下通航等级及标准净空" v-model:value="techIndex.arr.std_trm" />
 							</td>
 						</tr>
 						<tr>
 							<td class="table-item-name">桥下实际净空</td>
 							<td class="table-item-content">
-								<a-input placeholder="桥下实际净空" />
+								<a-input-number class="input-item-default" placeholder="桥下实际净空" v-model:value="techIndex.arr.act_trm" />
 							</td>
 							<td class="table-item-name">引道总宽</td>
 							<td class="table-item-content">
-								<a-input placeholder="引道总宽" />
+								<a-input-number class="input-item-default"  placeholder="引道总宽" v-model:value="techIndex.arr.apr_wdh" />
 							</td>
 							<td class="table-item-name">引道线形或曲线半径</td>
 							<td class="table-item-content">
-								<a-input placeholder="引道线形或曲线半径" />
+								<a-input-number class="input-item-default"  placeholder="引道线形或曲线半径" v-model:value="techIndex.arr.crv_rds" />
 							</td>
 						</tr>
 						<tr>
 							<td class="table-item-name">设计洪水频率及其水位</td>
 							<td class="table-item-content">
-								<a-input placeholder="设计洪水频率及其水位" />
+								<a-input-number class="input-item-default"  placeholder="设计洪水频率及其水位" v-model:value="techIndex.arr.des_fol_lev" />
 							</td>
 							<td class="table-item-name">历史洪水位</td>
 							<td class="table-item-content">
-								<a-input placeholder="历史洪水位" />
+								<a-input-number  class="input-item-default" placeholder="历史洪水位" v-model:value="techIndex.arr.his_fol_lev" />
 							</td>
 							<td class="table-item-name">设计地震动峰值加速度系数</td>
 							<td class="table-item-content">
-								<a-input placeholder="设计地震动峰值加速度系数" />
+								<a-input-number class="input-item-default" placeholder="设计地震动峰值加速度系数" v-model:value="techIndex.arr.grd_pek_acc" />
 							</td>
 						</tr>
 					</table>
@@ -188,12 +198,12 @@
 				<a-form-item>
 					<div class="struct-container" v-for="item in bridgeStruct.arr">
 						<a-row>
-							<a-col :span="1" class="struct-main"> <h4> {{item.struct}} </h4></a-col>
+							<a-col :span="1" class="struct-main"> <h4> {{ item.struct }} </h4></a-col>
 							<a-col :span="23">
 								<table class="sub-struct-table" >
 									<tr v-for="subItem in item.subStruct">
 										<td style="width: 10%;"> {{ subItem.subName }} </td>
-										<td v-for="data in subItem.subArr">{{ data }}</td>
+										<td v-for="data in subItem.subArr">{{ data.material }}</td>
 									</tr>
 								</table>
 							</a-col>
@@ -380,7 +390,7 @@
 				<CloudUploadOutlined />
 			</template>
 		</a-button>
-		<a-button type="primary">
+		<a-button type="primary" @click="$router.back()">
 			<template #icon>
 				<ArrowLeftOutlined />
 			</template>
@@ -390,10 +400,13 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, reactive, ref} from 'vue';
+import {defineComponent, reactive, Ref, ref} from 'vue';
 import {CloudUploadOutlined, ArrowLeftOutlined} from '@ant-design/icons-vue'
 import {useUserStore} from "../../store/user.ts";
 import type {SelectProps} from "ant-design-vue";
+import axios from "axios";
+import {useRoute} from "vue-router";
+import {Unit} from '../admin/unit.vue'
 
 const options = ref<SelectProps['options']>([
 	{
@@ -415,32 +428,71 @@ export default defineComponent({
 		ArrowLeftOutlined,
 	},
 	setup() {
+		let loadingCount = 0
 		let loading = ref(true)
+
+		let units: Ref<Unit[]> = ref([])
+
+		const route = useRoute();
+		const techIndex = reactive({
+			arr: {
+				bridge_wdh:'',
+				car_wdh:'',
+				psn_wdh:'',
+				ctr_dvr_wdh:'',
+				pet_hgt:'',
+				std_hrm:'',
+				act_hrm:'',
+				std_trm:'',
+				act_trm:'',
+				apr_wdh:'',
+				crv_rds:'',
+				des_fol_lev:'',
+				his_fol_lev:'',
+				grd_pek_acc:'',
+			}
+		})
+		const cardInfo = reactive({
+			arr: {
+				bridge_no:route.query.bridge_no,
+				oal_photo:'',
+				frt_photo:'',
+				card_psn:'',// 填卡人
+				card_time:'',//填卡时间
+				admin_code:'',
+				fun_type:'',
+				des_load:'',
+				bridge_slope:'',
+				bridge_radius:'',
+				build_time:'',
+				otr_sig:'',
+			},
+			route: {
+				route_no:'',
+				route_name:'',
+				route_rank:'',
+				bridge_name:'',
+			},
+			units: {
+				spr_unit:'',
+				own_unit:'',
+			}
+		})
+
+
+
 		const bridgeStruct = reactive({
 			arr: [
 				{
-					struct: "主结构",
+					struct:"",
 					subStruct: [
 						{
-							subName:"主梁",
-							subArr: [1, 2, 3, 4, 5],
-						},
-						{
-							subName:"主梁1",
-							subArr: [1, 2, 3, 4, 5],
-						},
-						{
-							subName:"主梁2",
-							subArr: [1, 2, 3, 4, 5],
-						}
-					]
-				},
-				{
-					struct: "上下结构",
-					subStruct: [
-						{
-							subName:"主拱圈",
-							subArr: [1, 2, 3, 4],
+							subName:'',
+							subArr:[
+								{
+									material:'',
+								}
+							]
 						}
 					]
 				}
@@ -529,20 +581,72 @@ export default defineComponent({
 				},
 			]
 		})
-		const init = () => {
-			setTimeout(() => {
-				loading.value = false
-			}, 1000)
+
+		const getRoute = () => {
+			axios({
+				url:'http://localhost:3000/api/route/get/bno',
+				method:"GET",
+				params: {
+					bridge_no: route.query.bridge_no
+				}
+			}).then((resp) => {
+				cardInfo.route = resp.data
+
+				loadingCount += 1
+			})
 		}
-		init()
+		getRoute();
+
+		const getStructInfo = () => {
+			axios({
+				url: 'http://localhost:3000/api/part/get/info',
+				method:'GET',
+				params: {
+					bridge_no: route.query.bridge_no,
+				}
+			}).then((resp) => {
+				bridgeStruct.arr = resp.data
+				console.log(bridgeStruct.arr)
+				loadingCount += 1
+			})
+		}
+		getStructInfo()
+
+		const getUnits = () => {
+			axios({
+				url: 'http://localhost:3000/api/unit/get/all',
+				method:'GET',
+			}).then((resp) => {
+				units.value = resp.data
+				loadingCount += 1
+			})
+		}
+		getUnits()
+
+
+		const checkInterval = setInterval(() => {
+
+			if (loadingCount == 3) {
+				loading.value = false
+				clearInterval(checkInterval)
+			}
+
+		}, 500)
+
+
+
+
 		return {
 			loading,
+			cardInfo,
 			assessRecord,
 			otr_sig,
 			userStore,
 			bridgeStruct,
 			maintainRecord,
+			techIndex,
 			options,
+			units,
 			img1,
 			img2,
 		}
@@ -557,6 +661,9 @@ export default defineComponent({
 	width: 95%;
 }
 .header-tips {
+	position: sticky;
+	top: -1em;
+	z-index: 9999;
 	height: 2em;
 	margin-bottom: 1em;
 	width: 95%;
@@ -622,7 +729,9 @@ hr {
 h3 {
 	margin-bottom: .8em;
 }
-
+.input-item-default {
+	width: 100%;
+}
 .photo-box {
 	height: 15em;
 }

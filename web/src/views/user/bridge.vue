@@ -53,6 +53,7 @@
 import axios from 'axios';
 import { Ref, defineComponent, reactive, ref } from 'vue';
 import { error_message } from '../../utils/errorMessage';
+import {useUserStore} from "../../store/user.ts";
 
 const columns = [
     {
@@ -111,6 +112,7 @@ export default defineComponent({
 
     },
     setup() {
+        const userStore = useUserStore()
         let visible = ref(false)
         let isUpdate = ref(false)
         let old_bridge_no = ref("")
@@ -200,6 +202,8 @@ export default defineComponent({
                     bridge_name:modalValue.bridge_name,
                     type_no:modalValue.type_no,
                     route_no:modalValue.route_no,
+                    unit_no: userStore.unit_no,
+                    unit_job:'管养',
                 }
             }).then((resp) => {
                 if (resp.data.error_info === 'success') {

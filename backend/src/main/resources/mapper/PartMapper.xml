@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.backend.mapper.PartMapper">
+    <select id="getPartMF" resultType="java.util.Map">
+        select bridge_cet_part.cet_part_no, material,format
+        from bridge_cet_part,bridge_stru_record
+        where bridge_no=#{bridge_no} and
+              bridge_cet_part.cet_part_no=bridge_stru_record.cet_part_no
+    </select>
+    <select id="getCpnByCetCpn" resultType="java.util.Map">
+        select bri_cpn_name,bri_part_name
+        from bridge_cpn,bridge_part,bridge_cet_part
+        where cet_part_no=#{cet_part_no} and
+              bridge_cet_part.bri_cpn_no=bridge_cpn.bri_cpn_no and
+              bridge_cpn.bri_part_no=bridge_part.bri_part_no
+    </select>
+</mapper>

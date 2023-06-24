@@ -44,7 +44,6 @@ export default defineComponent({
 html,
 body {
   touch-action: manipulation;
-  zoom: reset;
   -moz-user-select: none;
   -ms-user-select: none;
   -webkit-user-select: none;

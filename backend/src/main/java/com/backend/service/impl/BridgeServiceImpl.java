@@ -1,10 +1,12 @@
 package com.backend.service.impl;
 
 import com.backend.mapper.BridgeMapper;
+import com.backend.mapper.UnitJobMapper;
 import com.backend.pojo.BridgeInfo;
 import com.backend.service.BridgeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,20 +19,26 @@ public class BridgeServiceImpl implements BridgeService {
     @Autowired
     private BridgeMapper bridgeMapper;
 
+    @Autowired
+    private UnitJobMapper unitJobMapper;
+
     @Override
-    public Map<String, String> addBridge(Map<String, String> map) {
+    @Transactional
+    public Map<String, String> addBridge(Map<String, Object> map) {
 
         Map<String, String> resp = new HashMap<>();
 
         try {
             bridgeMapper.insert(map);
+            unitJobMapper.insertOne(map);
         } catch (Exception e) {
-            resp.put("error_info", "新建失败");
+            resp.put("error_info", "插入错误");
+            throw new RuntimeException();
+        } finally {
+            resp.putIfAbsent("error_info", "success");
             return resp;
         }
 
-        resp.put("error_info", "success");
-        return resp;
     }
 
     @Override

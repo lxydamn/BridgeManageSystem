@@ -46,7 +46,7 @@ public class BridgeController {
     }
 
     @PostMapping("/api/bridge/add")
-    public Map<String, String> addBridge(@RequestParam Map<String, String> map) {
+    public Map<String, String> addBridge(@RequestParam Map<String, Object> map) {
         return bridgeService.addBridge(map);
     }
 

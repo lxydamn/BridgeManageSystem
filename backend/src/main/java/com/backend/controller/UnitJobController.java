@@ -15,7 +15,7 @@ public class UnitJobController {
     private UnitJobService unitJobService;
 
     @PostMapping("/api/unit/job/add")
-    public Map<String, String> addUnitJob(@RequestParam Map<String, String> map) {
+    public Map<String, String> addUnitJob(@RequestParam Map<String, Object> map) {
         return unitJobService.addUnitJob(map);
     }
 }

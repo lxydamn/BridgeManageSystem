@@ -3,11 +3,13 @@ package com.backend.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.Map;
-
+/**
+ * Created by Lxy on 2023/6/24 14:42
+ */
 @Mapper
 @Repository
-public interface UnitJobMapper {
+public interface BasicCardMapper {
 
-    void insertOne(Map<String, Object> map);
+
+
 }

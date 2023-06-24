@@ -10,6 +10,12 @@
     <select id="selectById" parameterType="java.util.Map" resultType="com.backend.pojo.Route">
         select * from route where route_no = #{route_no}
     </select>
+    <select id="selectByBridgeNo" resultType="java.util.Map">
+        select route.route_no, route_name, route_rank, bridge_name
+        from route,bridge_info
+        where
+            bridge_no=#{bridge_no} and bridge_info.route_no=route.route_no
+    </select>
 
     <delete id="delete" parameterType="java.util.Map">
         delete from route where route_no=#{route_no};
