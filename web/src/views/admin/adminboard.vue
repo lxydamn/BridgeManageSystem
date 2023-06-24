@@ -92,7 +92,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, reactive, ref} from 'vue';
+import {defineComponent, reactive} from 'vue';
 import axios from "axios";
 
 export default defineComponent({

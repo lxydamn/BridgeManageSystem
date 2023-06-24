@@ -27,6 +27,12 @@
               bridge_info.route_no=route.route_no
     </select>
 
+    <select id="getRouteByBridgeNo" parameterType="java.util.Map" resultType="java.util.Map">
+        select bridge_no, bridge_name, route.route_no, route_name,route_rank
+        from bridge_info,route
+        where bridge_no=#{bridge_no} and bridge_info.route_no=route.route_no
+    </select>
+
     <select id="getCountByUnit" parameterType="java.util.Map" resultType="java.lang.Integer">
         select count(bridge_no) bridgeCount from unit_job where unit_no=#{unit_no};
     </select>

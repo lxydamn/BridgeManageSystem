@@ -21,8 +21,6 @@
         where route_no=#{old_route_no}
     </update>
 
-
-
     <insert id="insert" parameterType="java.util.Map">
         insert into route values(
         #{route_no},

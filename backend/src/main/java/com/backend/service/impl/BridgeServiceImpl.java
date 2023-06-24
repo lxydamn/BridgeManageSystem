@@ -95,4 +95,9 @@ public class BridgeServiceImpl implements BridgeService {
 
         return resp;
     }
+
+    @Override
+    public List<Map<String, Object>> getRouteByBridgeNo(Map<String, String> map) {
+        return bridgeMapper.getRouteByBridgeNo(map);
+    }
 }

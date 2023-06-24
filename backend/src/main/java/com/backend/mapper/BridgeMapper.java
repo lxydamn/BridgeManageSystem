@@ -34,4 +34,6 @@ public interface BridgeMapper {
     List<Map<String, Object>> getAll();
 
     void update(Map<String, Object> map);
+
+    List<Map<String,Object>> getRouteByBridgeNo(Map<String,String> map);
 }

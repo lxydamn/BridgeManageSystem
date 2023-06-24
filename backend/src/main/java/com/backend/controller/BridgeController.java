@@ -26,6 +26,11 @@ public class BridgeController {
         return bridgeService.getAll();
     }
 
+    @GetMapping("/api/bridge/get/route")
+    public List<Map<String, Object>> getRoute(@RequestParam Map<String, String> map) {
+        return bridgeService.getRouteByBridgeNo(map);
+    }
+
     @GetMapping("/api/bridge/card/status")
     public List<Map<String, Object>> cardStatus(@RequestParam Map<String, Object> map) {
         return bridgeService.getCardStatus(map);

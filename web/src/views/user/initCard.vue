@@ -23,11 +23,11 @@
                             <tr>
                                 <td class="table-item-name">路线编号</td>
                                 <td class="table-item-content">
-                                    <a-input placeholder="路线编号" />
+                                    <a-input v-model:value=bridge_route.route_no placeholder="路线编号" disabled/>
                                 </td>
                                 <td class="table-item-name">路线名称</td>
                                 <td class="table-item-content">
-                                    <a-input placeholder="路线编号" />
+                                    <a-input v-model:value=bridge_route.route_name placeholder="路线名称" disabled/>
                                 </td>
                                 <td class="table-item-name">桥位桩号</td>
                                 <td class="table-item-content">
@@ -37,11 +37,11 @@
                             <tr>
                                 <td class="table-item-name">桥梁编号</td>
                                 <td class="table-item-content">
-                                    <a-input placeholder="桥梁编号" />
+                                    <a-input v-model:value=bridge_route.bridge_no placeholder="桥梁编号" disabled/>
                                 </td>
                                 <td class="table-item-name">桥梁名称</td>
                                 <td class="table-item-content">
-                                    <a-input placeholder="桥梁名称" />
+                                    <a-input v-model:value=bridge_route.vridge_name placeholder="桥梁名称" disabled/>
                                 </td>
                                 <td class="table-item-name">被跨越道路(通道)名称</td>
                                 <td class="table-item-content">
@@ -351,10 +351,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from 'vue';
+import axios from 'axios';
+import { defineComponent, ref } from 'vue';
 import { CloudUploadOutlined, ArrowLeftOutlined } from '@ant-design/icons-vue'
 import { useUserStore } from "../../store/user.ts";
 import type { SelectProps } from "ant-design-vue";
+import { useRoute }  from "vue-router";
 
 const value1= ref("")
 
@@ -372,143 +374,54 @@ const options = ref<SelectProps['options']>([
         label: '无',
     },
 ])
+
+interface Bridge_route {
+    bridge_no:string
+    bridge_name: string
+    route_no:string
+    route_name:string
+    route_rank:string
+}
+
 export default defineComponent({
     components: {
         CloudUploadOutlined,
         ArrowLeftOutlined,
     },
     setup() {
+        const route = useRoute();
         let loading = ref(true)
-        const bridgeStruct = reactive({
-            arr: [
-                {
-                    struct: "主结构",
-                    subStruct: [
-                        {
-                            subName: "主梁",
-                            subArr: [1, 2, 3, 4, 5],
-                        },
-                        {
-                            subName: "主梁1",
-                            subArr: [1, 2, 3, 4, 5],
-                        },
-                        {
-                            subName: "主梁2",
-                            subArr: [1, 2, 3, 4, 5],
-                        }
-                    ]
-                },
-                {
-                    struct: "上下结构",
-                    subStruct: [
-                        {
-                            subName: "主拱圈",
-                            subArr: [1, 2, 3, 4],
-                        }
-                    ]
-                }
-            ]
-        })
-
-        const assessRecord = reactive({
-            arr: [
-                {
-                    ase_rcd_no: '001',
-                    ase_type: "好类型",
-                    ase_rst: "结果......",
-                    ctr_mes: "处治对策",
-                    ase_time: "2023-6-22",
-                    nxt_time: "2024-6-22",
-                }, {
-                    ase_rcd_no: '002',
-                    ase_type: "好类型",
-                    ase_rst: "结果......",
-                    ctr_mes: "处治对策",
-                    ase_time: "2023-6-22",
-                    nxt_time: "2024-6-22",
-                }, {
-                    ase_rcd_no: '003',
-                    ase_type: "好类型",
-                    ase_rst: "结果......",
-                    ctr_mes: "处治对策",
-                    ase_time: "2023-6-22",
-                    nxt_time: "2024-6-22",
-                }, {
-                    ase_rcd_no: '004',
-                    ase_type: "好类型",
-                    ase_rst: "结果......",
-                    ctr_mes: "处治对策",
-                    ase_time: "2023-6-22",
-                    nxt_time: "2024-6-22",
-                },
-            ]
-        })
-
-        let img1 = ref('https://picnew14.photophoto.cn/20200727/huisediwenbeijingtupian-38236152_1.jpg')
-        let img2 = ref('https://picnew14.photophoto.cn/20200727/huisediwenbeijingtupian-38236152_1.jpg')
-
         const userStore = useUserStore()
 
         const otr_sig = ref<string>("无")
 
-        const maintainRecord = reactive({
-            arr: [
-                {
-                    tre_time: "2023-6-22",
-                    tre_type: "处治类别",
-                    tre_rea: "处治原因",
-                    tre_rge: "处治范围",
-                    pro_fee: "工程费用",
-                    ori_fee: "费用来源",
-                    tre_qlt_aes: "处治质量评定",
-                    bid_unit: "建设单位",
-                    dsn_unit: "设计单位",
-                    gh_unit: "施工单位",
-                    look_unit: "监理单位",
-                }, {
-                    tre_time: "2023-6-22",
-                    tre_type: "处治类别",
-                    tre_rea: "处治原因",
-                    tre_rge: "处治范围",
-                    pro_fee: "工程费用",
-                    ori_fee: "费用来源",
-                    tre_qlt_aes: "处治质量评定",
-                    bid_unit: "建设单位",
-                    dsn_unit: "设计单位",
-                    gh_unit: "施工单位",
-                    look_unit: "监理单位",
-                }, {
-                    tre_time: "2023-6-22",
-                    tre_type: "处治类别",
-                    tre_rea: "处治原因",
-                    tre_rge: "处治范围",
-                    pro_fee: "工程费用",
-                    ori_fee: "费用来源",
-                    tre_qlt_aes: "处治质量评定",
-                    bid_unit: "建设单位",
-                    dsn_unit: "设计单位",
-                    gh_unit: "施工单位",
-                    look_unit: "监理单位",
-                },
-            ]
-        })
+        const bridge_route = ref<Bridge_route>()
         const init = () => {
             setTimeout(() => {
                 loading.value = false
             }, 1000)
+            axios({
+                url: 'http://localhost:3000/api/bridge/get/route',
+                method:'GET',
+                params: {
+                    bridge_no: route.query.bridge_no
+                }
+            }).then((resp) => {
+                console.log(resp.data)
+                bridge_route.value = resp.data[0]
+                console.log(bridge_route.value)
+            })
         }
         init()
+
+
         return {
+            bridge_route,
             value1,
             loading,
-            assessRecord,
             otr_sig,
             userStore,
-            bridgeStruct,
-            maintainRecord,
             options,
-            img1,
-            img2,
         }
     }
 })
