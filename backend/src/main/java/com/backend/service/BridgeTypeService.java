@@ -11,11 +11,11 @@ import java.util.Map;
  */
 
 public interface BridgeTypeService {
-    Map<String, String> addRoute(Map<String, Object> map);
+    Map<String, String> addType(Map<String, Object> map);
 
-    Map<String, String> deleteRoute(Map<String, Object> map);
+    Map<String, String> deleteType(Map<String, Object> map);
 
-    Map<String, String> updateRoute(Map<String, Object> map);
+    Map<String, String> updateType(Map<String, Object> map);
 
     List<BridgeType> getAll();
 

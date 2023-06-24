@@ -8,9 +8,7 @@
 			
 			<RouterView v-slot="{ Component }">
 				<Transition name="slide-fade">
-					<KeepAlive>	
-						<component :is="Component"></component>
-					</KeepAlive>
+					<component :is="Component"></component>
 				</Transition>
 			</RouterView>	
 			

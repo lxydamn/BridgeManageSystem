@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.backend.mapper.InitCardMapper">
+    <insert id="insert" parameterType="java.util.Map">
+        insert into bridge_init_record
+        values (
+        #{init_record_no}, #{bridge_no},  #{init_time}, #{del_time}, #{cro_name},
+        #{cro_no}, #{bri_len},  #{bri_cro_len}, #{up_dow_stru_form}, #{bridge_jo_spa_comb},
+        #{brid_constr_meth}, #{new_mat_rf_costi},  #{refo_reno_costi}, #{lac_mat_rf_costi}, #{init_recor_envir},
+        #{Brid_deck_ele}, #{axis_arch},  #{main_cab_shape}, #{pie_pla_anc_ele}, #{pie_pla_py_incl},
+        #{hori_sh_ele_tow}, #{brid_hori_dis_anch_sus},  #{sus_brid_fasfor}, #{under_foda}, #{stca_bo_cabfo},
+        #{main_lobe_mem_dimen}, #{mate_stren},  #{stepi_coma}, #{pro_thick}, #{sta_tes_res},
+        #{dyn_tes_res}, #{recorder},  #{brid_engi}, #{brid_init_ins_mecha}, #{bridge_pile},
+        )
+    </insert>
+</mapper>

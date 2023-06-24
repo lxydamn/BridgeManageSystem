@@ -20,7 +20,7 @@ public class BridgeTypeServiceImpl implements BridgeTypeService {
     private BridgeTypeMapper bridgeTypeMapper;
 
     @Override
-    public Map<String, String> addRoute(Map<String, Object> map) {
+    public Map<String, String> addType(Map<String, Object> map) {
 
         Map<String, String> resp = new HashMap<>();
 
@@ -37,7 +37,7 @@ public class BridgeTypeServiceImpl implements BridgeTypeService {
     }
 
     @Override
-    public Map<String, String> deleteRoute(Map<String, Object> map) {
+    public Map<String, String> deleteType(Map<String, Object> map) {
         Map<String, String> resp = new HashMap<>();
 
         try {
@@ -53,7 +53,7 @@ public class BridgeTypeServiceImpl implements BridgeTypeService {
     }
 
     @Override
-    public Map<String, String> updateRoute(Map<String, Object> map) {
+    public Map<String, String> updateType(Map<String, Object> map) {
         Map<String, String> resp = new HashMap<>();
 
         try {

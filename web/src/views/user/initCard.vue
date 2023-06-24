@@ -355,7 +355,7 @@
             </div>
         </a-skeleton>
         <div class="footer-bar" v-if="!loading">
-            <a-button type="primary" style="margin-bottom: 1em">
+            <a-button type="primary" style="margin-bottom: 1em" >
                 <template #icon>
                     <CloudUploadOutlined />
                 </template>

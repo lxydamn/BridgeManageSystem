@@ -28,7 +28,7 @@ public class BridgeTypeController {
 
     @PostMapping("/api/bridgeType/update")
     public Map<String, String> update(@RequestParam Map<String, Object> map) {
-        return bridgeTypeService.updateRoute(map);
+        return bridgeTypeService.updateType(map);
     }
 
     @GetMapping("/api/bridgeType/count")
@@ -37,12 +37,12 @@ public class BridgeTypeController {
     }
     @PostMapping("/api/bridgeType/add")
     public Map<String, String> insert(@RequestParam Map<String, Object> map) {
-        return bridgeTypeService.addRoute(map);
+        return bridgeTypeService.addType(map);
     }
 
     @PostMapping("/api/bridgeType/delete")
     public Map<String, String> delete(@RequestParam Map<String, Object> map) {
-        return bridgeTypeService.deleteRoute(map);
+        return bridgeTypeService.deleteType(map);
     }
     @GetMapping("/api/bridgeType/get/id")
     public BridgeType getById(@RequestParam Map<String, Object> map) {
