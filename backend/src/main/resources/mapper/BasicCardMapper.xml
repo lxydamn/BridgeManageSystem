@@ -3,7 +3,15 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.backend.mapper.BasicCardMapper">
-
-
+    <select id="getAssessRecordByBridgeNo" resultType="java.util.Map">
+        select * from bridge_assess_record where card_no in (
+            select card_no from bridge_info where bridge_no=#{bridge_no}
+            )
+    </select>
+    <select id="getMaintainRecordByBridgeNo" resultType="java.util.Map">
+        select * from maintain_record where card_no in (
+            select card_no from bridge_info where bridge_no=#{bridge_no}
+        )
+    </select>
 
 </mapper>

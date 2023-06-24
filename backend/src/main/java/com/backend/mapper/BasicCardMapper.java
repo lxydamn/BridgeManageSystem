@@ -3,13 +3,16 @@ package com.backend.mapper;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * Created by Lxy on 2023/6/24 14:42
  */
 @Mapper
 @Repository
 public interface BasicCardMapper {
-
-
+    List<Map<String, Object>> getAssessRecordByBridgeNo(Map<String, Object> map);
+    List<Map<String, Object>> getMaintainRecordByBridgeNo(Map<String, Object> map);
 
 }
