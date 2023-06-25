@@ -24,14 +24,10 @@ public interface BridgeMapper {
     Integer getPeriCardCountByBridgeNo(String bridge_no);
 
     List<BridgeInfo> getBridgeByUnit(Map<String, Object> map);
-
     Map<String, Object> getAllCount(Map<String, Object> map);
-
     Integer getCountByUnit(Map<String, Object> map);
     void insert(Map<String, Object> map);
     BridgeInfo selectById(Map<String, String> map);
-
     List<Map<String, Object>> getAll();
-
     void update(Map<String, Object> map);
 }

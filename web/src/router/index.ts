@@ -88,6 +88,28 @@ const routes = [
 						/* webpackChunkName: "bridge" */ "../views/user/informationIndex.vue"
 						),
 			},
+			{
+				path: "cpnConfigIndex/",
+				name: "cpnConfigIndex",
+				meta: {
+					author: 1,
+				},
+				component: () =>
+					import(
+						/* webpackChunkName: "bridge" */ "../views/user/cpnConfigIndex.vue"
+						),
+			},
+			{
+				path: "cpnConfig/",
+				name: "cpnConfig",
+				meta: {
+					author: 1,
+				},
+				component: () =>
+					import(
+						/* webpackChunkName: "bridge" */ "../views/user/cpnConfig.vue"
+						),
+			},
 		],
 	}, //  admin 管理
 	{

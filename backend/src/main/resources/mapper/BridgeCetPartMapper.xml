@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.backend.mapper.BridgeCetPartMapper">
+    <select id="getAll" resultType="com.backend.pojo.BridgeCetPart">
+        select * from bridge_cet_part
+        where bridge_no = #{bridge_no};
+    </select>
+
+    <select id="getCetPartCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(bridge_no) cetPartCount
+        from bridge_cet_part
+        where bridge_no = #{bridge_no}
+    </select>
+
+    <delete id="delete" parameterType="java.util.Map">
+        delete from bridge_cet_part where cet_part_no=#{cet_part_no};
+    </delete>
+
+    <update id="update" parameterType="java.util.Map">
+        update bridge_cet_part
+        set cet_part_no = #{new_cet_part_no}, bridge_no = #{bridge_no},
+        type_no = #{type_no}, bri_cpn_no = #{bri_cpn_no}, cet_part_name = #{cet_part_name}
+        where cet_part_no =#{old_cet_part_no}
+    </update>
+
+    <insert id="insert" parameterType="java.util.Map">
+        insert into bridge_cet_part values(
+        #{cet_part_no},
+        #{bridge_no},
+        #{type_no},
+        #{bri_cpn_no},
+        #{cet_part_name}
+        )
+    </insert>
+</mapper>

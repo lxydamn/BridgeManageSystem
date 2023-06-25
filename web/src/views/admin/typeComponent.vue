@@ -19,18 +19,17 @@
     </a-table>
 
     <a-modal v-model:visible="visible" title="桥梁类型部件" ok-text="确认" cancel-text="取消" @ok="handleOk" @cancel="cleanInput">
-        <a-input class="input-cpn" disabled v-model:value="modalValue.type_no" placeholder="桥梁部件编号" />
         <a-select 
         class="input-cpn" 
         ref="select" 
-        v-model:value="modalValue.bri_cpn_no" 
+        v-model:value="bri_cpn_no" 
         style="width: 100%;"
         :options="components" :field-names="{ label: 'bri_cpn_name', value: 'bri_cpn_no' }" />
     </a-modal>
 </template>
 <script lang="ts">
 import axios from 'axios';
-import { Ref, defineComponent, reactive, ref } from 'vue';
+import { Ref, defineComponent, ref } from 'vue';
 import { PlusOutlined } from '@ant-design/icons-vue'
 import { error_message } from '../../utils/errorMessage';
 import { useRoute } from "vue-router";
@@ -79,7 +78,7 @@ export default defineComponent({
         getComponents()
 
         const checkInput = () => {
-            if (modalValue.bri_cpn_no.length == 0)
+            if (bri_cpn_no.value === '')
                 return false
             return true
         }
@@ -87,26 +86,20 @@ export default defineComponent({
         const cleanInput = () => {
             visible.value = false
             isUpdate.value = false
-
-            modalValue.type_no = route.query.type_no.toString(),
-            modalValue.bri_cpn_no = ""
+            bri_cpn_no.value = ''
             old_bri_cpn_no.value = ""
             getTypeCpns()
         }
         
-
-        const modalValue = reactive({
-            type_no: '',
-            bri_cpn_no: '',
-        })
-        modalValue.type_no = route.query.type_no.toString()
+        const type_no = route.query.type_no
+        let bri_cpn_no = ref('')
 
         const getTypeCpns = () => {
             axios({
                 url: 'http://localhost:3000/api/bridgeTypeCpn/get/all',
                 method: 'GET',
                 params: {
-                    type_no: route.query.type_no
+                    type_no: type_no
                 }
             }).then((resp) => {
                 dataSource.value = resp.data
@@ -131,8 +124,8 @@ export default defineComponent({
                 url: 'http://localhost:3000/api/bridgeTypeCpn/add',
                 method: "POST",
                 params: {
-                    type_no: modalValue.type_no,
-                    bri_cpn_no: modalValue.bri_cpn_no,
+                    type_no: type_no,
+                    bri_cpn_no: bri_cpn_no.value,
                 }
             }).then((resp) => {
                 if (resp.data.error_info === 'success') {
@@ -145,8 +138,7 @@ export default defineComponent({
         }
 
         const onUpdate = (record: any) => {
-            modalValue.bri_cpn_no = record.bri_cpn_no
-            modalValue.type_no = record.type_no
+            bri_cpn_no.value = record.bri_cpn_no
             old_bri_cpn_no.value = record.bri_cpn_no
             visible.value = true
             isUpdate.value = true
@@ -158,8 +150,8 @@ export default defineComponent({
                 method: "POST",
                 params: {
                     old_bri_cpn_no: old_bri_cpn_no.value,
-                    new_bri_cpn_no: modalValue.bri_cpn_no,
-                    type_no: modalValue.type_no,
+                    new_bri_cpn_no: bri_cpn_no.value,
+                    type_no: type_no,
                 }
             }).then((resp) => {
                 if (resp.data.error_info === 'success') {
@@ -189,7 +181,8 @@ export default defineComponent({
             components,
             columns,
             dataSource,
-            modalValue,
+            type_no,
+            bri_cpn_no,
             handleOk,
             visible,
             onUpdate,

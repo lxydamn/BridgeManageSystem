@@ -21,7 +21,7 @@
                 </template>
                 信息录入
             </a-menu-item>
-            <a-menu-item key="part">
+            <a-menu-item key="cpnConfigIndex">
                 <template #icon>
                     <ApartmentOutlined />
                 </template>

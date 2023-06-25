@@ -356,6 +356,7 @@
 import axios from 'axios';
 import { Ref, defineComponent, ref } from 'vue';
 import { CloudUploadOutlined, ArrowLeftOutlined } from '@ant-design/icons-vue'
+import { useUserStore } from "../../store/user.ts";
 import { useRoute } from "vue-router";
 
 interface Bridge_route {
@@ -376,6 +377,7 @@ export default defineComponent({
         ArrowLeftOutlined,
     },
     setup() {
+        const userStore = useUserStore()
         const route = useRoute();
         let loadingCount = 0
         let loading = ref(true)
@@ -508,6 +510,7 @@ export default defineComponent({
 
             loading,
             units,
+            userStore,
         }
     }
 })
