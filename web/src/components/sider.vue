@@ -27,6 +27,18 @@
                 </template>
                 部件配置
             </a-menu-item>
+            <a-menu-item key="assessRecordIndex">
+              <template #icon >
+                <ScheduleOutlined />
+              </template>
+              检测历史记录
+            </a-menu-item>
+          <a-menu-item key="maintainRecordIndex">
+            <template #icon>
+              <WalletOutlined />
+            </template>
+            养护处治记录
+          </a-menu-item>
         </a-menu>
 
     </div>
@@ -35,7 +47,8 @@
 import { defineComponent, reactive, toRefs } from 'vue';
 import {
     MailOutlined, DatabaseOutlined, FileDoneOutlined,
-    ApartmentOutlined, AppstoreOutlined, SettingOutlined
+    ApartmentOutlined, AppstoreOutlined, SettingOutlined,
+    ScheduleOutlined,WalletOutlined
 } from '@ant-design/icons-vue';
 import router from '../router';
 export default defineComponent({
@@ -46,6 +59,8 @@ export default defineComponent({
         AppstoreOutlined,
         SettingOutlined,
         FileDoneOutlined,
+        ScheduleOutlined,
+        WalletOutlined,
     },
     setup() {
         const state = reactive({

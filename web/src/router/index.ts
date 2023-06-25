@@ -87,6 +87,27 @@ const routes = [
 					import(
 						/* webpackChunkName: "bridge" */ "../views/user/informationIndex.vue"
 						),
+			},{
+				path: "/assess/record",
+				name: "assessRecordIndex",
+				meta: {
+					author: 1,
+				},
+				component: () =>
+					import(
+						/* webpackChunkName: "dashboard" */ "../views/user/assessRecord.vue"
+						),
+			},
+			{
+				path: "/maintain/record",
+				name: "maintainRecordIndex",
+				meta: {
+					author: 1,
+				},
+				component: () =>
+					import(
+						/* webpackChunkName: "dashboard" */ "../views/user/maintainRecord.vue"
+						),
 			},
 			{
 				path: "cpnConfigIndex/",

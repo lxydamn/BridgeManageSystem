@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.backend.mapper.RecordMapper">
+    <insert id="insertAssessRecord">
+        insert into bridge_assess_record
+        values (
+                #{ase_rcd_no},
+                #{card_no},
+                #{ase_type},
+                #{ase_rst},
+                #{ctr_mes},
+                #{ase_time},
+                #{nxt_time}
+                )
+    </insert>
+    <insert id="insertMaintainRecord">
+        insert into maintain_record 
+        values (
+                #{tre_rcd_no},
+                #{card_no},
+                #{tre_type},
+                #{tre_rea},
+                #{tre_rge},
+                #{pro_fee},
+                #{ori_fee},
+                #{tre_qlt_aes},
+                #{tre_time}
+                );
+    </insert>
+    <delete id="deleteAssessRecord">
+        delete from bridge_assess_record where ase_rcd_no=#{ase_rcd_no}
+    </delete>
+    <delete id="deleteMaintainRecord">
+        delete from maintain_record where tre_rcd_no=#{tre_rcd_no}
+    </delete>
+    <select id="getAssessRecordWithBC" resultType="java.util.Map">
+        select ase_rcd_no, bridge_basic_cond.card_no, ase_type, ase_rst,ctr_mes,
+               ase_time,nxt_time,bridge_info.bridge_no,bridge_name
+        from bridge_assess_record,bridge_info,bridge_basic_cond
+        where bridge_assess_record.card_no=bridge_basic_cond.card_no and
+              bridge_info.bridge_no=bridge_basic_cond.bridge_no
+    </select>
+    <select id="getMaintainRecordWithBC" resultType="java.util.Map">
+        select tre_rcd_no, bridge_basic_cond.card_no, tre_type,
+               tre_rea, tre_rge, pro_fee, ori_fee,
+               tre_qlt_aes, tre_time,bridge_info.bridge_no,bridge_name
+        from maintain_record,bridge_info,bridge_basic_cond
+        where maintain_record.card_no=bridge_basic_cond.card_no and
+            bridge_info.bridge_no=bridge_basic_cond.bridge_no
+    </select>
+    <select id="getBridgeToCard" resultType="java.util.Map">
+        select bridge_name, card_no
+        from bridge_info, bridge_basic_cond
+        where bridge_info.bridge_no=bridge_basic_cond.bridge_no
+    </select>
+</mapper>

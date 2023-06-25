@@ -811,6 +811,9 @@ export default defineComponent({
 			axios({
 				url: 'http://localhost:3000/api/assess/record/get',
 				method:'GET',
+        params: {
+          bridge_no:route.query.bridge_no,
+        }
 			}).then((resp) => {
 				assessRecord.arr = resp.data
 				loadingCount += 1
@@ -822,6 +825,9 @@ export default defineComponent({
 			axios({
 				url: 'http://localhost:3000/api/maintain/record/get',
 				method:'GET',
+        params: {
+          bridge_no:route.query.bridge_no,
+        }
 			}).then((resp) => {
 				maintainRecord.arr = resp.data
 				loadingCount += 1

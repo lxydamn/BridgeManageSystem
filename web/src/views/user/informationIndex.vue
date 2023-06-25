@@ -4,23 +4,35 @@
             <template v-if="column.dataIndex === 'tags'">
                 <span>
                   <a-tag
-                          :color="record.basic == 'finish' ? 'green' : 'volcano' "
+                      :color="record.basic == 'finish' ? 'green' : 'volcano' "
                   >
+                    <template #icon>
+                      <CheckCircleOutlined v-if="record.basic === 'finish' "/>
+                      <CloseCircleOutlined v-if="record.basic === 'unfinished' "/>
+                    </template>
                     <router-link :to="{name:'basicCard', query:{bridge_no:record.bridge_no, status:record.basic, initStatus:record.init}}">
                         基本卡片
                     </router-link>
                   </a-tag>
 
                   <a-tag
-                          :color="record.init === 'finish' ? 'green' : 'volcano' "
+                      :color="record.init === 'finish' ? 'green' : 'volcano' "
                   >
+                    <template #icon>
+                      <CheckCircleOutlined v-if="record.init === 'finish' "/>
+                      <CloseCircleOutlined v-if="record.init === 'unfinished' "/>
+                    </template>
                     <router-link :to="{name:'initCard', query:{bridge_no:record.bridge_no, status:record.init }}">
                         初始检查
                     </router-link>
                   </a-tag>
                   <a-tag
-                          :color="record.peri == 'finish' ? 'green' : 'volcano' "
+                      :color="record.peri == 'finish' ? 'green' : 'volcano' "
                   >
+                    <template #icon>
+                      <CheckCircleOutlined v-if="record.peri === 'finish' "/>
+                      <CloseCircleOutlined v-if="record.peri === 'unfinished' "/>
+                    </template>
                     <router-link :to="{name:'periCard', query:{bridge_no:record.bridge_no, status:record.peri }}">
                         定期检查
                     </router-link>
@@ -32,10 +44,10 @@
 </template>
 
 <script lang="ts">
-
 import {defineComponent, ref, Ref} from "vue";
 import axios from "axios";
 import {useUserStore} from "../../store/user.ts";
+import {CheckCircleOutlined ,CloseCircleOutlined} from '@ant-design/icons-vue'
 
 const columns = [
     {
@@ -65,7 +77,8 @@ interface BridgeCardInfo {
 }
 export default defineComponent ({
     components: {
-
+      CheckCircleOutlined,
+      CloseCircleOutlined,
     },
     setup() {
 
