@@ -15,4 +15,19 @@ public interface BasicCardMapper {
     List<Map<String, Object>> getAssessRecordByBridgeNo(Map<String, Object> map);
     List<Map<String, Object>> getMaintainRecordByBridgeNo(Map<String, Object> map);
 
+    void insertBasicCard(Map<String, Object> map);
+
+    void insertTechIndex(Map<String, Object> map);
+
+    void insertBridgeFile(Map<String, Object> map);
+
+    Map<String, Object> getCardInfoData(Map<String, Object> map);
+    Map<String, Object> getTechIndexData(Map<String, Object> map);
+
+    Map<String, Object> getBridgeFileData(Map<String, Object> map);
+
+    Map<String, Object> getInitCardData(Map<String, Object> map);
+
+
+
 }

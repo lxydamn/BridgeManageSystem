@@ -9,4 +9,5 @@ import java.util.Map;
 @Repository
 public interface InitCardMapper {
     void insert(Map<String, String> map);
+
 }

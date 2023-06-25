@@ -96,18 +96,29 @@
 							<td class="table-item-name">建成时间</td>
 							<td class="table-item-content">
 								<a-date-picker
+                    value-format="YYYY-MM-DD"
+                    :locale="locale"
 										class="input-item-default"
+                    format="YYYY-MM-DD"
 										placeholder="建成时间"
 										v-model:value="cardInfo.arr.build_time"
 								/>
 							</td>
 							<td class="table-item-name">设计单位</td>
 							<td class="table-item-content">
-								<a-input placeholder="设计单位" disabled />
+								<a-input
+                    placeholder="设计单位"
+                    disabled
+                    v-model:value="initCardData.data.des_unit"
+                />
 							</td>
 							<td class="table-item-name">施工单位</td>
 							<td class="table-item-content">
-								<a-input placeholder="施工单位" disabled />
+								<a-input
+                    placeholder="施工单位"
+                    disabled
+                    v-model:value="initCardData.data.cst_unit"
+                />
 							</td>
 						</tr>
 						<tr>
@@ -325,7 +336,14 @@
 							</td>
 							<td class="table-item-name">建档时间</td>
 							<td class="table-item-content">
-								<a-date-picker placeholder="建档时间" class="input-item-default"  v-model:value="bridgeFile.arr.file_time" />
+								<a-date-picker
+                    value-format="YYYY-MM-DD"
+                    format="YYYY-MM-DD"
+                    :locale="locale"
+                    placeholder="建档时间"
+                    class="input-item-default"
+                    v-model:value="bridgeFile.arr.file_time"
+                />
 							</td>
 						</tr>
 					</table>
@@ -396,28 +414,36 @@
 				<h3>其他（参照卡片）</h3>
 				<hr>
 				<a-form-item>
+          <div class="header-img-box">
+            <span>图片链接</span>
+            <span>桥梁总体图片</span>
+            <span>图片链接</span>
+            <span>桥梁正面图片</span>
+          </div>
 					<div class="photo-box">
 						<a-row justify="space-around" style="height: 100%; align-items: center">
-							<a-col :span="1" style="writing-mode: vertical-lr; ">
-								桥梁总体图片
-							</a-col>
-							<a-col :span="8">
-								<a-input placeholder="图片链接" v-model:value="cardInfo.arr.oal_photo" style="width: 10em; margin-right: 2em" />
+              <a-col>
+                <a-input
+                    placeholder="图片链接"
+                    v-model:value="cardInfo.arr.oal_photo"
+                />
+              </a-col>
+							<a-col :span="6" class="img-input-box">
 								<img
 										:src="cardInfo.arr.oal_photo.length === 0? defaultImg : cardInfo.arr.oal_photo"
 										alt="图片"
-										style="height: 10em; margin: 1em auto 0;"
 								/>
 							</a-col>
-							<a-col :span="1" style="writing-mode: vertical-lr; ">
-								桥梁正面图片
-							</a-col>
-							<a-col :span="8">
-								<a-input placeholder="图片链接" v-model:value="cardInfo.arr.frt_photo" style="width: 10em; margin-right: 2em" />
+              <a-col>
+                <a-input
+                    placeholder="图片链接"
+                    v-model:value="cardInfo.arr.frt_photo"
+                />
+              </a-col>
+							<a-col :span="6" class="img-input-box">
 								<img
 										:src="cardInfo.arr.frt_photo.length === 0? defaultImg : cardInfo.arr.frt_photo"
 										alt="图片"
-										style="height: 10em; margin: 1em auto 0;"
 								/>
 							</a-col>
 						</a-row>
@@ -439,7 +465,14 @@
 							</td>
 							<td class="table-item-name">填卡日期</td>
 							<td class="table-item-content">
-								<a-date-picker class="input-item-default" placeholder="填卡日期" v-model:value="cardInfo.arr.card_time" />
+								<a-date-picker
+                    value-format="YYYY-MM-DD"
+                    format="YYYY-MM-DD"
+                    :locale="locale"
+                    class="input-item-default"
+                    placeholder="填卡日期"
+                    v-model:value="cardInfo.arr.card_time"
+                />
 							</td>
 						</tr>
 					</table>
@@ -448,7 +481,12 @@
 		</div>
 	</a-skeleton>
 	<div class="footer-bar" v-if="!loading">
-		<a-button type="primary" style="margin-bottom: 1em" @click="submitData">
+		<a-button
+        type="primary"
+        style="margin-bottom: 1em"
+        @click="submitData"
+        :disabled="$route.query.status === 'finish' "
+    >
 			<template #icon>
 				<CloudUploadOutlined />
 			</template>
@@ -466,12 +504,13 @@
 import {defineComponent, reactive, Ref, ref} from 'vue';
 import {CloudUploadOutlined, ArrowLeftOutlined} from '@ant-design/icons-vue'
 import {useUserStore} from "../../store/user.ts";
-import type {SelectProps} from "ant-design-vue";
+import type { SelectProps} from "ant-design-vue";
 import axios from "axios";
 import {useRoute} from "vue-router";
 import {Unit} from '../admin/unit.vue'
 import {error_message} from "../../utils/errorMessage.ts";
-
+import locale from "ant-design-vue/lib/time-picker/locale/zh_CN";
+import type {Dayjs} from 'dayjs'
 const options = ref<SelectProps['options']>([
 	{
 		value:'全',
@@ -522,14 +561,14 @@ export default defineComponent({
 				bridge_no:route.query.bridge_no,
 				oal_photo:'',
 				frt_photo:'',
-				card_psn:'',// 填卡人
-				card_time:'',//填卡时间
+				card_psn:'',
+        card_time: ref<Dayjs>(),
 				admin_code:'',
 				fun_type:'',
 				des_load:'',
 				bridge_slope:'',
 				bridge_radius:'',
-				build_time:'',
+				build_time:ref<Dayjs>(),
 				otr_sig:'',
 			},
 			route: {
@@ -542,7 +581,6 @@ export default defineComponent({
 				spr_unit:'',
 				own_unit:'',
 			},
-
 		})
 		const bridgeFile = reactive({
 			arr: {
@@ -557,7 +595,7 @@ export default defineComponent({
 				hsy_info:'',
 				ohr_info:'',
 				file_type:'',
-				file_time:'',
+				file_time:ref<Dayjs>(),
 			},
 		})
 		const bridgeStruct = reactive({
@@ -602,7 +640,6 @@ export default defineComponent({
 				}
 			]
 		})
-
 		const initCardData = reactive({
 			data: {
 				bri_len:'初始检查导入，请先完成初始检查',
@@ -610,19 +647,22 @@ export default defineComponent({
 				cro_no:'初始检查导入，请先完成初始检查',
 				bridge_pile:'初始检查导入，请先完成初始检查',
 				brid_engi:'初始检查导入，请先完成初始检查',
+        des_unit:'初始检查导入，请先完成初始检查',
+        cst_unit:'初始检查导入，请先完成初始检查',
 			}
 		})
-
 		const userStore = useUserStore()
 
+
+
 		const checkDataFormat = () => {
-			 if (
+
+      if (
 					 cardInfo.arr.fun_type == null || cardInfo.arr.fun_type.length === 0 ||
-					 cardInfo.arr.des_load == null || cardInfo.arr.des_load.length === 0 ||
-			     cardInfo.arr.bridge_slope == null || cardInfo.arr.bridge_slope.length === 0 ||
-					 cardInfo.arr.bridge_radius == null || cardInfo.arr.bridge_radius.length === 0 ||
-					 cardInfo.arr.build_time == null || cardInfo.arr.build_time.length === 0 ||
-					 cardInfo.arr.admin_code == null || cardInfo.arr.admin_code.length === 0
+          cardInfo.arr.des_load == null || cardInfo.arr.des_load.length === 0 ||
+          cardInfo.arr.bridge_slope == null || cardInfo.arr.bridge_slope.length === 0 ||
+          cardInfo.arr.bridge_radius == null || cardInfo.arr.bridge_radius.length === 0 ||
+          cardInfo.arr.admin_code == null || cardInfo.arr.admin_code.length === 0
 			 ) {
 				 error_message( "桥梁行政数据存在部分不合法数据", 'error')
 				 return false;
@@ -666,8 +706,7 @@ export default defineComponent({
 					 bridgeFile.arr.spc_chk_info == null || bridgeFile.arr.spc_chk_info.length === 0 ||
 					 bridgeFile.arr.hsy_info == null || bridgeFile.arr.hsy_info.length === 0 ||
 					 bridgeFile.arr.ohr_info == null || bridgeFile.arr.ohr_info.length === 0 ||
-					 bridgeFile.arr.file_type == null || bridgeFile.arr.file_type.length === 0 ||
-					 bridgeFile.arr.file_time == null || bridgeFile.arr.file_time.length === 0
+					 bridgeFile.arr.file_type == null || bridgeFile.arr.file_type.length === 0
 			 ) {
 				 error_message( "桥梁档案资料存在不合法数据", 'error')
 				 return false;
@@ -691,8 +730,7 @@ export default defineComponent({
 			 if (
 					 cardInfo.arr.card_psn == null ||
 					 cardInfo.arr.card_psn.length === 0 ||
-					 cardInfo.arr.card_time == null ||
-					 cardInfo.arr.card_time.length === 0
+					 cardInfo.arr.card_time == null
 			 ) {
 				 error_message("请确认填卡人或填卡日期", 'error')
 				 return false;
@@ -710,6 +748,23 @@ export default defineComponent({
 				error_message("所有数据合法，正在上传卡片", "success");
 			}
 
+      console.log(cardInfo.arr)
+      axios({
+        url: 'http://localhost:3000/api/basic/card/submit',
+        method:'POST',
+        params: {
+          bridge_no:cardInfo.arr.bridge_no,
+          cardInfo:JSON.stringify(cardInfo.arr),
+          techIndex:JSON.stringify(techIndex.arr),
+          bridgeFile:JSON.stringify(bridgeFile.arr),
+          units:JSON.stringify(cardInfo.units),
+        }
+      }).then((resp) => {
+          error_message(resp.data.error_info, resp.data.error_info)
+      }).catch(() => {
+          error_message("提交失败", "error")
+      })
+
 		}
 
 
@@ -722,8 +777,7 @@ export default defineComponent({
 				}
 			}).then((resp) => {
 				cardInfo.route = resp.data
-
-				loadingCount += 1
+        loadingCount += 1
 			})
 		}
 		getRoute();
@@ -737,7 +791,6 @@ export default defineComponent({
 				}
 			}).then((resp) => {
 				bridgeStruct.arr = resp.data
-				console.log(bridgeStruct.arr)
 				loadingCount += 1
 			})
 		}
@@ -776,11 +829,84 @@ export default defineComponent({
 		}
 		getMaintainRecord();
 
+    const getCardInfoData = () => {
+      axios({
+        url: 'http://localhost:3000/api/basic/card/data',
+        method:'GET',
+        params: {
+          bridge_no: route.query.bridge_no
+        }
+      }).then((resp) => {
+        cardInfo.arr = resp.data
+        loadingCount += 1
+      })
+    }
+    if(route.query.status === 'finish') getCardInfoData();
+
+    const getTechIndexData = () => {
+      axios({
+        url: 'http://localhost:3000/api/basic/tech/data',
+        method:'GET',
+        params: {
+          bridge_no: route.query.bridge_no
+        }
+      }).then((resp) => {
+        techIndex.arr = resp.data
+        loadingCount += 1
+      })
+    }
+    if(route.query.status === 'finish') getTechIndexData();
+
+    const getBridgeFileData = () => {
+      axios({
+        url: 'http://localhost:3000/api/basic/file/data',
+        method:'GET',
+        params: {
+          bridge_no: route.query.bridge_no
+        }
+      }).then((resp) => {
+        bridgeFile.arr = resp.data
+        loadingCount += 1
+      })
+    }
+    if(route.query.status === 'finish') getBridgeFileData();
+
+    const getUnitJobs = () => {
+      axios({
+        url: 'http://localhost:3000/api/basic/unitjob/data',
+        method:'GET',
+        params: {
+          bridge_no: route.query.bridge_no
+        }
+      }).then((resp) => {
+        cardInfo.units = resp.data
+        loadingCount += 1
+      })
+    }
+    if(route.query.status === 'finish') getUnitJobs();
+
+
+    const getInitCardData = () => {
+      axios({
+        url: 'http://localhost:3000/api/basic/initcard/data',
+        method:'GET',
+        params: {
+          bridge_no: route.query.bridge_no
+        }
+      }).then((resp) => {
+        techIndex.arr = resp.data
+        loadingCount += 1
+      })
+    }
+    if(route.query.initStatus === 'finish') getInitCardData();
 
 		const checkInterval = setInterval(() => {
-			if (loadingCount == 5) {
-				loading.value = false
-				clearInterval(checkInterval)
+      let needCount = 5
+      if (route.query.status == 'finish') needCount = 9
+      if (route.query.initSatus == 'finish') needCount += 1
+      if (loadingCount == needCount) {
+          loading.value = false
+          clearInterval(checkInterval)
 			}
 		}, 500)
 
@@ -798,6 +924,7 @@ export default defineComponent({
 			submitData,
 			initCardData,
 			bridgeFile,
+      locale,
 			defaultImg,
 			options,
 			units,
@@ -828,6 +955,7 @@ export default defineComponent({
 	position: absolute;
 	display: flex;
 	flex-direction: column;
+  align-items: center;
 	top: 100px;
 	right: 2%;
 }
@@ -894,5 +1022,25 @@ h3 {
 }
 .photo-box {
 	height: 15em;
+}
+
+.img-input-box {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 14em;
+}
+.header-img-box {
+  display: flex;
+  justify-content: space-around;
+}
+
+.header-img-box span {
+  margin-right: 3%;
+}
+.img-input-box img {
+  margin-top: 1em;
+  height: 12em;
+  width: 12em;
 }
 </style>

@@ -3,6 +3,66 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.backend.mapper.BasicCardMapper">
+    <insert id="insertBasicCard">
+        insert into bridge_basic_cond
+        values (
+                #{card_no},
+                #{bridge_no},
+                #{oal_photo},
+                #{frt_photo},
+                #{card_psn},
+                #{card_time},
+                #{admin_code},
+                #{fun_type},
+                #{des_load},
+                #{bridge_slope},
+                #{bridge_radius},
+                #{build_time},
+                #{otr_sig}
+               )
+    </insert>
+    <insert id="insertTechIndex" >
+        insert into bridg_tech_index
+        values (
+                #{bridge_tech_index},
+                #{card_no},
+                #{bridge_wdh},
+                #{car_wdh},
+                #{psn_wdh},
+                #{ctr_dvr_wdh},
+                #{pet_hgt},
+                #{std_hrm},
+                #{act_hrm},
+                #{std_trm},
+                #{act_trm},
+                #{apr_wdh},
+                #{crv_rds},
+                #{des_fol_lev},
+                #{his_fol_lev},
+                #{grd_pek_acc}
+               )
+    </insert>
+
+    <insert id="insertBridgeFile">
+        insert into bridge_file
+        values (
+                #{file_no},
+                #{card_no},
+                #{des_draw},
+                #{des_file},
+                #{fin_draw},
+                #{cst_file},
+                #{acp_file},
+                #{adm_apv_file},
+                #{per_chk_info},
+                #{spc_chk_info},
+                #{hsy_info},
+                #{ohr_info},
+                #{file_type},
+                #{file_time}
+               )
+    </insert>
+
     <select id="getAssessRecordByBridgeNo" resultType="java.util.Map">
         select * from bridge_assess_record where card_no in (
             select card_no from bridge_info where bridge_no=#{bridge_no}
@@ -13,5 +73,23 @@
             select card_no from bridge_info where bridge_no=#{bridge_no}
         )
     </select>
+    <select id="getCardInfoData" resultType="java.util.Map">
+        select * from bridge_basic_cond where bridge_no=#{bridge_no}
+    </select>
+    <select id="getTechIndexData" resultType="java.util.Map">
+        select * from bridg_tech_index where card_no in (
+            select card_no from bridge_basic_cond where bridge_no=#{bridge_no}
+            )
+    </select>
+    <select id="getBridgeFileData" resultType="java.util.Map">
+        select * from bridge_file where card_no in (
+            select card_no from bridge_basic_cond where bridge_no=#{bridge_no}
+        )
+    </select>
+    <select id="getInitCardData" resultType="java.util.Map">
+        select bri_len, cro_name, cro_no, bridge_pile, brid_engi from bridge_init_record
+        where bridge_no=#{bridge_no}
+    </select>
+
 
 </mapper>

@@ -10,4 +10,16 @@
             #{unit_job}
         )
     </insert>
+    <insert id="insertByUnitJob">
+        insert into unit_job(unit_no, bridge_no, unit_job)
+        values(
+               #{unit_no},
+               #{bridge_no},
+               #{unit_job}
+               )
+    </insert>
+
+    <select id="getUnitJobData" resultType="java.lang.Integer">
+        select unit_no from unit_job where bridge_no=#{bridge_no} and unit_job=#{unit_job}
+    </select>
 </mapper>

@@ -6,7 +6,7 @@
                   <a-tag
                           :color="record.basic == 'finish' ? 'green' : 'volcano' "
                   >
-                    <router-link :to="{name:'basicCard', query:{bridge_no:record.bridge_no}}">
+                    <router-link :to="{name:'basicCard', query:{bridge_no:record.bridge_no, status:record.basic, initStatus:record.init}}">
                         基本卡片
                     </router-link>
                   </a-tag>
@@ -14,14 +14,14 @@
                   <a-tag
                           :color="record.init === 'finish' ? 'green' : 'volcano' "
                   >
-                    <router-link :to="{name:'initCard', query:{bridge_no:record.bridge_no}}">
+                    <router-link :to="{name:'initCard', query:{bridge_no:record.bridge_no, status:record.init }}">
                         初始检查
                     </router-link>
                   </a-tag>
                   <a-tag
                           :color="record.peri == 'finish' ? 'green' : 'volcano' "
                   >
-                    <router-link :to="{name:'periCard', query:{bridge_no:record.bridge_no}}">
+                    <router-link :to="{name:'periCard', query:{bridge_no:record.bridge_no, status:record.peri }}">
                         定期检查
                     </router-link>
                   </a-tag>
