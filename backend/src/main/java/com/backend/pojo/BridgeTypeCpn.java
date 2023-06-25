@@ -10,5 +10,4 @@ import lombok.NoArgsConstructor;
 public class BridgeTypeCpn {
     private String type_no;
     private Integer bri_cpn_no;
-
 }

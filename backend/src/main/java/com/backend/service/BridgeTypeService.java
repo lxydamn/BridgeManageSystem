@@ -22,4 +22,6 @@ public interface BridgeTypeService {
     BridgeType getById(Map<String, Object> map);
 
     List<Map<String, Object>> getCount();
+
+    List<Map<String, Object>> getTypeCpnStatus();
 }

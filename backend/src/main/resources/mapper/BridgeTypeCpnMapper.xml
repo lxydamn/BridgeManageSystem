@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.backend.mapper.BridgeTypeCpnMapper">
+    <select id="getAll" resultType="com.backend.pojo.BridgeTypeCpn">
+        select * from bridge_type_cpn
+        where type_no = #{type_no}
+    </select>
+
+    <delete id="delete" parameterType="java.util.Map">
+        delete from bridge_type_cpn
+        where type_no=#{type_no} and bri_cpn_no=#{bri_cpn_no};
+    </delete>
+
+    <update id="update" parameterType="java.util.Map">
+        update bridge_type_cpn set type_no = #{type_no}, bri_cpn_no = #{new_bri_cpn_no}
+        where type_no = #{type_no} and bri_cpn_no =#{old_bri_cpn_no}
+    </update>
+
+    <insert id="insert" parameterType="java.util.Map">
+        insert into bridge_type_cpn values(
+        #{type_no},
+        #{bri_cpn_no}
+        )
+    </insert>
+
+</mapper>

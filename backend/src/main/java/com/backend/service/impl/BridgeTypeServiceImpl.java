@@ -1,11 +1,13 @@
 package com.backend.service.impl;
 
 import com.backend.mapper.BridgeTypeMapper;
+import com.backend.pojo.BridgeInfo;
 import com.backend.pojo.BridgeType;
 import com.backend.service.BridgeTypeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -84,4 +86,23 @@ public class BridgeTypeServiceImpl implements BridgeTypeService {
     public List<Map<String, Object>> getCount() {
         return bridgeTypeMapper.getTypeCount();
     }
+
+    @Override
+    public List<Map<String, Object>> getTypeCpnStatus() {
+        List<Map<String, Object>> resp = new ArrayList<>();
+
+        List<BridgeType> bridgeTypes = bridgeTypeMapper.getAll();
+
+        for (BridgeType bridgeType : bridgeTypes) {
+            Integer type_cpn = bridgeTypeMapper.getTypeCpnCount(bridgeType.getType_no());
+            Map<String, Object> item = new HashMap<>();
+
+            item.put("type_cpn", type_cpn == 0 ? "unfinished" : "finish");
+            item.put("type_no", bridgeType.getType_no());
+            item.put("type_name", bridgeType.getType_name());
+            resp.add(item);
+        }
+        return resp;
+    }
+
 }

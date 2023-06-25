@@ -11,6 +11,12 @@
         select * from bridge_type where type_no = #{type_no}
     </select>
 
+    <select id="getTypeCpnCount" parameterType="java.util.Map" resultType="java.lang.Integer">
+        select count(type_no) typeCpnCount
+        from bridge_type_cpn
+        where type_no = #{type_no}
+    </select>
+
     <select id="getTypeCount" resultType="java.util.Map">
         select count(bridge_no) type_count, bt.type_name from bridge_info
             right join bridge_type bt on bt.type_no = bridge_info.type_no
@@ -26,12 +32,10 @@
         where type_no =#{old_type_no}
     </update>
 
-
-
     <insert id="insert" parameterType="java.util.Map">
         insert into bridge_type values(
-                                    #{type_no},
-                                    #{type_name}
-                                )
+        #{type_no},
+        #{type_name}
+        )
     </insert>
 </mapper>

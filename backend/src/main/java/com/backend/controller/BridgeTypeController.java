@@ -31,6 +31,11 @@ public class BridgeTypeController {
         return bridgeTypeService.updateType(map);
     }
 
+    @GetMapping("/api/bridgeType/cpn/status")
+    public List<Map<String, Object>> cpnStatus() {
+        return bridgeTypeService.getTypeCpnStatus();
+    }
+
     @GetMapping("/api/bridgeType/count")
     public List<Map<String, Object>> getCount() {
         return bridgeTypeService.getCount();

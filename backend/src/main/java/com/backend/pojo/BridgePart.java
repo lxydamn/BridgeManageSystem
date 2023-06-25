@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class BridgePart {
-    private String bri_part_no;
+    private Integer bri_part_no;
     private String bri_part_name;
 }

@@ -19,12 +19,9 @@ public interface BridgeTypeMapper {
 
     void insert(Map<String, Object> map);
     void update(Map<String, Object> map);
-
-
     List<Map<String, Object>> getTypeCount();
     List<BridgeType> getAll();
-
     BridgeType selectById(Map<String, Object> map);
-
-    void  delete(Map<String, Object> map);
+    void delete(Map<String, Object> map);
+    Integer getTypeCpnCount(String type_no);
 }

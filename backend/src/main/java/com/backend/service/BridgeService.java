@@ -17,6 +17,4 @@ public interface BridgeService {
     Map<String, String> updateBridge(Map<String, Object> map);
 
     List<Map<String, Object>> getCardStatus(Map<String, Object> map);
-
-    List<Map<String, Object>> getRouteByBridgeNo(Map<String, String> map);
 }

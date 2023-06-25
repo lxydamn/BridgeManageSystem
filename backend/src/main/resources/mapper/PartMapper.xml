@@ -9,6 +9,7 @@
         where bridge_no=#{bridge_no} and
               bridge_cet_part.cet_part_no=bridge_stru_record.cet_part_no
     </select>
+
     <select id="getCpnByCetCpn" resultType="java.util.Map">
         select bri_cpn_name,bri_part_name
         from bridge_cpn,bridge_part,bridge_cet_part

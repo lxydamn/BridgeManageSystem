@@ -15,6 +15,17 @@
                     <a>删除</a>
                 </a-popconfirm>
             </template>
+            <template v-if="column.dataIndex === 'tag'">
+                <span>
+                    <a-tag
+                          :color="record.basic == 'finish' ? 'green' : 'volcano' "
+                  >
+                    <router-link :to="{name:'adminTypeComponent', query:{type_name:record.type_name, type_no:record.type_no}}">
+                        类型部件配置
+                    </router-link>
+                  </a-tag>
+                </span>
+            </template>
         </template>
     </a-table>
 
@@ -58,12 +69,17 @@ const columns = [
         title: '操作',
         dataIndex: 'operation',
     },
-
+    {
+        title: '类型部件配置完成情况',
+        dataIndex: 'tag',
+        ellipsis: true,
+    },
 ];
 
 interface BridgeType {
     type_no:string
     type_name: string
+    type_cpn: string
 }
 
 export default defineComponent({
@@ -77,12 +93,10 @@ export default defineComponent({
         let old_type_no = ref("")
         const dataSource: Ref<BridgeType[]> = ref([])
 
-        let units = ref([])
 
         const checkInput = () => {
             if (modalValue.type_no.length == 0 || modalValue.type_name.length == 0 )
                 return false
-
             return true
         }
 
@@ -104,7 +118,7 @@ export default defineComponent({
 
         const getTypes = () => {
             axios({
-                url: 'http://localhost:3000/api/bridgeType/get/all',
+                url: 'http://localhost:3000/api/bridgeType/cpn/status',
                 method:'GET',
             }).then((resp) => {
                 dataSource.value = resp.data
@@ -195,7 +209,6 @@ export default defineComponent({
             handleOk,
             visible,
             onUpdate,
-            units,
             onDelete,
             cleanInput,
         };
