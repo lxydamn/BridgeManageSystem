@@ -35,7 +35,7 @@
             <a-col :span="24">
                 <div class="chat-box">
                     <a-card hoverable class="chat-card">
-                        <h2>广告位招租</h2>
+                        <MapContainer></MapContainer>
                     </a-card>
                 </div>
             </a-col>
@@ -50,11 +50,13 @@ import { SettingOutlined, EditOutlined, EllipsisOutlined } from '@ant-design/ico
 import { defineComponent, reactive } from 'vue';
 import { useUserStore } from '../../store/user';
 import axios from 'axios';
+import MapContainer from "../../components/MapContainer.vue"
 export default defineComponent({
     components: {
         SettingOutlined,
         EditOutlined,
         EllipsisOutlined,
+        MapContainer,
     },
     setup() {
         const userStore = useUserStore()
@@ -114,7 +116,6 @@ export default defineComponent({
 
 .chat-card {
     margin-top: 1em;
-    height: 35em;
 }
 
 .info-grid {

@@ -48,4 +48,9 @@ public class RouteController {
     public Map<String, Object> getByBridgeNo(@RequestParam Map<String, Object> map) {
         return routeService.getByBridgeNo(map);
     }
+
+    @GetMapping("/api/route/count")
+    public Map<String, Object> getRouteCount() {
+        return routeService.getRouteCount();
+    }
 }

@@ -17,6 +17,9 @@
         where
             bridge_no=#{bridge_no} and bridge_info.route_no=route.route_no
     </select>
+    <select id="getRouteCount" resultType="java.util.Map">
+        select count(route_no) as route_count from route;
+    </select>
 
     <delete id="delete" parameterType="java.util.Map">
         delete from route where route_no=#{route_no};

@@ -39,7 +39,7 @@ public class PartServiceImpl implements PartService {
             String cetPartNo =  String.valueOf(item.get("cet_part_no"));
 
             Map<String, Object> cpnByCetCpn = partMapper.getCpnByCetCpn(cetPartNo);
-            System.out.println(cpnByCetCpn);
+
             String briPartNo = String.valueOf(cpnByCetCpn.get("bri_part_name"));
             String briCpnNo = String.valueOf(cpnByCetCpn.get("bri_cpn_name"));
 
@@ -49,16 +49,10 @@ public class PartServiceImpl implements PartService {
             cpnToInfo.putIfAbsent(briCpnNo, new ArrayList<>());
             cpnToInfo.get(briCpnNo).add(item);
         }
-
-        System.out.println(partToCpn);
-
-        System.out.println(cpnToInfo);
         /*
           解构树信息，构造JSON
          */
-
         JSONArray jsonObject = new JSONArray();
-
         for (Map.Entry<String, Set<String>> entry : partToCpn.entrySet()) {
             Set<String> cpns = entry.getValue();
             JSONObject mainObject = new JSONObject();

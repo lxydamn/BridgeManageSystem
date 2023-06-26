@@ -23,4 +23,6 @@ public interface RouteMapper {
 
     Map<String, Object> selectByBridgeNo(Map<String, Object> map);
     void  delete(Map<String, Object> map);
+
+    Map<String, Object> getRouteCount();
 }

@@ -59,6 +59,10 @@ export default defineComponent({
   margin-bottom: 0.3em;
   width: 100%;
 }
+
+.logo a {
+  color: #1890FF;
+}
 </style>
 
 

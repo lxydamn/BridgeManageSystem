@@ -82,4 +82,9 @@ public class RouteServiceImpl implements RouteService {
     public Route getById(Map<String, Object> map) {
         return routeMapper.selectById(map);
     }
+
+    @Override
+    public Map<String, Object> getRouteCount() {
+        return routeMapper.getRouteCount();
+    }
 }

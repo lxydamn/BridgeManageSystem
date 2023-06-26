@@ -506,9 +506,9 @@ import {CloudUploadOutlined, ArrowLeftOutlined} from '@ant-design/icons-vue'
 import {useUserStore} from "../../store/user.ts";
 import type { SelectProps} from "ant-design-vue";
 import axios from "axios";
-import {useRoute} from "vue-router";
-import {Unit} from '../admin/unit.vue'
-import {error_message} from "../../utils/errorMessage.ts";
+import { useRoute } from "vue-router";
+import { Unit } from '../admin/unit.vue'
+import { error_message } from "../../utils/errorMessage.ts";
 import locale from "ant-design-vue/lib/time-picker/locale/zh_CN";
 import type {Dayjs} from 'dayjs'
 const options = ref<SelectProps['options']>([
@@ -652,11 +652,9 @@ export default defineComponent({
 			}
 		})
 		const userStore = useUserStore()
-
-
+    
 
 		const checkDataFormat = () => {
-
       if (
 					 cardInfo.arr.fun_type == null || cardInfo.arr.fun_type.length === 0 ||
           cardInfo.arr.des_load == null || cardInfo.arr.des_load.length === 0 ||
@@ -730,7 +728,7 @@ export default defineComponent({
 			 if (
 					 cardInfo.arr.card_psn == null ||
 					 cardInfo.arr.card_psn.length === 0 ||
-					 cardInfo.arr.card_time == null
+					 cardInfo.arr.card_time == undefined
 			 ) {
 				 error_message("请确认填卡人或填卡日期", 'error')
 				 return false;
@@ -900,7 +898,7 @@ export default defineComponent({
           bridge_no: route.query.bridge_no
         }
       }).then((resp) => {
-        techIndex.arr = resp.data
+        initCardData.data = resp.data
         loadingCount += 1
       })
     }

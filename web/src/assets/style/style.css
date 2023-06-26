@@ -22,28 +22,11 @@
     font-size: 1.1em;
     margin: .5em auto .5em;
   }
-  .login-box {
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-image: url("../../assets/images/login-bg1.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-  }
-  .login-box img {
-    height: 60vh;
-    border-radius: 10px 0 10px 0;
-  }
+
   .response-message {
     text-align: center;
     font-weight: 900;
     font-size: 5rem;
-  }
-  .ant-form {
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0  1rem #6c6969;
   }
   
   .login-form-button {
@@ -60,6 +43,8 @@
   .logo {
     display: flex;
     align-items: center;
+    letter-spacing: .3em;
+    color: #1890FF;
     height: 4rem;
     width: 90%;
     margin-left: 10%;

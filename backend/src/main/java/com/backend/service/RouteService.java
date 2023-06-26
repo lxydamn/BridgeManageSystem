@@ -21,4 +21,6 @@ public interface RouteService {
     List<Route> getAll();
 
     Route getById(Map<String, Object> map);
+
+    Map<String, Object> getRouteCount();
 }

@@ -77,14 +77,13 @@
             </a-card>
 
             <a-card
-                :loading="loading"
-                title="用户单位统计"
+                :loading="loading.route"
+                title="路线统计"
                 hoverable
                 style="margin-top: 3em"
             >
                 <div class="user-unit-statistic">
-                    <a-statistic class="statistic-item" suffix="个" title="单位" :value="1128" />
-                    <a-statistic class="statistic-item" suffix="个" title="用户" :value="1128" />
+                    <a-statistic class="statistic-item" suffix="个" title="单位" :value="route_count" />
                 </div>
             </a-card>
         </a-col>
@@ -92,7 +91,7 @@
 </template>
 
 <script lang="ts">
-import {defineComponent, reactive} from 'vue';
+import {defineComponent, reactive, ref} from 'vue';
 import axios from "axios";
 
 export default defineComponent({
@@ -104,20 +103,34 @@ export default defineComponent({
             type:true,
             card:true,
             user:true,
-
+            route:true,
         })
 
         const typeCount = reactive({
-            data:[]
+            data:[
+                {
+                    type_name:'',
+                    type_count:'',
+                }
+            ]
         })
 
         const cardCount = reactive({
-            data:[],
+            data:{
+                    bridge_count:'',
+                    basic_count:'',
+                    init_count:'',
+                    peri_count:'',
+            }
         })
         const uuCount = reactive({
-            data:[],
+            data:{
+                    user_count:'',
+                    unit_count:''
+            }
         })
-
+        
+        let route_count = ref('')
 
         const getTypeCount = () => {
             axios({
@@ -129,6 +142,17 @@ export default defineComponent({
             })
         }
         getTypeCount()
+
+        const getRouteCount = () => {
+            axios({
+                url:'http://localhost:3000/api/route/count',
+                method:"GET",
+            }).then((resp) => {
+                route_count.value = resp.data.route_count
+                loading.route = false;
+            })
+        }
+        getRouteCount()
 
         const getUUCount = () => {
             axios({
@@ -147,7 +171,6 @@ export default defineComponent({
                 method:"GET",
             }).then((resp) => {
                 cardCount.data = resp.data
-                console.log(cardCount.data)
                 loading.card= false;
             })
         }
@@ -158,6 +181,7 @@ export default defineComponent({
             typeCount,
             cardCount,
             uuCount,
+            route_count,
         }
     }
 })
@@ -182,8 +206,17 @@ export default defineComponent({
 .statistic-item:first-child {
     border: none;
 }
+.statistic-item:hover > .ant-statistic-title {
+    color: #0a85f8;
+}
+.statistic-item:hover > .ant-statistic-content {
+    color: #0a85f8;
+}
 .statistic-item:hover {
     flex-grow: 2;
+    background-color: #b7b6b6;
+    border-radius: .5em;
+    opacity: .5;
 }
 .statistic-count-box {
     display: flex;
