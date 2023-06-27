@@ -1,7 +1,7 @@
 <template>
   <a-button class="operator-btn" @click="visible = true">添加养护处治记录</a-button>
 
-  <a-table :columns="columns" :data-source="dataSource" :pagination="{ pageSize: 8}">
+  <a-table :columns="columns" :data-source="dataSource" :pagination="{ pageSize: 8}" style="height: 70vh">
     <template #bodyCell="{column, record}">
       <template v-if="column.dataIndex === 'operation'">
         <a-popconfirm

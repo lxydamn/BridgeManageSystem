@@ -20,6 +20,10 @@
                     <a-tag
                           :color="record.type_cpn == 'finish' ? 'green' : 'volcano' "
                   >
+                  <template #icon>
+                    <CheckCircleOutlined v-if="record.type_cpn === 'finish' "/>
+                    <CloseCircleOutlined v-if="record.type_cpn === 'unfinished' "/>
+                  </template>
                     <router-link :to="{name:'adminTypeComponent', query:{type_name:record.type_name, type_no:record.type_no}}">
                         类型部件配置
                     </router-link>
@@ -54,7 +58,7 @@
 import axios from 'axios';
 import { Ref, defineComponent, reactive, ref } from 'vue';
 import { error_message } from '../../utils/errorMessage';
-
+import {CheckCircleOutlined ,CloseCircleOutlined} from '@ant-design/icons-vue'
 const columns = [
     {
         title: "类型编号",
@@ -84,9 +88,9 @@ interface BridgeType {
 
 export default defineComponent({
     components: {
-
+        CheckCircleOutlined,
+        CloseCircleOutlined
     },
-
     setup() {
         let visible = ref(false)
         let isUpdate = ref(false)

@@ -1,5 +1,5 @@
 <template>
-	<RouterView></RouterView>
+	<RouterView ></RouterView>
 </template>
 <script lang="ts" setup>
 import './assets/style/style.css'

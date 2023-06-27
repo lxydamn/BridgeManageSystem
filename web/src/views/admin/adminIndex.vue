@@ -5,7 +5,7 @@
 			<adminSider></adminSider>
 		</div>
 		<div class="content-box">
-			<RouterView v-slot="{ Component }">
+			<RouterView v-slot="{ Component }" :key="$route.fullPath">
 				<component :is="Component"></component>
 			</RouterView>
 		</div>

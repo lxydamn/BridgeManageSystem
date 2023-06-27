@@ -83,7 +83,7 @@
                 style="margin-top: 3em"
             >
                 <div class="user-unit-statistic">
-                    <a-statistic class="statistic-item" suffix="个" title="单位" :value="route_count" />
+                    <a-statistic class="statistic-item" suffix="个" title="路线" :value="route_count" />
                 </div>
             </a-card>
         </a-col>

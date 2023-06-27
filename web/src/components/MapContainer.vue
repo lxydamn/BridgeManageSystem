@@ -62,6 +62,7 @@ export default {
               position:[i.lati, i.longi],
               icon:'https://img1.imgtp.com/2023/06/27/DU9XCGE0.png',
               text:i.bridge_name,
+              offset: new AMap.Pixel(0, -32),
               map:this.map,
               title: i.bridge_name
             })

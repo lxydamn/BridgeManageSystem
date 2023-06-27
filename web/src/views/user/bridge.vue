@@ -2,18 +2,10 @@
 
     <a-button class="operator-btn" @click="visible = true">添加桥梁</a-button>
 
-    <a-table class="bridge-table" :columns="columns" :data-source="dataSource" :pagination="{ pageSize: 8}">
+    <a-table class="bridge-table" :columns="columns" :data-source="dataSource" :pagination="{ pageSize: 8}" style="height: 70vh">
         <template #bodyCell="{column, record}">
             <template v-if="column.dataIndex === 'operation'">
                 <a style="margin-right: .5em;" @click="onUpdate(record)">修改</a>
-                <a-popconfirm
-                    v-if="dataSource.length"
-                    title="确认要删除吗？"
-                    ok-text="确认"
-                    cancel-text="取消"
-                >
-                  <a>删除</a>
-                </a-popconfirm>
               </template>
         </template>
     </a-table>
@@ -42,12 +34,10 @@
         <div class="select-box">
             <a-input-number 
                 addon-before="经度"
-                class="input-cpn" 
                 v-model:value="modalValue.lati"
             />
             <a-input-number 
                 addon-before="纬度"
-                class="input-cpn" 
                 v-model:value="modalValue.longi"
             />
         </div>
@@ -308,6 +298,8 @@ export default defineComponent({
                 console.log(resp.data)
                 error_message(resp.data.error_info, resp.data.error_info)
                 getBridge()
+            }).catch(() => {
+                error_message("删除失败", 'error')
             })
         }
 
@@ -339,6 +331,7 @@ export default defineComponent({
 }
 .select-box {
     width: 100%;
+    margin-left: .5em;
     display: flex;
     align-items: center;
     justify-content: space-between;

@@ -303,7 +303,7 @@
 						</tr>
 					</table>
 				</a-form-item>
-				<h3>桥梁检测评定历史（动态）</h3>
+				<h3>桥梁检测评定历史</h3>
 				<hr>
 				<a-form-item>
 					<table class="assess-record-table">
@@ -326,7 +326,7 @@
 						暂无数据
 					</div>
 				</a-form-item>
-				<h3>养护处治记录（加标题）</h3>
+				<h3>养护处治记录</h3>
 				<hr>
 				<a-form-item>
 					<table class="assess-record-table">
@@ -353,13 +353,13 @@
 						暂无数据
 					</div>
 				</a-form-item>
-				<h3>说明事项（文本框）</h3>
+				<h3>说明事项</h3>
 				<hr>
 				<a-form-item>
 					<a-textarea v-model:value="cardInfo.arr.otr_sig" placeholder="输入说明事项" show-count :maxlength="200"
 						allow-clear style="margin: 1em auto 1em;" :autosize="{ minRows: 4 }" />
 				</a-form-item>
-				<h3>其他（参照卡片）</h3>
+				<h3>其他</h3>
 				<hr>
 				<a-form-item>
 					<div class="header-img-box">

@@ -6,7 +6,7 @@
 		</div>
 		<div class="content-box">
 			
-			<RouterView v-slot="{ Component }">
+			<RouterView v-slot="{ Component }" :key="$route.fullPath">
 				<Transition name="slide-fade">
 					<component :is="Component"></component>
 				</Transition>

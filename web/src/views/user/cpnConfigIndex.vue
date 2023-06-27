@@ -6,6 +6,10 @@
                   <a-tag
                           :color="record.cet_part == 'finish' ? 'green' : 'volcano' "
                   >
+                  <template #icon>
+                    <CheckCircleOutlined v-if="record.cet_part === 'finish' "/>
+                    <CloseCircleOutlined v-if="record.cet_part === 'unfinished' "/>
+                  </template>
                     <router-link :to="{name:'cpnConfig', query:{bridge_no:record.bridge_no, bridge_name:record.bridge_name, type_no:record.type_no}}">
                         桥梁配件配置
                     </router-link>
@@ -21,7 +25,7 @@
 import {defineComponent, ref, Ref} from "vue";
 import axios from "axios";
 import {useUserStore} from "../../store/user.ts";
-
+import {CheckCircleOutlined ,CloseCircleOutlined} from '@ant-design/icons-vue'
 const columns = [
     {
         title: '桥梁编号',
@@ -49,7 +53,8 @@ interface BridgeCardInfo {
 }
 export default defineComponent ({
     components: {
-
+        CheckCircleOutlined,
+        CloseCircleOutlined
     },
     setup() {
 
