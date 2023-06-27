@@ -8,6 +8,7 @@ import java.util.Map;
 @Mapper
 @Repository
 public interface InitCardMapper {
-    void insert(Map<String, String> map);
+    void insertInitCard(Map<String, Object> map);
 
+    Map<String, Object> getInitCard(Map<String, Object> map);
 }

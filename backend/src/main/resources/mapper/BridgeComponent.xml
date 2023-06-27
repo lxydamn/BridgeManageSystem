@@ -3,8 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.backend.mapper.BridgeComponentMapper">
-    <select id="getAll" resultType="com.backend.pojo.BridgeCpn">
-        select * from bridge_cpn;
+    <select id="getAll" resultType="java.util.Map">
+        select bri_cpn_no, bri_cpn_name, bridge_cpn.bri_part_no, bridge_part.bri_part_name
+        from bridge_cpn, bridge_part
+        where bridge_cpn.bri_part_no = bridge_part.bri_part_no;
     </select>
 
     <delete id="delete" parameterType="java.util.Map">

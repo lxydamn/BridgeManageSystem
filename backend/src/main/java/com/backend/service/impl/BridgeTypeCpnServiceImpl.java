@@ -29,7 +29,7 @@ public class BridgeTypeCpnServiceImpl implements BridgeTypeCpnService {
     }
 
     @Override
-    public List<BridgeTypeCpn> getAll(Map<String, Object> map) {
+    public List<Map<String, Object>> getAll(Map<String, Object> map) {
         return bridgeTypeCpnMapper.getAll(map);
     }
 

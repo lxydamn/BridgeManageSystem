@@ -28,6 +28,4 @@ public interface BasicCardMapper {
 
     Map<String, Object> getInitCardData(Map<String, Object> map);
 
-
-
 }

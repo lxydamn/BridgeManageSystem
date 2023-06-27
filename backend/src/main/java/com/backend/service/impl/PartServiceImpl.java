@@ -21,9 +21,6 @@ public class PartServiceImpl implements PartService {
 
     @Override
     public JSONArray getStructInfo(Map<String, Object> map) {
-
-
-
         Map<String, Set<String>> partToCpn = new HashMap<>();
         Map<String, List<Map<String, Object>>> cpnToInfo = new HashMap<>();
 

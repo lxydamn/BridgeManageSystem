@@ -27,13 +27,14 @@
             class="input-cpn" 
             v-model:value="modalValue.cet_part_name" 
             placeholder="具体部件名称" />
+        <p class="tip">桥梁部件:</p>
         <a-select 
             class="input-cpn" 
             ref="select" 
             v-model:value="modalValue.bri_cpn_no" 
             style="width: 100%;"
             :options="typeCpn" 
-            :field-names="{ label: 'bri_cpn_no', value: 'bri_cpn_no' }" />
+            :field-names="{ label: 'bri_cpn_name', value: 'bri_cpn_no' }" />
     </a-modal>
 </template>
 <script lang="ts">
@@ -53,16 +54,19 @@ const columns = [
         ellipsis: true,
     },
     {
-        title: "桥梁编号",
-        dataIndex: 'bridge_no',
+        title: "桥梁名称",
+        dataIndex: 'bridge_name',
+        ellipsis: true,
     },
     {
-        title: "类型编号",
-        dataIndex: 'type_no',
+        title: "类型名称",
+        dataIndex: 'type_name',
+        ellipsis: true,
     },
     {
-        title: "桥梁部件编号",
-        dataIndex: 'bri_cpn_no',
+        title: "桥梁部件名称",
+        dataIndex: 'bri_cpn_name',
+        ellipsis: true,
     },
     {
         title: '操作',
@@ -72,10 +76,12 @@ const columns = [
 
 interface BridgeCepPart {
     cet_part_no: string
-    bridge_no: string
-    type_no: string
-    bri_cpn_no: string
     cet_part_name: string
+    bridge_no: string
+    bridge_name: string
+    type_name: string
+    bri_cpn_no: string
+    bri_cpn_name: string
 }
 
 export default defineComponent({
@@ -138,7 +144,6 @@ export default defineComponent({
                     bridge_no: route.query.bridge_no
                 }
             }).then((resp) => {
-                console.log(resp.data)
                 dataSource.value = resp.data
             })
         }
@@ -247,7 +252,11 @@ export default defineComponent({
     padding: 0;
     margin-bottom: 1em;
 }
-
+.tip {
+    margin: 0.5em;
+    margin-top: 1em;
+    padding: 0;
+}
 .head-title {
     text-align: center;
     flex: 1;

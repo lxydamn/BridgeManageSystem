@@ -30,7 +30,7 @@ public class BridgeComponentServiceImpl implements BridgeComponentService {
     }
 
     @Override
-    public List<BridgeCpn> getAll() {
+    public List<Map<String, Object>> getAll() {
         return bridgeComponentMapper.getAll();
     }
 

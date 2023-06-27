@@ -3,9 +3,12 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.backend.mapper.BridgeTypeCpnMapper">
-    <select id="getAll" resultType="com.backend.pojo.BridgeTypeCpn">
-        select * from bridge_type_cpn
-        where type_no = #{type_no}
+    <select id="getAll" resultType="java.util.Map">
+        select bridge_type_cpn.type_no, bridge_type.type_name, bridge_cpn.bri_cpn_no, bridge_cpn.bri_cpn_name
+        from bridge_type_cpn,bridge_type,bridge_cpn
+        where bridge_type_cpn.type_no = bridge_type.type_no
+        and bridge_type_cpn.bri_cpn_no = bridge_cpn.bri_cpn_no
+        and bridge_type_cpn.type_no = #{type_no}
     </select>
 
     <delete id="delete" parameterType="java.util.Map">

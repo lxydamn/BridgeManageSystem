@@ -22,7 +22,7 @@ public class BridgeCetPartController {
     }
 
     @GetMapping ("/api/cetPart/get")
-    public List<BridgeCetPart> getCetPart(@RequestParam Map<String, Object> map) {
+    public List<Map<String,Object>> getCetPart(@RequestParam Map<String, Object> map) {
         return bridgeCetPartService.getAll(map);
     }
 

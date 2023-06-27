@@ -42,7 +42,7 @@ public class BridgeCetPartServiceImpl implements BridgeCetPartService {
     }
 
     @Override
-    public List<BridgeCetPart> getAll(Map<String, Object> map) {
+    public List<Map<String,Object>> getAll(Map<String, Object> map) {
         return bridgeCetPartMapper.getAll(map);
     }
 

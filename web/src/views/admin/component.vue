@@ -1,7 +1,7 @@
 <template>
     <a-button class="operator-btn" @click="visible = true">添加桥梁部件</a-button>
 
-    <a-table :columns="columns" :data-source="dataSource" :pagination="{ pageSize: 8}" style="height: 69vh">
+    <a-table :columns="columns" :data-source="dataSource" :pagination="{ pageSize: 8}" >
         <template #bodyCell="{column, record}">
             <template v-if="column.dataIndex === 'operation'">
                 <a style="margin-right: .5em;" @click="onUpdate(record)">修改</a>
@@ -63,8 +63,8 @@ const columns = [
         ellipsis: true,
     },
     {
-        title: "部位编号",
-        dataIndex: 'bri_part_no',
+        title: "部位名称",
+        dataIndex: 'bri_part_name',
     },
     {
         title: '操作',
@@ -73,8 +73,9 @@ const columns = [
 ];
 
 interface BridgeComponent {
-    bri_cpn_no:string
-    bri_part_no:string
+    bri_cpn_no: string
+    bri_part_no: string
+    bri_part_name: string
     bri_cpn_name: string
 }
 
@@ -96,7 +97,6 @@ export default defineComponent({
                 method: 'GET',
             }).then((resp) => {
                 parts.value = resp.data
-                console.log(parts.value)
             })
         }
         getParts()
@@ -228,6 +228,9 @@ export default defineComponent({
 </script>
 
 <style>
+.ant-table {
+    min-height: 68.43vh !important;
+}
 .operator-btn {
     margin-bottom: .8em;
     height: 3em;

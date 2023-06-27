@@ -11,7 +11,7 @@ import java.util.Map;
 @Mapper
 @Repository
 public interface BridgeTypeCpnMapper {
-    List<BridgeTypeCpn> getAll(Map<String, Object> map);
+    List<Map<String, Object>> getAll(Map<String, Object> map);
 
     void insert(Map<String, Object> map);
 

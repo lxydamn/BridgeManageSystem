@@ -12,7 +12,7 @@ import java.util.Map;
 public interface BridgeCetPartMapper {
     Integer getCetPartCount(String type_no);
 
-    List<BridgeCetPart> getAll(Map<String,Object> map);
+    List<Map<String,Object>> getAll(Map<String,Object> map);
 
     void insert(Map<String, Object> map);
 

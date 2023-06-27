@@ -9,7 +9,7 @@ import java.util.Map;
 public interface BridgeTypeCpnService {
     Map<String, String> addTypeCpn(Map<String, Object> map);
 
-    List<BridgeTypeCpn> getAll(Map<String, Object> map);
+    List<Map<String, Object>> getAll(Map<String, Object> map);
 
     Map<String, String> deleteTypeCpn(Map<String, Object> map);
 

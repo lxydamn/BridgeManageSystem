@@ -22,18 +22,14 @@ public class RouteServiceImpl implements RouteService {
 
     @Override
     public Map<String, String> addRoute(Map<String, Object> map) {
-
         Map<String, String> resp = new HashMap<>();
-
         try {
             routeMapper.insert(map);
         } catch (Exception e) {
             resp.put("error_info", "添加失败");
             return resp;
         }
-
         resp.put("error_info", "success");
-
         return resp;
     }
 
@@ -45,14 +41,12 @@ public class RouteServiceImpl implements RouteService {
     @Override
     public Map<String, String> deleteRoute(Map<String, Object> map) {
         Map<String, String> resp = new HashMap<>();
-
         try {
             routeMapper.delete(map);
         } catch (Exception e) {
             resp.put("error_info", "删除失败");
             return resp;
         }
-
         resp.put("error_info", "success");
         return resp;
     }

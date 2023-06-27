@@ -21,7 +21,6 @@ public class PartController {
     @Autowired
     private PartService partService;
 
-
     @GetMapping("/api/part/get/info")
     public JSONArray getStructInfo(@RequestParam Map<String, Object> map) {
         return partService.getStructInfo(map);

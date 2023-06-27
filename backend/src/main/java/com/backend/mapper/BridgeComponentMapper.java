@@ -10,7 +10,7 @@ import java.util.Map;
 @Mapper
 @Repository
 public interface BridgeComponentMapper {
-    List<BridgeCpn> getAll();
+    List<Map<String,Object>> getAll();
 
     void insert(Map<String, Object> map);
 

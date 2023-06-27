@@ -37,11 +37,11 @@ import { useRoute } from "vue-router";
 const columns = [
     {
         title: "类型编号",
-        dataIndex: 'type_no',
+        dataIndex: 'type_name',
     },
     {
         title: "部件编号",
-        dataIndex: 'bri_cpn_no',
+        dataIndex: 'bri_cpn_name',
     },
     {
         title: '操作',
@@ -51,7 +51,9 @@ const columns = [
 
 interface BridgeTypeCpn {
     type_no: string
+    type_name: string
     bri_cpn_no: string
+    bri_cpn_name: string
 }
 
 export default defineComponent({

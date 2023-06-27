@@ -9,7 +9,7 @@ import java.util.Map;
 public interface BridgeComponentService {
     Map<String, String> addComponent(Map<String, Object> map);
 
-    List<BridgeCpn> getAll();
+    List<Map<String, Object>> getAll();
 
     Map<String, String> deleteComponent(Map<String, Object> map);
 

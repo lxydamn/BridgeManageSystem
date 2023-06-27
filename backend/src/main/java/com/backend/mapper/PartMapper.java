@@ -18,5 +18,4 @@ public interface PartMapper {
 
     Map<String, Object> getCpnByCetCpn(String cet_part_no);
 
-
 }

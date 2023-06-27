@@ -18,7 +18,7 @@ public class BridgeTypeCpnController {
     BridgeTypeCpnService bridgeTypeCpnService;
 
     @GetMapping("/api/bridgeTypeCpn/get/all")
-    public List<BridgeTypeCpn> getAll(@RequestParam Map<String, Object> map) {
+    public List<Map<String, Object>> getAll(@RequestParam Map<String, Object> map) {
         return bridgeTypeCpnService.getAll(map);
     }
 

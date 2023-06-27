@@ -71,7 +71,7 @@ public class BasicCardServiceImpl implements BasicCardService {
                     Integer own_unit = Integer.parseInt(String.valueOf(data.get("own_unit")));
                     UnitJob unitJob = new UnitJob(spr_unit, bridge_no, "监管");
                     unitJobMapper.insertByUnitJob(unitJob);
-                    UnitJob unitJob1 = new UnitJob(own_unit, bridge_no, "业主单位");
+                    UnitJob unitJob1 = new UnitJob(own_unit, bridge_no, "业主");
                     unitJobMapper.insertByUnitJob(unitJob1);
                 }
 

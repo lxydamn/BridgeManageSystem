@@ -17,7 +17,7 @@ public class BridgeComponentController {
     BridgeComponentService bridgeComponentService;
 
     @GetMapping("/api/bridgeComponent/get/all")
-    public List<BridgeCpn> getAll() {
+    public List<Map<String, Object>> getAll() {
         return bridgeComponentService.getAll();
     }
 

@@ -53,6 +53,6 @@
     font-size: 30px;
     font-weight: 900;
 }
-  
-
-
+.ant-table-empty  tr > td {
+  border-bottom: none !important;
+}
