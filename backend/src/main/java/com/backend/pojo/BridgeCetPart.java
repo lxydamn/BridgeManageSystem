@@ -13,4 +13,6 @@ public class BridgeCetPart {
     private String type_no;
     private Integer bri_cpn_no;
     private String cet_part_name;
+    private String material;
+    private String format;
 }

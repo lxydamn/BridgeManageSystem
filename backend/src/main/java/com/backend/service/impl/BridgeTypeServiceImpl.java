@@ -95,6 +95,7 @@ public class BridgeTypeServiceImpl implements BridgeTypeService {
 
         for (BridgeType bridgeType : bridgeTypes) {
             Integer type_cpn = bridgeTypeMapper.getTypeCpnCount(bridgeType.getType_no());
+            System.out.println(type_cpn);
             Map<String, Object> item = new HashMap<>();
 
             item.put("type_cpn", type_cpn == 0 ? "unfinished" : "finish");

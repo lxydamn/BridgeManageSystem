@@ -6,7 +6,7 @@
     <select id="getAll" resultType="java.util.Map">
         select cet_part_no, cet_part_name, bridge_info.bridge_no, bridge_info.bridge_name,
             bridge_type.type_no, bridge_type.type_name, bridge_cpn.bri_cpn_no,
-            bridge_cpn.bri_cpn_name
+            bridge_cpn.bri_cpn_name, material, format
         from bridge_cet_part,bridge_info,bridge_type,bridge_cpn
         where bridge_cet_part.bridge_no = bridge_info.bridge_no
             and bridge_cet_part.type_no = bridge_type.type_no
@@ -27,7 +27,8 @@
     <update id="update" parameterType="java.util.Map">
         update bridge_cet_part
         set cet_part_no = #{new_cet_part_no}, bridge_no = #{bridge_no},
-        type_no = #{type_no}, bri_cpn_no = #{bri_cpn_no}, cet_part_name = #{cet_part_name}
+        type_no = #{type_no}, bri_cpn_no = #{bri_cpn_no}, cet_part_name = #{cet_part_name},
+        material = #{material}, format = #{format}
         where cet_part_no =#{old_cet_part_no}
     </update>
 
@@ -37,7 +38,9 @@
         #{bridge_no},
         #{type_no},
         #{bri_cpn_no},
-        #{cet_part_name}
+        #{cet_part_name},
+        #{material},
+        #{format}
         )
     </insert>
 </mapper>

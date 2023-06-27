@@ -35,6 +35,14 @@
             style="width: 100%;"
             :options="typeCpn" 
             :field-names="{ label: 'bri_cpn_name', value: 'bri_cpn_no' }" />
+        <a-input 
+            class="input-cpn" 
+            v-model:value="modalValue.material" 
+            placeholder="具体部件材料" />
+        <a-input 
+            class="input-cpn" 
+            v-model:value="modalValue.format" 
+            placeholder="具体部件形式" />
     </a-modal>
 </template>
 <script lang="ts">
@@ -69,6 +77,16 @@ const columns = [
         ellipsis: true,
     },
     {
+        title: "桥梁部件材料",
+        dataIndex: 'material',
+        ellipsis: true,
+    },
+    {
+        title: "桥梁部件形式",
+        dataIndex: 'format',
+        ellipsis: true,
+    },
+    {
         title: '操作',
         dataIndex: 'operation',
     },
@@ -82,6 +100,8 @@ interface BridgeCepPart {
     type_name: string
     bri_cpn_no: string
     bri_cpn_name: string
+    material: string
+    format: string
 }
 
 export default defineComponent({
@@ -113,7 +133,8 @@ export default defineComponent({
 
 
         const checkInput = () => {
-            if (modalValue.cet_part_no.length == 0)
+            if (modalValue.cet_part_no.length == 0 || modalValue.cet_part_name === '' || modalValue.bri_cpn_no === ''
+                || modalValue.material === '' || modalValue.format === '')
                 return false
             return true
         }
@@ -125,6 +146,8 @@ export default defineComponent({
             modalValue.cet_part_no = ""
             modalValue.cet_part_name = ""
             modalValue.bri_cpn_no = ""
+            modalValue.material = ""
+            modalValue.format = ""
             old_cet_part_no.value = ""
             getCetParts()
         }
@@ -134,6 +157,8 @@ export default defineComponent({
             cet_part_no: '',
             cet_part_name: '',
             bri_cpn_no: '',
+            material: '',
+            format: '',
         })
 
         const getCetParts = () => {
@@ -171,6 +196,8 @@ export default defineComponent({
                     type_no: route.query.type_no,
                     bri_cpn_no: modalValue.bri_cpn_no,
                     cet_part_name: modalValue.cet_part_name,
+                    material: modalValue.material,
+                    format: modalValue.format
                 }
             }).then((resp) => {
                 if (resp.data.error_info === 'success') {
@@ -186,6 +213,8 @@ export default defineComponent({
             modalValue.cet_part_no = record.cet_part_no
             modalValue.bri_cpn_no = record.bri_cpn_no
             modalValue.cet_part_name = record.cet_part_name
+            modalValue.material = record.material
+            modalValue.format = record.format
             old_cet_part_no.value = record.cet_part_no
             visible.value = true
             isUpdate.value = true
@@ -201,7 +230,9 @@ export default defineComponent({
                     type_no: route.query.type_no,
                     bri_cpn_no: modalValue.bri_cpn_no,
                     cet_part_name: modalValue.cet_part_name,
-                    old_cet_part_no: old_cet_part_no.value
+                    old_cet_part_no: old_cet_part_no.value,
+                    material: modalValue.material,
+                    format: modalValue.format
                 }
             }).then((resp) => {
                 if (resp.data.error_info === 'success') {

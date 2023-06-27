@@ -18,7 +18,7 @@
             <template v-if="column.dataIndex === 'tag'">
                 <span>
                     <a-tag
-                          :color="record.basic == 'finish' ? 'green' : 'volcano' "
+                          :color="record.type_cpn == 'finish' ? 'green' : 'volcano' "
                   >
                     <router-link :to="{name:'adminTypeComponent', query:{type_name:record.type_name, type_no:record.type_no}}">
                         类型部件配置
