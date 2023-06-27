@@ -20,5 +20,6 @@ public interface UnitMapper {
 
     void delete(Map<String, String> map);
 
+    List<String> getBridgeNoByUnit(String unit_no);
     Integer getCount();
 }

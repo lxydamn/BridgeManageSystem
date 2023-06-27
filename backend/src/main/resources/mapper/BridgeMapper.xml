@@ -11,11 +11,25 @@
             #{bridge_no}, #{type_no},  #{route_no}, #{bridge_name}
         )
     </insert>
+    <insert id="insertLL">
+        insert into bridge_loca (bridge_no, lati, longi)
+        values (
+                #{bridge_no},
+                #{lati},
+                #{longi}
+               );
+    </insert>
     <update id="update">
         update bridge_info set bridge_no=#{new_bridge_no},bridge_name=#{bridge_name},
                                type_no=#{type_no},route_no=#{route_no}
         where bridge_no=#{old_bridge_no}
     </update>
+    <update id="updateBridgeLL">
+        update bridge_loca set lati=#{lati},
+                               longi=#{longi}
+        where bridge_no=#{new_bridge_no}
+    </update>
+
 
     <select id="selectById" resultType="com.backend.pojo.BridgeInfo" parameterType="java.util.Map">
         select * from bridge_info where bridge_no=#{bridge_no}
@@ -60,13 +74,33 @@
         from bridge_init_record
         where bridge_no=#{bridge_no};
     </select>
+
     <select id="getPeriCardCountByBridgeNo" resultType="java.lang.Integer">
         select count(bridge_no) from bridge_peri_record where bridge_no=#{bridge_no};
     </select>
+
     <select id="getBridgeByUnit" resultType="com.backend.pojo.BridgeInfo">
         select * from bridge_info where bridge_no in (
-            select bridge_no from unit_job where unit_no=#{unit_no}
+                select bridge_no from unit_job where unit_no=#{unit_no}
             )
+    </select>
+    <select id="getBridgeLL" resultType="java.util.Map">
+        select bridge_info.bridge_no, bridge_name, lati, longi,route_name,type_name
+        from bridge_loca, bridge_info,route,bridge_type
+        where bridge_info.bridge_no=#{bridge_no}
+            and bridge_info.bridge_no=bridge_loca.bridge_no
+            and bridge_info.route_no=route.route_no
+            and bridge_info.type_no=bridge_type.type_no
+    </select>
+    <select id="getBridgeInfoAndAbout" resultType="java.util.Map">
+        select bridge_info.bridge_no,bridge_name,
+               route.route_no, route_name, route_rank,
+               bridge_info.type_no,type_name,lati,longi
+        from bridge_info,bridge_loca, route, bridge_type
+        where bridge_info.bridge_no=#{bridge_no} and
+              bridge_info.bridge_no=bridge_loca.bridge_no and
+              bridge_info.route_no=route.route_no and
+              bridge_info.type_no=bridge_type.type_no
     </select>
 
 

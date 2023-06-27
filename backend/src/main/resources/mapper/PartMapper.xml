@@ -5,9 +5,8 @@
 <mapper namespace="com.backend.mapper.PartMapper">
     <select id="getPartMF" resultType="java.util.Map">
         select bridge_cet_part.cet_part_no, material,format
-        from bridge_cet_part,bridge_stru_record
-        where bridge_no=#{bridge_no} and
-              bridge_cet_part.cet_part_no=bridge_stru_record.cet_part_no
+        from bridge_cet_part
+        where bridge_no=#{bridge_no}
     </select>
 
     <select id="getCpnByCetCpn" resultType="java.util.Map">

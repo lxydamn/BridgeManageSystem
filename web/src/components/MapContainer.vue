@@ -1,19 +1,35 @@
 <template>
-  <el-card class="box-card">
     <div id="container">
     </div>
-  </el-card>
-
 </template>
 
 <script lang="ts">
 import AMapLoader from '@amap/amap-jsapi-loader';
 import { shallowRef } from '@vue/reactivity';
+import axios from 'axios';
+import { reactive } from 'vue';
+import { useUserStore } from '../store/user';
+
+const userStore= useUserStore()
+
 export default {
   setup() {
-    const map = shallowRef(null);
+    const map = shallowRef();
+    const bridgeLL = reactive({
+      data: [
+          {
+            bridge_no:'',
+            bridge_name:'',
+            route_name:'',
+            type_name:'',
+            lati:'',
+            longi:'',
+       }
+      ]
+    })
     return {
       map,
+      bridgeLL,
     }
   },
   methods: {
@@ -33,23 +49,59 @@ export default {
           version: "2.0.0", // Loca 版本，缺省 2.0.0
         },
       }).then((AMap) => {
-        this.map = new AMap.Map("container", {
+          this.map = new AMap.Map("container", {
             //设置地图容器id
-            zoom: 4.4, //初始化地图级别
+            zoom: 6, //初始化地图级别
             mapStyle:
               "amap://styles/8389cc93e89d4cf61b6873b24befc228", //设置地图的显示样式
-            center: [106.542725, 36.583360], //初始化地图中心点位置//
+            center: [106.505, 29.5332], //初始化地图中心点位置//
           });
+        
+          for (let i of this.bridgeLL.data) {
+            var marker = new AMap.Marker({
+              position:[i.lati, i.longi],
+              icon:'https://img1.imgtp.com/2023/06/27/DU9XCGE0.png',
+              text:i.bridge_name,
+              map:this.map,
+              title: i.bridge_name
+            })
+            marker.bridgeData = i
+            marker.on('click', openInfo)
+            this.map.add(marker)
+            
+          }
+          function openInfo(e : any) {
+              var info = [];
+              info.push("<p class='input-item'> 桥梁名称   ：" + e.target.bridgeData.bridge_name + "</p>");
+              info.push("<p class='input-item'> 桥梁编号   ：" + e.target.bridgeData.bridge_no + "</p>");
+              info.push("<p class='input-item'> 桥梁类型   ：" + e.target.bridgeData.bridge_no + "</p>");
+              info.push("<p class='input-item'> 路线   ：" + e.target.bridgeData.route_name + "</p>");
+              info.push("<p class='input-item'> 经纬度   ：" + e.target.bridgeData.lati + "，" + e.target.bridgeData.longi + "</p>");
+              let infoWindow = new AMap.InfoWindow({
+                  content: info.join("")  //使用默认信息窗体框样式，显示信息内容
+              });
+              infoWindow.open(e.target._map, e.target._position)
+          }
       })
-
-
     },
-
+    
+    getBridgeLL() {
+      axios({
+        url:"http://localhost:3000/api/bridge/get/ll",
+        method:"GET",
+        params: {
+          unit_no: userStore.unit_no,
+        }
+      }).then((resp) => {
+        this.bridgeLL.data = resp.data
+        this.ininMap()
+      })
+    }
 
   },
   mounted() {
     //DOM初始化完成进行地图初始化
-    this.ininMap();
+    this.getBridgeLL();
   }
 }
 </script>
@@ -70,7 +122,9 @@ export default {
 .amap-logo {
   display: none !important;
 }
-
+.input-item {
+  margin: 1em;
+}
 /* 隐藏高德版权  */
 .amap-copyright {
   display: none !important;

@@ -26,22 +26,46 @@
         @ok="handleOk"
         @cancel="cleanInput"
     >
-        <a-input addon-before="桥梁编号" class="input-cpn" pattern="[0-9]*" v-model:value="modalValue.bridge_no" placeholder="桥梁编号" />
-        <a-input addon-before="桥梁名称" class="input-cpn" v-model:value="modalValue.bridge_name" placeholder="桥梁名称" />
-        <div class="select-box input-cpn">
-            <span style="margin-left: .6em;">路线编号</span>
+        <a-input 
+            addon-before="桥梁编号"
+            class="input-cpn" 
+            pattern="[0-9]*"
+             v-model:value="modalValue.bridge_no"
+              placeholder="桥梁编号"
+        />
+        <a-input 
+            addon-before="桥梁名称" 
+            class="input-cpn"
+            v-model:value="modalValue.bridge_name"
+            placeholder="桥梁名称"
+        />
+        <div class="select-box">
+            <a-input-number 
+                addon-before="经度"
+                class="input-cpn" 
+                v-model:value="modalValue.lati"
+            />
+            <a-input-number 
+                addon-before="纬度"
+                class="input-cpn" 
+                v-model:value="modalValue.longi"
+            />
+        </div>
+        
+        <div class="select-box">
+            <span style="margin-top: .5em;">路线编号</span>
             <a-select
                 ref="select"
                 v-model:value="modalValue.route_no"
-                style="width: 10em"
+                style="width: 10em; margin-top: 1em;"
                 :options="routes"
                 :field-names="{label:'route_name', value:'route_no'}"
             ></a-select>
-            <span>桥梁类型</span>
+            <span style="margin-top: .5em;">桥梁类型</span>
             <a-select
                 ref="select"
                 v-model:value="modalValue.type_no"
-                style="width: 10em"
+                style="width: 10em;margin-top: 1em;"
                 :options="types"
                 :field-names="{label:'type_name', value:'type_no'}"
             ></a-select>
@@ -91,9 +115,20 @@ const columns = [
         ellipsis: true,
     },
     {
+        title: '经度',
+        dataIndex: 'lati',
+        ellipsis: true,
+    },
+    {
+        title: '纬度',
+        dataIndex: 'longi',
+        ellipsis: true,
+    },
+    {
         title: '操作',
         dataIndex: 'operation',
     },
+
     
 ];
 
@@ -105,6 +140,8 @@ interface Bridge {
     route_rank:string
     type_no:string
     type_name:string
+    lati:string
+    longi:string
 }
 
 export default defineComponent({
@@ -124,13 +161,17 @@ export default defineComponent({
             bridge_name:'',
             type_no:'',
             route_no:'',
+            lati:'',
+            longi:'',
         })
 
         const checkInput = () => {
-            if (modalValue.bridge_name.length == 0 || modalValue.bridge_no.length == 0 ||
-                    modalValue.route_no.length == 0 || modalValue.type_no.length == 0
-                )
-                return false
+            if (
+                modalValue.bridge_name.length == 0 || modalValue.bridge_no.length == 0 ||
+                modalValue.route_no.length == 0 || modalValue.type_no.length == 0 || 
+                modalValue.lati.length == 0 || modalValue.longi.length == 0
+            ) return false
+
             return true
         }
 
@@ -142,6 +183,8 @@ export default defineComponent({
             modalValue.route_no = ""
             modalValue.type_no = ""
             modalValue.bridge_name =""
+            modalValue.lati = ""
+            modalValue.longi = ""
             old_bridge_no.value=""
 
             getBridge()
@@ -162,8 +205,12 @@ export default defineComponent({
             axios({
                 url: 'http://localhost:3000/api/bridge/get/all',
                 method:'GET',
+                params: {
+                    unit_no: userStore.unit_no,
+                }
             }).then((resp) => {
                 dataSource.value = resp.data
+                console.log(resp.data)
             })
         }
         getBridge()
@@ -203,15 +250,16 @@ export default defineComponent({
                     type_no:modalValue.type_no,
                     route_no:modalValue.route_no,
                     unit_no: userStore.unit_no,
+                    lati:modalValue.lati,
+                    longi:modalValue.longi,
                     unit_job:'管养',
                 }
-            }).then((resp) => {
-                if (resp.data.error_info === 'success') {
-                    error_message("成功", "success")
-                    cleanInput()
-                } else {
-                    error_message(resp.data.error_info, "error")
-                }
+            }).then(() => {
+                error_message("添加成功", "success")
+                cleanInput()
+
+            }).catch(() => {
+                error_message("添加失败", "error")
             })
         }
 
@@ -221,7 +269,8 @@ export default defineComponent({
             modalValue.route_no = record.route_no
             modalValue.type_no = record.type_no
             old_bridge_no.value = record.bridge_no
-
+            modalValue.lati = record.lati
+            modalValue.longi = record.longi
             visible.value = true
             isUpdate.value = true
             console.log(record)
@@ -237,14 +286,14 @@ export default defineComponent({
                     bridge_name:modalValue.bridge_name,
                     route_no:modalValue.route_no,
                     type_no:modalValue.type_no,
+                    lati:modalValue.lati,
+                    longi:modalValue.longi,
                 }
-            }).then((resp) => {
-                if (resp.data.error_info === 'success') {
-                    error_message("成功", "success")
-                    cleanInput()
-                } else {
-                    error_message(resp.data.error_info, "error")
-                }
+            }).then(() => {
+                error_message("修改成功", "success")
+                cleanInput()
+            }).catch(() => {
+                error_message("修改失败，不允许修改编号", "error")
             })
         }
 
@@ -290,13 +339,13 @@ export default defineComponent({
 }
 .select-box {
     width: 100%;
-    margin: 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 .input-cpn {
-    margin: .5em;
+    margin: 0;
+    margin-top: .5em;
     height: 2.5em;
 }
 </style>

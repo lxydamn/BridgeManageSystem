@@ -13,6 +13,9 @@
     <select id="getCount" resultType="java.lang.Integer">
         select count(unit_no) from unit;
     </select>
+    <select id="getBridgeNoByUnit" resultType="java.lang.String">
+        select bridge_no from unit_job where unit_no=#{unit_no}
+    </select>
 
     <insert id="insertOne" parameterType="java.util.Map">
         insert into unit(unit_no, unit_name) values(

@@ -21,9 +21,13 @@ public class BridgeController {
     @Autowired
     private BridgeService bridgeService;
 
+    @GetMapping("/api/bridge/get/ll")
+    public List<Map<String, Object>> getBridgeLL(@RequestParam Map<String, String> map) {
+        return bridgeService.getBridgeLL(map);
+    }
     @GetMapping("/api/bridge/get/all")
-    public List<Map<String, Object>> getAll() {
-        return bridgeService.getAll();
+    public List<Map<String, Object>> getAllByUnitNo(@RequestParam Map<String, Object> map) {
+        return bridgeService.getAllByUnitNo(map);
     }
 
     @GetMapping("/api/bridge/card/status")

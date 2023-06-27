@@ -907,7 +907,7 @@ export default defineComponent({
 		const checkInterval = setInterval(() => {
       let needCount = 5
       if (route.query.status == 'finish') needCount = 9
-      if (route.query.initSatus == 'finish') needCount += 1
+      if (route.query.initStatus == 'finish') needCount += 1
       if (loadingCount == needCount) {
           loading.value = false
           clearInterval(checkInterval)

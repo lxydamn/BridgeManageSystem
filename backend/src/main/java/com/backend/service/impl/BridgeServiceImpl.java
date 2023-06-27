@@ -2,6 +2,7 @@ package com.backend.service.impl;
 
 import com.backend.mapper.BridgeMapper;
 import com.backend.mapper.UnitJobMapper;
+import com.backend.mapper.UnitMapper;
 import com.backend.pojo.BridgeInfo;
 import com.backend.service.BridgeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,9 @@ public class BridgeServiceImpl implements BridgeService {
     private BridgeMapper bridgeMapper;
 
     @Autowired
+    private UnitMapper unitMapper;
+
+    @Autowired
     private UnitJobMapper unitJobMapper;
 
     @Override
@@ -31,14 +35,14 @@ public class BridgeServiceImpl implements BridgeService {
         try {
             bridgeMapper.insert(map);
             unitJobMapper.insertOne(map);
+            bridgeMapper.insertLL(map);
         } catch (Exception e) {
-            resp.put("error_info", "插入错误");
             throw new RuntimeException();
-        } finally {
-            resp.putIfAbsent("error_info", "success");
-            return resp;
         }
 
+        resp.put("error_info", "success");
+
+        return resp;
     }
 
     @Override
@@ -47,8 +51,27 @@ public class BridgeServiceImpl implements BridgeService {
     }
 
     @Override
-    public List<Map<String, Object>> getAll() {
-        return bridgeMapper.getAll();
+    public List<Map<String, Object>> getBridgeLL(Map<String, String> map) {
+
+        List<String> bridgeNos = unitMapper.getBridgeNoByUnit(map.get("unit_no"));
+        List<Map<String, Object>> resp = new ArrayList<>();
+        for (String bridgeNo : bridgeNos) {
+            resp.add(bridgeMapper.getBridgeLL(bridgeNo));
+        }
+        return resp;
+    }
+
+    @Override
+    public List<Map<String, Object>> getAllByUnitNo(Map<String, Object> map) {
+
+        List<Map<String , Object>> resp = new ArrayList<>();
+        List<BridgeInfo> bridgeByUnit = bridgeMapper.getBridgeByUnit(map);
+
+        for (BridgeInfo bridgeInfo : bridgeByUnit) {
+            resp.add(bridgeMapper.getBridgeInfoAndAbout(bridgeInfo.getBridge_no()));
+        }
+
+       return resp;
     }
 
     @Override
@@ -65,15 +88,16 @@ public class BridgeServiceImpl implements BridgeService {
     }
 
     @Override
+    @Transactional
     public Map<String, String> updateBridge(Map<String, Object> map) {
 
         Map<String, String> resp = new HashMap<>();
 
         try {
             bridgeMapper.update(map);
+            bridgeMapper.updateBridgeLL(map);
         } catch (Exception e) {
-            resp.put("error_info", "修改失败");
-            return resp;
+            throw new RuntimeException();
         }
 
         resp.put("error_info", "success");
