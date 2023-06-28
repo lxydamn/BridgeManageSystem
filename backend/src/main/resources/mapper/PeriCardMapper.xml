@@ -3,6 +3,44 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.backend.mapper.PeriCardMapper">
+    <insert id="insertStructRecord">
+        insert into bridge_stru_record
+        values (
+        #{stru_rcd_no},
+        #{cet_part_no},
+        #{score},
+        #{dft_type},
+        #{dft_position},
+        #{dft_range},
+        #{dft_photo},
+        #{dft_most_part},
+        #{mte_suggest},
+        #{spc_inspect}
+        )
+    </insert>
+
+    <insert id="insertPeriCard">
+        insert into bridge_peri_record
+        values (
+        #{peri_record_no},
+        #{bridge_no},
+        #{las_rema_time},
+        #{las_insp_time},
+        #{now_insp_time},
+        #{now_insp_envir},
+        #{brid_coun_rat},
+        #{brid_cle_condi},
+        #{pre_ma_sta},
+        #{recorder},
+        #{res_per},
+        #{nex_insp_time},
+        #{main_spa_stru}
+        )
+    </insert>
+
+    <delete id="deleteStructRecord">
+        delete from bridge_stru_record where stru_rcd_no=#{stru_rcd_no}
+    </delete>
 
     <select id="getInitCardInfo" resultType="java.util.Map">
         select bridge_pile, cro_name, bri_len, bri_cro_len
@@ -16,10 +54,33 @@
         where bridge_no=#{bridge_no}
     </select>
     <select id="getCetCpn" resultType="java.util.Map">
-        select cet_part_no, cet_part_name, bridge_part.bri_part_name
-        from bridge_cet_part, bridge_cpn, bridge_part
+        select bri_part_name
+        from bridge_cet_part,bridge_cpn,bridge_part
+        where bridge_cet_part.cet_part_no = #{cet_part_no} and
+        bridge_cet_part.bri_cpn_no = bridge_cpn.bri_cpn_no and
+        bridge_cpn.bri_part_no = bridge_part.bri_part_no
+    </select>
+    <select id="getStructRecord" resultType="java.util.Map">
+        select bridge_cet_part.cet_part_no, cet_part_name, score, dft_type, dft_position,
+        dft_range, dft_photo, dft_most_part, mte_suggest, spc_inspect
+        from bridge_cet_part, bridge_stru_record
         where bridge_no = #{bridge_no} and
-              bridge_cet_part.bri_cpn_no = bridge_cpn.bri_cpn_no and
-              bridge_cpn.bri_part_no = bridge_part.bri_part_no
+        bridge_cet_part.cet_part_no = bridge_stru_record.cet_part_no
+    </select>
+    <select id="getAllStructRecord2" resultType="java.util.Map">
+        select bridge_no, stru_rcd_no, bri_part_name ,cet_part_name, score, dft_type, dft_position,
+        dft_range, dft_photo, dft_most_part, mte_suggest, spc_inspect
+        from bridge_cet_part, bridge_stru_record, bridge_cpn, bridge_part
+        where bridge_cet_part.cet_part_no = bridge_stru_record.cet_part_no and
+        bridge_cet_part.bri_cpn_no = bridge_cpn.bri_cpn_no and
+        bridge_part.bri_part_no = bridge_cpn.bri_part_no
+    </select>
+
+    <select id="getPeriCardBridgeNo" resultType="java.lang.String">
+        select bridge_no
+        from bridge_peri_record
+    </select>
+    <select id="getPeriCard" resultType="java.util.Map">
+        select * from bridge_peri_record where bridge_no=#{bridge_no}
     </select>
 </mapper>

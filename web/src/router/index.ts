@@ -110,6 +110,17 @@ const routes = [
 						),
 			},
 			{
+				path: "/struct/record",
+				name: "structRecord",
+				meta: {
+					author: 1,
+				},
+				component: () =>
+					import(
+						/* webpackChunkName: "dashboard" */ "../views/user/structRecord.vue"
+						),
+			},
+			{
 				path: "cpnConfigIndex/",
 				name: "cpnConfigIndex",
 				meta: {
