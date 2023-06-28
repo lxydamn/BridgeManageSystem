@@ -10,5 +10,20 @@ import java.util.Map;
  */
 public interface PartService {
 
+    /**
+     * 获取桥梁结构数据
+     * 传入桥梁编号，自动生成Json字符串
+     * [
+     *  struct: {
+     *      name: xxx
+     *      subStruct : [
+     *          {
+     *              subName: xxx
+     *              subArr: [x, x, x...]
+     *          }
+     *      ]
+     *  }
+     * ]
+     */
     JSONArray getStructInfo(Map<String, Object> map);
 }

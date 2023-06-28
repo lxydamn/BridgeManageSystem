@@ -288,19 +288,7 @@ export default defineComponent({
         }
 
         const onDelete = (bridge_no : any) => {
-            axios({
-                url:'http://localhost:3000/api/bridge/delete',
-                method:"POST",
-                params: {
-                    bridge_no: bridge_no,
-                }
-            }).then((resp) => {
-                console.log(resp.data)
-                error_message(resp.data.error_info, resp.data.error_info)
-                getBridge()
-            }).catch(() => {
-                error_message("删除失败", 'error')
-            })
+            console.log(bridge_no)
         }
 
         return {
@@ -331,7 +319,6 @@ export default defineComponent({
 }
 .select-box {
     width: 100%;
-    margin-left: .5em;
     display: flex;
     align-items: center;
     justify-content: space-between;

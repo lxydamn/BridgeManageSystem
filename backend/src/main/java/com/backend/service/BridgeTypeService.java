@@ -21,6 +21,9 @@ public interface BridgeTypeService {
 
     BridgeType getById(Map<String, Object> map);
 
+    /**
+     * 获取桥梁类型名称、类型数量
+     */
     List<Map<String, Object>> getCount();
 
     List<Map<String, Object>> getTypeCpnStatus();
