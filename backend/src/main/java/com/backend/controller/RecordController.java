@@ -55,4 +55,9 @@ public class RecordController {
     public List<Map<String, Object>> getBridgeToCard() {
         return recordService.getBridgeToCard();
     }
+
+    @GetMapping("/api/record/data/get")
+    public Map<String, Object> getRecordDataCount() {
+        return recordService.getRecordDataCount();
+    }
 }

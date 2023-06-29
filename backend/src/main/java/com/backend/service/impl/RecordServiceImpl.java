@@ -89,4 +89,16 @@ public class RecordServiceImpl implements RecordService {
     public List<Map<String, Object>> getBridgeToCard() {
         return recordMapper.getBridgeToCard();
     }
+
+    @Override
+    public Map<String, Object> getRecordDataCount() {
+        Map<String, Object> resp = new HashMap<>();
+
+        resp.put("part_count", recordMapper.partCount());
+        resp.put("cpn_count", recordMapper.componentCount());
+        resp.put("typeCpn_count", recordMapper.typeCpmCount());
+        resp.put("aes_count", recordMapper.assessRecordCount());
+        resp.put("tre_count", recordMapper.maintainRecordCount());
+        return resp;
+    }
 }

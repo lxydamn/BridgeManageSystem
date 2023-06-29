@@ -25,4 +25,6 @@ public interface RecordService {
     List<Map<String ,Object>> getMaintainRecordWithBS();
 
     List<Map<String, Object>> getBridgeToCard();
+
+    Map<String, Object> getRecordDataCount();
 }

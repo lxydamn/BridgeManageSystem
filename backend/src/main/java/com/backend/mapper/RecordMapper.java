@@ -25,4 +25,13 @@ public interface RecordMapper {
     List<Map<String, Object>> getMaintainRecordWithBC();
 
     List<Map<String, Object>> getBridgeToCard();
+
+    Integer assessRecordCount();
+    Integer maintainRecordCount();
+
+    Integer partCount();
+
+    Integer componentCount();
+
+    Integer typeCpmCount();
 }

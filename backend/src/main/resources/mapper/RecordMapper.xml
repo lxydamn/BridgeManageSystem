@@ -55,4 +55,19 @@
         from bridge_info, bridge_basic_cond
         where bridge_info.bridge_no=bridge_basic_cond.bridge_no
     </select>
+    <select id="assessRecordCount" resultType="java.lang.Integer">
+        select count(ase_rcd_no) from bridge_assess_record
+    </select>
+    <select id="maintainRecordCount" resultType="java.lang.Integer">
+        select count(tre_rcd_no) from maintain_record
+    </select>
+    <select id="partCount" resultType="java.lang.Integer">
+        select count(bri_part_no) from bridge_part
+    </select>
+    <select id="componentCount" resultType="java.lang.Integer">
+        select  count(bri_cpn_no) from bridge_cpn
+    </select>
+    <select id="typeCpmCount" resultType="java.lang.Integer">
+        select count(bri_cpn_no) from bridge_type_cpn
+    </select>
 </mapper>

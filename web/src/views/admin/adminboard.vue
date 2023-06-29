@@ -52,6 +52,35 @@
                 </div>
 
             </a-card>
+
+            <a-card
+                class="left-board"
+                :loading="loading.record"
+                title="桥梁部件数据统计"
+                hoverable
+            >
+                <div class="statistic-count-box">
+                    <a-statistic
+                        class="statistic-item"
+                        suffix="个"
+                        title="部位数量"
+                        :value=recordCount.data.part_count
+                    />
+                    <a-statistic
+                        class="statistic-item"
+                        suffix="个"
+                        title="部件数量"
+                        :value=recordCount.data.cpn_count
+                    />
+                    <a-statistic
+                        class="statistic-item"
+                        suffix="个"
+                        title="类型部件数量"
+                        :value=recordCount.data.typeCpn_count
+                    />
+                </div>
+
+            </a-card>
         </a-col>
         <a-col :span="8">
 
@@ -86,6 +115,30 @@
                     <a-statistic class="statistic-item" suffix="个" title="路线" :value="route_count" />
                 </div>
             </a-card>
+
+            <a-card
+                :loading="loading.record"
+                title="桥梁记录统计"
+                style="margin-top: 3em"
+                hoverable
+            >
+            <div class="statistic-count-box">
+                <a-statistic
+                    class="statistic-item"
+                    suffix="条"
+                    title="检测记录"
+                    :value="recordCount.data.aes_count"
+                />
+                <a-statistic
+                    class="statistic-item"
+                    suffix="条"
+                    title="养护处治记录"
+                    :value="recordCount.data.tre_count"
+                />
+            </div>
+        </a-card>
+
+
         </a-col>
     </a-row>
 </template>
@@ -104,8 +157,18 @@ export default defineComponent({
             card:true,
             user:true,
             route:true,
+            record:true,
         })
 
+        const recordCount = reactive( {
+            data: {
+                part_count:"",
+                cpn_count:'',
+                typeCpn_count:'',
+                aes_count:'',
+                tre_count:'',
+            }
+        })
         const typeCount = reactive({
             data:[
                 {
@@ -176,12 +239,24 @@ export default defineComponent({
         }
         getCardCount()
 
+        const getRecordCount = () => {
+            axios({
+                url:'http://localhost:3000/api/record/data/get',
+                method:"GET",
+            }).then((resp) => {
+                recordCount.data = resp.data
+                loading.record= false;
+            })
+        }
+        getRecordCount()
+
         return {
             loading,
             typeCount,
             cardCount,
             uuCount,
             route_count,
+            recordCount,
         }
     }
 })
