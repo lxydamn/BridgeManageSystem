@@ -27,18 +27,31 @@
                 </template>
                 部件配置
             </a-menu-item>
-            <a-menu-item key="assessRecordIndex">
-              <template #icon >
-                <ScheduleOutlined />
-              </template>
-              检测历史记录
-            </a-menu-item>
-          <a-menu-item key="maintainRecordIndex">
-            <template #icon>
-              <WalletOutlined />
-            </template>
-            养护处治记录
-          </a-menu-item>
+            <a-sub-menu key="bridge">
+                <template #icon >
+                    <DeleteOutlined />
+                </template>
+                <template #title>信息修改</template>
+                <a-menu-item key="assessRecordIndex">
+                    <template #icon >
+                    <ScheduleOutlined />
+                    </template>
+                    检测历史记录
+                </a-menu-item>
+                <a-menu-item key="maintainRecordIndex">
+                    <template #icon>
+                    <WalletOutlined />
+                    </template>
+                    养护处治记录
+                </a-menu-item>
+                <a-menu-item key="structRecord">
+                    <template #icon>
+                    <BuildOutlined />
+                    </template>
+                    桥梁部位结构检查
+                </a-menu-item>
+                
+            </a-sub-menu>
         </a-menu>
 
     </div>
@@ -48,7 +61,8 @@ import { defineComponent, reactive, toRefs } from 'vue';
 import {
     MailOutlined, DatabaseOutlined, FileDoneOutlined,
     ApartmentOutlined, AppstoreOutlined, SettingOutlined,
-    ScheduleOutlined,WalletOutlined
+    ScheduleOutlined,WalletOutlined, DeleteOutlined,
+    BuildOutlined
 } from '@ant-design/icons-vue';
 import router from '../router';
 export default defineComponent({
@@ -61,6 +75,8 @@ export default defineComponent({
         FileDoneOutlined,
         ScheduleOutlined,
         WalletOutlined,
+        DeleteOutlined,
+        BuildOutlined
     },
     setup() {
         const state = reactive({
@@ -78,7 +94,3 @@ export default defineComponent({
     },
 });
 </script>
-
-.
-  
-  

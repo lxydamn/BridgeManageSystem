@@ -6,7 +6,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     username: root
     password: 123456
-    url: jdbc:mysql://localhost:3306/bms?serverTimezone=Asia/Shanghai&allowMultiQueries=true
+    url: jdbc:mysql://localhost:3306/backup?serverTimezone=Asia/Shanghai&allowMultiQueries=true
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
