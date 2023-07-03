@@ -1,5 +1,5 @@
 <template>
-    <a-table :columns="columns" :data-source="dataSource" :pagination="{ pageSize: 8 }">
+    <a-table :columns="columns" :data-source="dataSource" :pagination="{ pageSize: 12 }" style="height: 80vh;">
         <template #bodyCell="{ column, record }">
             <template v-if="column.dataIndex === 'operation'">
                 <a-popconfirm v-if="dataSource.length" title="确认要删除吗？" ok-text="确认" cancel-text="取消"
@@ -14,6 +14,7 @@
 import axios from 'axios';
 import { Ref, defineComponent, ref } from 'vue';
 import { error_message } from "../../utils/errorMessage.ts"
+import {useUserStore} from "../../store/user.ts";
 const columns = [
     {
         title: "桥梁编号",
@@ -96,11 +97,15 @@ export default defineComponent({
     },
     setup() {
         const dataSource: Ref<StructRecord[]> = ref([])
+        const userStore = useUserStore()
 
         const getStructRecord = () => {
             axios({
                 url: 'http://localhost:3000/api/periCard/get/structRecord2',
                 method: 'GET',
+                params: {
+                    unit_no: userStore.unit_no,
+                }
             }).then((resp) => {
                 dataSource.value = resp.data
             })

@@ -17,9 +17,9 @@ public interface PeriCardMapper {
 
     List<Map<String, Object>> getStructRecord(Map<String, Object> map);
 
-    List<Map<String, Object>> getAllStructRecord2();
+    List<Map<String, Object>> getAllStructRecord2(Map<String, Object> map);
 
-    List<String> getPeriCardBridgeNo();
+    List<String> getPeriCardBridgeNo(Map<String, Object> map);
 
     void insertStructRecord(Map<String, Object> map);
 

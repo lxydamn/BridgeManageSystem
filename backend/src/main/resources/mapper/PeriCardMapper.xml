@@ -68,17 +68,21 @@
         bridge_cet_part.cet_part_no = bridge_stru_record.cet_part_no
     </select>
     <select id="getAllStructRecord2" resultType="java.util.Map">
-        select bridge_no, stru_rcd_no, bri_part_name ,cet_part_name, score, dft_type, dft_position,
-        dft_range, dft_photo, dft_most_part, mte_suggest, spc_inspect
-        from bridge_cet_part, bridge_stru_record, bridge_cpn, bridge_part
+        select bridge_cet_part.bridge_no, stru_rcd_no, bri_part_name ,cet_part_name, score, dft_type, dft_position,
+               dft_range, dft_photo, dft_most_part, mte_suggest, spc_inspect
+        from bridge_cet_part, bridge_stru_record, bridge_cpn, bridge_part, unit_job
         where bridge_cet_part.cet_part_no = bridge_stru_record.cet_part_no and
-        bridge_cet_part.bri_cpn_no = bridge_cpn.bri_cpn_no and
-        bridge_part.bri_part_no = bridge_cpn.bri_part_no
+              bridge_cet_part.bri_cpn_no = bridge_cpn.bri_cpn_no and
+              bridge_part.bri_part_no = bridge_cpn.bri_part_no and
+              bridge_cet_part.bridge_no = unit_job.bridge_no and
+              unit_job.unit_no = #{unit_no}
     </select>
 
     <select id="getPeriCardBridgeNo" resultType="java.lang.String">
-        select bridge_no
-        from bridge_peri_record
+        select bridge_peri_record.bridge_no
+        from bridge_peri_record, unit_job
+        where bridge_peri_record.bridge_no = unit_job.bridge_no and
+              unit_job.unit_no = #{unit_no}
     </select>
     <select id="getPeriCard" resultType="java.util.Map">
         select * from bridge_peri_record where bridge_no=#{bridge_no}

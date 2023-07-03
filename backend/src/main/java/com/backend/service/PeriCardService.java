@@ -10,7 +10,7 @@ public interface PeriCardService {
     Map<String, Object> getBuildTime(Map<String, Object> map);
     JSONArray getStructRecord(Map<String, Object> map);
     Map<String, String> insertStructRecord(Map<String, Object> map);
-    List<Map<String, Object>> getStructRecord2();
+    List<Map<String, Object>> getStructRecord2(Map<String, Object> map);
     Map<String, String> deleteStructRecord(Map<String, Object> map);
     Map<String, String> addPeriCard(Map<String, Object> map);
     Map<String, Object> getPeriCard(Map<String, Object> map);

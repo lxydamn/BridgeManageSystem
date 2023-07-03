@@ -37,8 +37,8 @@ public class PeriCardController {
     }
 
     @GetMapping("/api/periCard/get/structRecord2")
-    public List<Map<String, Object>> getStructRecord2() {
-        return periCardService.getStructRecord2();
+    public List<Map<String, Object>> getStructRecord2(@RequestParam Map<String, Object> map) {
+        return periCardService.getStructRecord2(map);
     }
 
     @PostMapping("/api/periCard/delete/structRecord")

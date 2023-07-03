@@ -55,15 +55,11 @@ const columns = [
     {
         title: "具体部件编码",
         dataIndex: 'cet_part_no',
+        ellipsis: true,
     },
     {
         title: "具体部件名称",
         dataIndex: 'cet_part_name',
-        ellipsis: true,
-    },
-    {
-        title: "桥梁名称",
-        dataIndex: 'bridge_name',
         ellipsis: true,
     },
     {
@@ -96,7 +92,6 @@ interface BridgeCepPart {
     cet_part_no: string
     cet_part_name: string
     bridge_no: string
-    bridge_name: string
     type_name: string
     bri_cpn_no: string
     bri_cpn_name: string

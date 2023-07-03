@@ -56,7 +56,7 @@
                                 </td>
                                 <td class="table-item-name">主跨结构</td>
                                 <td class="table-item-content">
-                                    <a-input v-model:value=cardInfo.arr.main_spa_stru placeholder="被跨越道路(通道)桩号"
+                                    <a-input v-model:value=cardInfo.arr.main_spa_stru placeholder="主跨结构"
                                         :maxlength="20" />
                                 </td>
                                 <td class="table-item-name">最大跨径(m)</td>
@@ -536,7 +536,6 @@ export default defineComponent({
                 }
             }).then((resp) => {
                 bridgeStruct.arr = resp.data
-                console.log(bridgeStruct)
             })
         }
         getStruRecord()
@@ -606,13 +605,14 @@ export default defineComponent({
 				}
 			}).then((resp) => {
                 cardInfo.arr = resp.data
+                loadingCount += 1
 			})
         }
         if (route.query.status === 'finish') getCardInfo();
 
         const checkInterval = setInterval(() => {
             let needCount = 3
-            //if (route.query.status == 'finish') needCount = 4
+            if (route.query.status == 'finish') needCount = 4
             if (loadingCount == needCount) {
                 loading.value = false
                 clearInterval(checkInterval)

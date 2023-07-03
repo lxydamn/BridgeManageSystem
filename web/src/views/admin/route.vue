@@ -1,7 +1,7 @@
 <template>
     <a-button class="operator-btn" @click="visible = true">添加路线</a-button>
 
-    <a-table :columns="columns" :data-source="dataSource" :pagination="{ pageSize: 8}" style="height: 70vh">
+    <a-table :columns="columns" :data-source="dataSource" :pagination="{ pageSize: 8}" style="height: 68.5vh">
         <template #bodyCell="{column, record}">
             <template v-if="column.dataIndex === 'operation'">
                 <a style="margin-right: .5em;" @click="onUpdate(record)">修改</a>
@@ -28,6 +28,7 @@
     >
         <a-input class="input-cpn" pattern="[0-9]*" v-model:value="modalValue.route_no" placeholder="路线编号" />
         <a-input class="input-cpn" v-model:value="modalValue.route_name" placeholder="路线名称" />
+        <a-input-number class="input-cpn" v-model:value="modalValue.route_rank" placeholder="路线等级" />
     </a-modal>
 </template>
 <script lang="ts">

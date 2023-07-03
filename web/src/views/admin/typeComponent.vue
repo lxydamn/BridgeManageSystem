@@ -19,6 +19,7 @@
     </a-table>
 
     <a-modal v-model:visible="visible" title="桥梁类型部件" ok-text="确认" cancel-text="取消" @ok="handleOk" @cancel="cleanInput">
+        <p class="tip">类型部件选择:</p>
         <a-select 
         class="input-cpn" 
         ref="select" 
@@ -219,6 +220,11 @@ export default defineComponent({
 .input-cpn {
     margin: .5em;
     height: 2.5em;
+}
+.tip {
+    margin: 0.5em;
+    margin-top: 1em;
+    padding: 0;
 }
 </style>
 
