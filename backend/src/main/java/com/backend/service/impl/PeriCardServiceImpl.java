@@ -82,6 +82,7 @@ public class PeriCardServiceImpl implements PeriCardService {
     public List<Map<String, Object>> getStructRecord2(Map<String, Object> map) {
         List<Map<String, Object>> structRecord = new ArrayList<>();
         List<Map<String, Object>> allStructRecord = periCardMapper.getAllStructRecord2(map);
+        System.out.println(allStructRecord);
         List<String> periCardBridgeNo = periCardMapper.getPeriCardBridgeNo(map);
 
         for (Map<String, Object> str : allStructRecord) {

@@ -409,17 +409,27 @@
 		</div>
 	</a-skeleton>
 	<div class="footer-bar" v-if="!loading">
-		<a-button type="primary" style="margin-bottom: 1em" @click="submitData"
+		<a-tooltip placement="left">
+			<template #title>
+                <span>上传基本信息卡片</span>
+            </template>
+			<a-button type="primary" style="margin-bottom: 1em" @click="submitData"
 			:disabled="$route.query.status === 'finish'">
-			<template #icon>
-				<CloudUploadOutlined />
-			</template>
-		</a-button>
-		<a-button type="primary" @click="$router.back()">
-			<template #icon>
-				<ArrowLeftOutlined />
-			</template>
-		</a-button>
+				<template #icon>
+					<CloudUploadOutlined />
+				</template>
+			</a-button>
+		</a-tooltip>
+		<a-tooltip placement="left">
+			<template #title>
+                <span>返回上一级</span>
+            </template>
+			<a-button type="primary" @click="$router.back()">
+				<template #icon>
+					<ArrowLeftOutlined />
+				</template>
+			</a-button>
+		</a-tooltip>
 	</div>
 </template>
 

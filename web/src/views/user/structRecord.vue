@@ -99,6 +99,7 @@ export default defineComponent({
         const dataSource: Ref<StructRecord[]> = ref([])
         const userStore = useUserStore()
 
+        console.log(userStore.unit_no)
         const getStructRecord = () => {
             axios({
                 url: 'http://localhost:3000/api/periCard/get/structRecord2',
